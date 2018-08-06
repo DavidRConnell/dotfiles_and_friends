@@ -7,7 +7,7 @@ call vundle#begin('~/.config/nvim/bundle')
 Plugin 'VundleVim/Vundle.vim'
 " Add plugins here
 Plugin 'neomake/neomake'
-" Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-commentary'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'joshdick/onedark.vim'
 Plugin 'ervandew/supertab'
@@ -62,13 +62,16 @@ set backspace=indent,eol,start
 " Leader shortcuts
 nnoremap <space> <Nop>
 let mapleader =" "
+
 	"Save and quit 
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>wq :wq<CR>
 nnoremap <leader>Q :qa<CR>
+ 
 	" Tabs
-nnoremap <leader>t :tab drop 
+nnoremap <leader>t<leader> :tab drop 
+nnoremap <leader>h<leader> :tab help 
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt
@@ -86,6 +89,11 @@ nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
+
+	"Comments
+nmap <leader>cl gcc
+nmap <leader>cp gcap
+" autocmd FileType matlab setlocal commentstring=#\ %s
 
 " Remap
 nnoremap ; :
@@ -113,6 +121,12 @@ inoremap {;<CR> {<CR>};<ESC>O
 " Plugin Options
 	" Airline
 let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#formatter='unique_tail'
+let g:airline#extensions#tabline#tab_nr_type=1
 
 	" SuperTab
 let g:SuperTabDefaultCompletionType="context"
+let g:SuperTabCompletionContexts=['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextTextOmniPrecedence=['&completefunc', '&omnifunc']
+let g:SuperTabContextDiscoverDiscovery=
+            \ ["&completefunc:<c-p>", "&omnifunc:<c-x><c-o>"]

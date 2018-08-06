@@ -14,3 +14,4 @@ let g:vimtex_complete_recursive_bib=1
 let g:vimtex_compiler_progname='nvr'
 
 let g:livepreview_previewer='open -a Skim.app'
+" let b:SuperTabContextTextMemberPatterns=['\cite{', '\ref{'] 
