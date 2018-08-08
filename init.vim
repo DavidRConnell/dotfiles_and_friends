@@ -18,7 +18,7 @@ call vundle#end()
 filetype plugin indent on
 
 " General Vim
-set updatetime=500
+set updatetime=100
 set nobackup
 set noswapfile
 
@@ -35,11 +35,13 @@ let guifont="DejaVu\ Sans\ Mono\ for\ Powerline\ 14"
 set	mouse=a
 set number relativenumber
 set lazyredraw
+
+" Tab complete
 set wildmode=longest,list,full
 set wildmenu
-set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*.DS_Store
 
-" Invisibles
+" Show invisibles
 set list
 set listchars=tab:▸\ ,eol:¬
 
@@ -68,6 +70,9 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>wq :wq<CR>
 nnoremap <leader>Q :qa<CR>
+"
+	"Don't enter ex mode
+noremap Q <nop>
  
 	" Tabs
 nnoremap <leader>t<leader> :tab drop 
@@ -83,7 +88,7 @@ nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
 
 	"Splits
-nnoremap <leader>s :vsplit 
+nnoremap <leader>s<leader> :vsplit 
 nnoremap <leader>n <C-w><C-w>
 nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
@@ -91,9 +96,22 @@ nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 
 	"Comments
-nmap <leader>cl gcc
-nmap <leader>cp gcap
-" autocmd FileType matlab setlocal commentstring=#\ %s
+map <leader>cl gcc
+map <leader>cp gcap
+
+	" Search and replace all in line or visual selection.
+noremap <leader>r :s//g<left><left>
+
+	" Change surrounding parenthesis/brackets.
+nnoremap <leader>( mt%r)'tr(
+nnoremap <leader>{ mt%r}'tr{
+nnoremap <leader>[ mt%r]'tr[
+nnoremap <leader>< mt%r>'tr<
+
+nnoremap <leader>) mt%r('tr)
+nnoremap <leader>} mt%r{'tr}
+nnoremap <leader>] mt%r['tr]
+nnoremap <leader>> mt%r<'tr>
 
 " Remap
 nnoremap ; :
@@ -102,8 +120,8 @@ nnoremap B ^
 nnoremap E $
 nnoremap ^ <nop>
 nnoremap $ <nop>
-nnoremap > >>
-nnoremap < <<
+" nnoremap > >>
+" nnoremap < <<
 nnoremap j gj
 nnoremap k gk
 
@@ -123,6 +141,7 @@ inoremap {;<CR> {<CR>};<ESC>O
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#formatter='unique_tail'
 let g:airline#extensions#tabline#tab_nr_type=1
+let airline#extensions#tabline#show_splits=0
 
 	" SuperTab
 let g:SuperTabDefaultCompletionType="context"
