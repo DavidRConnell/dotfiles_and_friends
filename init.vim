@@ -9,13 +9,16 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'neomake/neomake'
 Plugin 'tpope/vim-commentary'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'junegunn/fzf'
 Plugin 'joshdick/onedark.vim'
 Plugin 'ervandew/supertab'
 Plugin 'vim-airline/vim-airline'
 Plugin 'lervag/vimtex'
 Plugin 'donRaphaco/neotex'
 call vundle#end()
+
 filetype plugin indent on
+let g:tex_flavor='latex'
 
 " General Vim
 set updatetime=100
@@ -23,13 +26,17 @@ set nobackup
 set noswapfile
 
 " Colors and fonts
+	" Highlight spaces at end of line / before tabs
+autocmd ColorScheme * highlight ExtraWhitespace
+	\ ctermbg=green guibg=darkgreen
+autocmd InsertLeave * match ExtraWhitespace /\s\+$\| \+\ze\t/
+autocmd InsertEnter * match
+
+	" Set colorscheme and syntex
 colorscheme onedark
 set background=dark
 syntax enable
 set termguicolors
-set t_co=256
-let enable_guicolors=1
-let guifont="DejaVu\ Sans\ Mono\ for\ Powerline\ 14"
 
 " ui config
 set	mouse=a
@@ -60,12 +67,16 @@ set autoindent
 set smartindent
 set cc=80
 set backspace=indent,eol,start
+"
+" Comment wrapping
+set textwidth=75
+set formatoptions=cqr
 
 " Leader shortcuts
 nnoremap <space> <Nop>
 let mapleader =" "
 
-	"Save and quit 
+	"Save and quit
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>wq :wq<CR>
@@ -73,10 +84,10 @@ nnoremap <leader>Q :qa<CR>
 "
 	"Don't enter ex mode
 noremap Q <nop>
- 
+
 	" Tabs
-nnoremap <leader>t<leader> :tab drop 
-nnoremap <leader>h<leader> :tab help 
+nnoremap <leader>t :tab drop
+nnoremap <leader>H :tab help
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt
@@ -88,30 +99,33 @@ nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
 
 	"Splits
-nnoremap <leader>s<leader> :vsplit 
+nnoremap <leader>s :vsplit
 nnoremap <leader>n <C-w><C-w>
+nnoremap <leader>p <C-w><C-p>
 nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 
-	"Comments
+	"Jumps
+nnoremap <leader>o <C-o>
+
+	"Commentj
 map <leader>cl gcc
 map <leader>cp gcap
 
 	" Search and replace all in line or visual selection.
 noremap <leader>r :s//g<left><left>
+noremap <leader>R :%s//g<left><left>
 
 	" Change surrounding parenthesis/brackets.
-nnoremap <leader>( mt%r)'tr(
-nnoremap <leader>{ mt%r}'tr{
-nnoremap <leader>[ mt%r]'tr[
-nnoremap <leader>< mt%r>'tr<
+nnoremap <leader>( mt%r)`tr(
+nnoremap <leader>{ mt%r}`tr{
+nnoremap <leader>[ mt%r]`tr[
 
-nnoremap <leader>) mt%r('tr)
-nnoremap <leader>} mt%r{'tr}
-nnoremap <leader>] mt%r['tr]
-nnoremap <leader>> mt%r<'tr>
+nnoremap <leader>) mt%r(`tr)
+nnoremap <leader>} mt%r{`tr}
+nnoremap <leader>] mt%r[`tr]
 
 " Remap
 nnoremap ; :
@@ -120,8 +134,6 @@ nnoremap B ^
 nnoremap E $
 nnoremap ^ <nop>
 nnoremap $ <nop>
-" nnoremap > >>
-" nnoremap < <<
 nnoremap j gj
 nnoremap k gk
 
@@ -131,7 +143,6 @@ inoremap ' ''<left>
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
-inoremap < <><left>
 inoremap (<CR> (<CR>)<ESC>O
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
@@ -149,3 +160,14 @@ let g:SuperTabCompletionContexts=['s:ContextText', 's:ContextDiscover']
 let g:SuperTabContextTextOmniPrecedence=['&completefunc', '&omnifunc']
 let g:SuperTabContextDiscoverDiscovery=
             \ ["&completefunc:<c-p>", "&omnifunc:<c-x><c-o>"]
+
+" Template for new matlab files. Try to move to matlab.vim. By the
+" filetype is checked BufNewFile can't be called
+autocmd BufNewFile *.m call InsertFunction()
+function InsertFunction()
+	let filename = expand("%:t:r")
+	exe "normal!ggifunction ".filename
+	normal!A()
+	normal!oend
+	normal!gg
+endfunction
