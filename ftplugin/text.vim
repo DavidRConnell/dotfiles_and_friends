@@ -1,6 +1,3 @@
-" Don't highlight end of line spaces
-autocmd InsertLeave *.txt match 
-
 " Remove quote completion
 inoremap <buffer> " "
 inoremap <buffer> ' '
