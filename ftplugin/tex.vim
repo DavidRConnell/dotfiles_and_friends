@@ -1,9 +1,7 @@
-" Don't highlight trailing spaces
-autocmd InsertLeave *.tex match
-
 setlocal tabstop=2
 setlocal shiftwidth=2
 setlocal iskeyword+=:
+setlocal define=/newcommand{
 
 " Ditionary and spelling
 setlocal spell
@@ -23,5 +21,9 @@ let g:livepreview_previewer='open -a Skim.app'
 " let b:SuperTabContextTextMemberPatterns=['\cite{', '\ref{']
 
 " Disable quote completation
-inoremap <buffer> " " 
+inoremap <buffer> " "
 inoremap <buffer> ' '
+
+" Build and view pdf
+nnoremap <buffer> <leader>b :w<CR>:!./buildpdf<CR>
+nnoremap <buffer> <leader>v :!./viewpdf<CR>
