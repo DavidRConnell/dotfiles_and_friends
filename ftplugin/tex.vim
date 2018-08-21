@@ -35,17 +35,20 @@ function! TeXComplete()
 	call cursor(line, col('.')-1)
 
 	let charleftofcurser = strpart(line, col('.')-1, 1)
+	let isempty = strlen(charleftofcurser) == 0
 
-	if charleftofcurser =~ "\\s" || col('.') == 1
+	if charleftofcurser =~ "\\s" || isempty
 	  return "\<tab>"
 	endif
 
 	let word = expand("<cWORD>")
 
-	if word =~ '\\inputfigure{.*}\|\\inputsubfigure{.*}'
+	let figpattern = '\\inputfigure\(\[.*\]\)\{0,1\}{.*}'
+	let figpattern = figpattern . '\|\\inputsubfigure\(\[.*\]\)\{0,1\}{.*}'
+	if word =~ figpattern
 		set completefunc=ListFigures
 		let out = "\<C-x>\<C-u>"
-	elseif word =~ '\\inputtable{.*}'
+	elseif word =~ '\\inputtable\(\[.*\]\)\{0,1\}{.*}'
 		set completefunc=ListTables
 		let out = "\<C-x>\<C-u>"
 	elseif word =~ '\\inputsection{.*}\|\\inputsubsection{.*}'
@@ -61,7 +64,7 @@ function! TeXComplete()
 	endif
 
 	if word =~ '^\\[0-9a-z]*'
-		setlocal complete=.
+		setlocal complete=.,k~/.config/nvim/dicts/latexmacros.txt
 		setlocal completeopt=longest,menu,preview
 		inoremap <buffer> <tab> <C-p>
 	else
@@ -85,9 +88,10 @@ function! ListFolder(findstart, base, folder)
 	else
 		" find files matching with "a:base"
 		let res = []
-		let files = systemlist("ls " . a:folder . "/*.tex")
+		let files = expand("./" . a:folder . "/**", 0, 1)
 		for f in files
-			let m =	fnamemodify(f, ":t:r")
+			let m = matchstr(f, '[^\(./' . a:folder . '/\)].*\.')
+			let m = fnamemodify(m, ":r")
 			if m =~ '^' . a:base
 				call add(res, m)
 			endif
