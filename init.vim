@@ -139,10 +139,6 @@ onoremap s //+0<left><left><left>
 " Remap
 nnoremap ; :
 nnoremap Y y$
-" nnoremap B ^
-" nnoremap E $
-" nnoremap ^ <nop>
-" nnoremap $ <nop>
 nnoremap j gj
 nnoremap k gk
 
@@ -170,14 +166,3 @@ let g:SuperTabCompletionContexts=['s:ContextText', 's:ContextDiscover']
 let g:SuperTabContextTextOmniPrecedence=['&completefunc', '&omnifunc']
 let g:SuperTabContextDiscoverDiscovery=
 		\ ["&completefunc:<c-p>", "&omnifunc:<c-x><c-o>"]
-
-" Template for new matlab files. Try to move to matlab.vim. By the
-" filetype is checked BufNewFile can't be called
-autocmd BufNewFile *.m call InsertFunction()
-function InsertFunction()
-	let filename = expand("%:t:r")
-	exe "normal!ggifunction ".filename
-	normal!A()
-	normal!oend
-	normal!gg
-endfunction
