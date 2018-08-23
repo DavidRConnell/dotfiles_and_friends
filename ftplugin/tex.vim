@@ -25,6 +25,7 @@ inoremap <buffer> ' '
 " Build and view pdf
 nnoremap <buffer> <leader>b :w<CR>:!./buildpdf<CR>
 nnoremap <buffer> <leader>v :!./viewpdf<CR>
+nnoremap <buffer> <leader>m :!./printmessages<CR>
 
 " Better complete
 nnoremap <buffer> <leader><tab> a<C-x>s
