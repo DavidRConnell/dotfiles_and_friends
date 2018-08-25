@@ -23,9 +23,10 @@ inoremap <buffer> " "
 inoremap <buffer> ' '
 
 " Build and view pdf
-nnoremap <buffer> <leader>b :w<CR>:!./buildpdf<CR>
-nnoremap <buffer> <leader>v :!./viewpdf<CR>
-nnoremap <buffer> <leader>m :!./printmessages<CR>
+let b:dir = fnamemodify(getcwd(), ':t')
+nnoremap <buffer> <leader>b :w<CR>:execute('!../buildpdf ' . b:dir)<CR>
+nnoremap <buffer> <leader>v :execute('!../viewpdf ' . b:dir)<CR>
+nnoremap <buffer> <leader>m :execute('!../printmessages ' . b:dir)<CR>
 
 " Better complete
 nnoremap <buffer> <leader><tab> a<C-x>s
@@ -59,7 +60,8 @@ function! TeXComplete()
 		set completefunc=ListLabels
 		let out = "\<C-x>\<C-u>"
 	elseif word =~ '\cite{.*}'
-		let out = "\<C-x>\<C-o>"
+		set completefunc=ListBibs
+		let out = "\<C-x>\<C-u>"
 	else
 		let out = "\<C-n>"
 	endif
@@ -79,13 +81,7 @@ endfunction
 
 function! ListFolder(findstart, base, folder)
 	if a:findstart
-		" locate the start of the word
-		let line = getline('.')
-		let start = col('.') - 1
-		while start > 0 && line[start - 1] =~ '\a'
-			let start -= 1
-		endwhile
-		return start
+		return FindStart()
 	else
 		" find files matching with "a:base"
 		let res = []
@@ -99,6 +95,16 @@ function! ListFolder(findstart, base, folder)
 		endfor
 		return res
 	endif
+endfunction
+
+function! FindStart()
+	" locate the start of the word
+	let line = getline('.')
+	let start = col('.') - 1
+	while start > 0 && line[start - 1] =~ '\a'
+		let start -= 1
+	endwhile
+	return start
 endfunction
 
 function! ListFigures(findstart, base)
@@ -115,22 +121,50 @@ endfunction
 
 function! ListLabels(findstart, base)
 	if a:findstart
-		" locate the start of the word
-		let line = getline('.')
-		let start = col('.') - 1
-		while start > 0 && line[start - 1] =~ '\a'
-			let start -= 1
-		endwhile
-		return start
+		return FindStart()
 	else
 		" find labels matching with "a:base"
 		let res = []
-		let labels = systemlist("grep -o -h -e '\label{[^}]*}' **/*.tex")
+		let labels = systemlist("grep -ohe '\\\\label{[^}]*}' **/*.tex")
 		for l in labels
-			let m = matchstr(l, "\[^}\]*", 6)
+			let m = GetArgBetween(l, '{', '}')
 			if m =~ '^' . a:base
 				call add(res, m)
 			endif
+		endfor
+		return res
+	endif
+endfunction
+
+function! GetArgBetween(string, left, right)
+	" Pulls out a atom inbetween symbols left and right.
+
+	let strprt = matchstr(a:string, a:left . '.*' . a:right)
+	return matchstr(strprt, '[^' . a:left . a:right . ']\+')
+endfunction
+
+function! ListBibs(findstart, base)
+	if a:findstart
+		return FindStart()
+	else
+		let res = []
+		let bibs = systemlist("grep -ohe '\\\\bibliography{.*}' " . b:dir . ".tex")
+
+		for bib in bibs
+			let bib = GetArgBetween(bib, '{', '}')
+			let keys = systemlist('grep -ohe "@.*," ' . bib . '.bib')
+			let titles = systemlist('grep -ohe "title.*," ' . bib . '.bib')
+
+			for entry in range(0, len(keys) - 1)
+				let key = keys[entry]
+				let title = titles[entry]
+
+				let m = GetArgBetween(key, '{', ',')
+				let prev = GetArgBetween(title, '{', '}')
+				if m =~ '^' . a:base
+					call add(res, {'word':m, 'menu':prev})
+				endif
+			endfor
 		endfor
 		return res
 	endif
