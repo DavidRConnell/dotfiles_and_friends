@@ -14,7 +14,6 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'joshdick/onedark.vim'
 Plugin 'ervandew/supertab'
 Plugin 'vim-airline/vim-airline'
-Plugin 'lervag/vimtex'
 call vundle#end()
 
 filetype plugin indent on
