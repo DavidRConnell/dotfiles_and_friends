@@ -1,7 +1,8 @@
-function saveTableForLatex(dataStruct, savePath, varargin)
+function saveTableForLatex(dataStruct, name, projectPath, varargin)
 	% Save matlab data as a table in LaTeX format. Table is saved in it's
-	% own file given by savePath argument, which can than be used with
-	% input to enter in a LaTeX paper.
+	% own file located in the tables folder of the project specified by the
+	% projectPath argument, which can than be used with input to enter in a
+	% LaTeX paper.
 	%
 	% dataStruct should be a structure with fields:
 	%	data -- the data in the form of a matrix or cell.
@@ -10,7 +11,7 @@ function saveTableForLatex(dataStruct, savePath, varargin)
 	%
 	% Optionals:
 	%	fmt -- the format used to display the data by column. Can be a
-	%	single.  descriptor or a string containing one descriptor for each
+	%	single descriptor or a string containing one descriptor for each
 	%	column of data.
 	%
 	%	align -- the alignment used for each column. Can be a single
@@ -20,9 +21,15 @@ function saveTableForLatex(dataStruct, savePath, varargin)
 	% ex:
 	%	fmt = '%s 0.2%f %d %d';
 	%	align = 'l';
-	%	saveTableForLatex(dataStruct, savePath, 'fmt', fmt, 'align', align);
+	%	project = '~/Documents/sampleProject';
+	%	saveTableForLatex(dataStruct, 'ex_table', project, 'fmt', fmt, 'align', align);
 
 	[fmt, align] = processOptionals(varargin);
+	pathToTables = strcat(projectPath, '/tables');
+	if ~exist(pathToTables, 'dir')
+		mkdir(pathToTables);
+	end
+	savePath = strcat(pathToTables, '/', name, '.tex');
 
 	top = strcat('\\begin{tabularx}{\\tablewidth}{', align, ...
 		'}\n\t\\toprule\n\t');
@@ -35,9 +42,9 @@ function saveTableForLatex(dataStruct, savePath, varargin)
 	data = dataStruct.data;
 
 	if ~iscell(data)
-		data = convertData2Cell(data, fmt);
+		data = mat2StringCell(data, fmt);
 	else
-		data = cell2stringcell(data, fmt);
+		data = cell2StringCell(data, fmt);
 	end
 
 	fid = fopen(savePath, 'w');
@@ -45,7 +52,12 @@ function saveTableForLatex(dataStruct, savePath, varargin)
 	fprintf(fid, strcat(strjoin(cheader, ' & '), ' \\\\\n\t'));
 	fprintf(fid, middle);
 	for row = 1:size(data, 1)
-		fprintf(fid, sprintf('%s & %s \\\\\\\\\\n\\t', rheader{row}, strjoin(data(row, :), ' & ')));
+		newLine = sprintf(...
+			'%s & %s \\\\\\\\\\n\\t', ...
+			rheader{row}, ...
+			strjoin(data(row, :), ' & '));
+
+		fprintf(fid, newLine);
 	end
 	fprintf(fid, bottom);
 	fclose(fid);
@@ -58,24 +70,24 @@ function saveTableForLatex(dataStruct, savePath, varargin)
 		for argnum = 1:numOptionals
 			argname = optionals{argnum};
 			if strcmpi(argname, 'fmt')
-				asserOptionalsEnteredCorrectly(argname);
+				assertOptionalsEneteredCorrectly(argname);
 				fmt = optionals{argnum + 1};
 			elseif strcmpi(argname, 'align')
-				asserOptionalsEnteredCorrectly(argname);
+				assertOptionalsEneteredCorrectly(argname);
 				align = optionals{argnum + 1};
 			end
 		end
 
 		numRows = size(dataStruct.data, 2) + 1;
-		fmt = convertOptsToProgramReadable(fmt, numRows - 1);
-		align = convertOptsToProgramReadable(align, numRows);
+		fmt = makeOptionalsProgramReadable(fmt, numRows - 1);
+		align = makeOptionalsProgramReadable(align, numRows);
 
-		function asserOptionalsEnteredCorrectly(argname)
+		function assertOptionalsEneteredCorrectly(argname)
 			errmsg = sprintf('Must include value after %s', argname);
 			assert(argnum + 1 <= numOptionals, errmsg);
 		end
 
-		function readableOpt = convertOptsToProgramReadable(...
+		function readableOpt = makeOptionalsProgramReadable(...
 			optional, ...
 			expectedNumValues)
 
@@ -93,7 +105,7 @@ function saveTableForLatex(dataStruct, savePath, varargin)
 		end
 	end
 
-	function dataCell = convertData2Cell(data, fmt)
+	function dataCell = mat2StringCell(data, fmt)
 		assert(ismatrix(data), 'Data must be a matrix or cell.');
 
 		shape = size(data);
@@ -105,7 +117,7 @@ function saveTableForLatex(dataStruct, savePath, varargin)
 		end
 	end
 
-	function data = cell2stringcell(data, fmt)
+	function data = cell2StringCell(data, fmt)
 		fmt = strsplit(fmt, ' ');
 		[numRows, numCols] = size(data);
 		for row = 1:numRows
