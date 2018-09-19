@@ -16,6 +16,7 @@ function! matlab#GenerateTags()
 		let _ = system('echo "' . newline . '" >> ' . tagspath)
 	endfor
 
+	let _ = SortTags()
 endfunction
 
 function! matlab#AppendToTags()
@@ -26,13 +27,19 @@ function! matlab#AppendToTags()
 		let newline = expand('%:r') . '\t'. expand('%:t') . '\t1'
 		let _  = system('echo "' . newline . '" >> ' . tagspath)
 	endif
+
+	let _ = SortTags()
+endfunction
+
+function! SortTags()
+	let tagspath = getcwd() . '/.tags'
+	let _ = system('sort ' . tagspath . '> tmp && mv tmp ' . tagspath)
 endfunction
 
 function! matlab#GotoDefinition()
 	let tagspath = '.tags'
 	let func = expand("<cword>")
 	let tag = system("grep " . func . " " . tagspath)
-	echom(tag)
 
 	if empty(tag)
 		return "[\<C-d>"
