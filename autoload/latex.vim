@@ -6,7 +6,7 @@ function! latex#TeXComplete()
 	let isempty = strlen(charleftofcurser) == 0
 
 	if charleftofcurser =~ "\\s" || isempty
-	  return "\<tab>"
+		return "\<tab>"
 	endif
 
 	let word = expand("<cWORD>")
@@ -16,7 +16,7 @@ function! latex#TeXComplete()
 	if word =~ figpattern
 		set completefunc=ListFigures
 		let out = "\<C-x>\<C-u>"
-	elseif word =~ '\\inputtable\(\[.*\]\)\{0,1\}{.*}'
+	elseif word =~ '\\inputtable\(\[\.*\]\)\{0,1}{.*}'
 		set completefunc=ListTables
 		let out = "\<C-x>\<C-u>"
 	elseif word =~ '\\inputsection{.*}\|\\inputsubsection{.*}'
@@ -53,7 +53,9 @@ function! ListFolder(findstart, base, folder)
 		let res = []
 		let files = expand("./" . a:folder . "/**", 0, 1)
 		for f in files
-			let m = matchstr(f, '[^\(./' . a:folder . '/\)].*\.')
+			" let m = matchstr(f, '[^\(./' . a:folder . '/\)].*\.')
+			let m = matchstr(f, a:folder . '/.*')
+			let m = m[strlen(a:folder . '/'):]
 			let m = fnamemodify(m, ":r")
 			if m =~ '^' . a:base
 				call add(res, m)
