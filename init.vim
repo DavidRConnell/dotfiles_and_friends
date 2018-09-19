@@ -46,7 +46,7 @@ set list
 set listchars=tab:▸\ ,eol:¬
 
 " Remove excessive whitespace"
-autocmd InsertLeave * %s/\s\+$\| \+\ze\t//e
+" autocmd InsertLeave * %s/\s\+$\| \+\ze\t//e
 
 " Searching and autocomplete
 set ignorecase
@@ -112,8 +112,8 @@ map <leader>cl gcc
 map <leader>cp gcap
 
 	" Search and replace all in line or visual selection.
-noremap <leader>r :s//g<left><left>
-noremap <leader>R :%s//g<left><left>
+noremap <leader>r :s/\<<C-r><C-w>\>//g<left><left>
+noremap <leader>R :%s/\<<C-r><C-w>\>//g<left><left>
 noremap <leader>f ;
 
 	" Change surrounding parenthesis/brackets.
