@@ -19,7 +19,6 @@ Plugin 'vim-airline/vim-airline'
 call vundle#end()
 
 filetype plugin indent on
-let g:tex_flavor='latex'
 
 " General Vim
 set updatetime=100
