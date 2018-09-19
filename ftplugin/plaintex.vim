@@ -1,1 +1,0 @@
-.config/nvim/ftplugin/tex.vim
