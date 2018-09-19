@@ -1,0 +1,7 @@
+neovim
+oh-my-zsh
+zsh?
+dejaVU sans mono
+bin files
+vim files
+texmf

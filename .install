@@ -1,0 +1,53 @@
+#!/bin/zsh
+# Install all my git repos, pip, python modules, etc and move the files in
+# this repo to $HOME
+
+DIRPATH=~/dotfiles
+
+function mkdirifmissing {
+	if ! [ -d ~/$1 ]; then
+		mkdir ~/$1
+	fi
+}
+
+function mkconfigdirs {
+	newdirs=(.config backupdots)
+	for dir in ${newdirs[@]}; do
+		mkdirifmissing $dir
+	done
+}
+
+function alreadylinked {
+	if $([ -L $2 ]); then
+		return $([[ $(readlink $2) == $DIRPATH/$1 ]])
+	fi
+	return 1
+}
+
+function ignore {
+	to_ignore=('meta_data' '.git' '.install')
+	for bad in ${to_ignore[@]}; do
+		if [[ $1 == $bad ]]; then
+			return 0
+		fi
+	done
+	return 1
+}
+
+cd $DIRPATH
+mkconfigdirs
+
+for file in $(echo $(ls -A)); do
+	newfile=~/.$file
+	if $(alreadylinked $file $newfile) || $(ignore $file); then
+		continue
+	fi
+
+	if $([ -f $newfile ]) || $([ -d $newfile ]); then
+		mv $newfile ~/backupdots
+	fi
+
+	ln -s $DIRPATH/$file $newfile
+done
+
+cd - &> /dev/null
