@@ -11,7 +11,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-commentary'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'joshdick/onedark.vim'
+" Plugin 'joshdick/onedark.vim'
+Plugin 'dracula/vim'
+
 Plugin 'ervandew/supertab'
 Plugin 'vim-airline/vim-airline'
 call vundle#end()
@@ -25,8 +27,8 @@ set nobackup
 set noswapfile
 
 " Colors and fonts
-colorscheme onedark
-let g:airline_theme='onedark'
+colorscheme dracula
+let g:airline_theme='dracula'
 set background=dark
 syntax enable
 set termguicolors
@@ -45,15 +47,13 @@ set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*.DS_Store,.gitignore
 set list
 set listchars=tab:▸\ ,eol:¬
 
-" Remove excessive whitespace"
-" autocmd InsertLeave * %s/\s\+$\| \+\ze\t//e
-
 " Searching and autocomplete
 set ignorecase
 set smartcase
 set showmatch
 set incsearch
 set hlsearch
+set complete=.,t
 
 " Tabs and spaces
 set tabstop=4
@@ -112,7 +112,8 @@ map <leader>cl gcc
 map <leader>cp gcap
 
 	" Search and replace all in line or visual selection.
-noremap <leader>r :s/\<<C-r><C-w>\>//g<left><left>
+vnoremap <leader>r :s//g<left><left>
+nnoremap <leader>r :s/\<<C-r><C-w>\>//g<left><left>
 noremap <leader>R :%s/\<<C-r><C-w>\>//g<left><left>
 noremap <leader>f ;
 
@@ -132,8 +133,11 @@ nnoremap <leader>- <C-x>
 	" Find definition
 nnoremap <leader>d [<C-d>
 
-	"From current line to line containing word
+	" From current line to line containing word
 onoremap s //+0<left><left><left>
+
+	" Toggle spell check
+nnoremap <leader>c :set spell!<CR>
 
 " Remap
 nnoremap ; :
