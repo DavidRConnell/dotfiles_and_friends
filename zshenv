@@ -4,4 +4,4 @@ alias cddot="cd ~/dotfiles_and_friends"
 alias matlab="matlab -nodesktop -nosplash"
 
 # Run with md2pdf file.pdf file.md
-alias md2pdf="pandoc --pdf-engine=xelatex --variable mainfont=Helvetica -f gfm -o"
+alias md2pdf="pandoc -V geometry:margin=1in --pdf-engine=xelatex --variable mainfont=Helvetica -f gfm -o"
