@@ -1,0 +1,13 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = "David R Connell"
+	email = davidconnell12@gmail.com
+[core]
+	editor = nvim
+	excludesfile = /Users/davidconnell/.config/git/.gitignore
+[alias]
+	logall = log --oneline --decorate --graph --all
+[merge]
+	tool = vimdiff3
+	conflictstyle = diff3
