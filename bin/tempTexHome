@@ -1,0 +1,1 @@
+kpsewhich -expand-var '$TEXMFHOME'
