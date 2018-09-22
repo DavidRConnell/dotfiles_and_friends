@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+# Opens all files in directory containing the regex pattern in nvim tabs.
+
+PROGNAME=$(basename $0)
+function usage {
+	cat <<- _EOF_
+
+		$PROGNAME usage: $PROGNAME [-h] pattern
+
+		Overview: 
+		Opens all files in \$PWD containing matches for the regex pattern
+		in nvim tabs.
+
+	_EOF_
+}
+
+if $([ $# -eq 0 ]) || $([ $1 = '-h' ]); then
+	usage
+	exit $([ $# -eq 1 ])
+fi
+
+files=$(grep -rl --exclude-dir .git $1 $PWD)
+tabs=$(echo $files | tr '\n' ' ')
+
+nvim -p $(echo $tabs)

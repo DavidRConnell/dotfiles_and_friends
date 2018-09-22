@@ -1,0 +1,27 @@
+#!/bin/zsh
+
+# Search and replace all files in $PWD.
+
+PROGNAME=$(basename $0)
+function usage {
+	cat <<- _EOF_
+
+	$PROGNAME usage: $PROGNAME pattern replacement
+
+	Overview:
+	Finds all instances of regex pattern in the \$PWD and replaces them
+	with replacement.
+
+	_EOF_
+}
+
+if $([ $# -eq 0 ]) || $([ $1 = '-h' ]); then
+	usage
+	exit $([ $# -eq 1 ])
+fi
+
+files=$(grep -rl --exclude-dir .git $1 $PWD)
+files=${files//$PWD\//}
+for file in $files; do
+	sed -i.bak s/$1/$2/g $(echo $file)
+done
