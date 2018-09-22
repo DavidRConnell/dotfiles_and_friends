@@ -1,0 +1,16 @@
+\inputsection
+\inputsubsection
+\inputfigure
+\inputtable
+\cite
+\autoref
+\ref
+\textit
+\textbf
+\texttt
+\emph
+\newcommand
+\newcounter
+\setcounter
+\stepcounter
+\addtocounter
