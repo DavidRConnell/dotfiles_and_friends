@@ -1,4 +1,4 @@
-function saveFigForLatex(name, projectPath, doClearLegend)
+function saveFigForLatex(name, projectPath)
 	% Saves current figure to the figures directory of the project
 	% specified by the projectPath optional.
 	%
@@ -15,7 +15,8 @@ function saveFigForLatex(name, projectPath, doClearLegend)
 	cleanfigure;
 	matlab2tikz(fullPath, 'showInfo', false);
 
-	if doClearLegend
+	isLegend = ~isempty(findall(gcf, 'type', 'Legend'));
+	if ~isLegend
 		clearLegend(fullPath)
 	end
 end
