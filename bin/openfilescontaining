@@ -20,7 +20,7 @@ if $([ $# -eq 0 ]) || $([ $1 = '-h' ]); then
 	exit $([ $# -eq 1 ])
 fi
 
-files=$(grep -rl --exclude-dir .git $1 $PWD)
+files=$(grep -rl --exclude .tags --exclude-dir .git $1 $PWD)
 tabs=$(echo $files | tr '\n' ' ')
 
 nvim -p $(echo $tabs)
