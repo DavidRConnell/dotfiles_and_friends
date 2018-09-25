@@ -71,6 +71,8 @@ function alreadylinked {
 	return $($([ -L $2 ]) && $([[ $(readlink $2) == $1 ]]))
 }
 
+cd $DIRPATH
 [ -d ~/backupdots ] || mkdir ~/backupdots
 lnfiles $DIRPATH
 [[ -n $(ls -A ~/backupdots) ]] || rmdir ~/backupdots
+cd - &> /dev/null
