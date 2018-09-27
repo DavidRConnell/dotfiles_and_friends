@@ -9,6 +9,7 @@ setlocal define=\newcommand{
 setlocal include=\usepackage{
 
 " Make spell check work outside of document enviornment
+syntax enable
 syntax spell toplevel
 
 " Enable $ sign completion
@@ -18,7 +19,10 @@ inoremap <buffer> $ $$<left>
 let b:dir = fnamemodify(getcwd(), ':t')
 nnoremap <buffer> <leader>b :w<CR>:execute('!../buildpdf ' . b:dir)<CR>
 nnoremap <buffer> <leader>v :execute('!../viewpdf ' . b:dir)<CR>
-nnoremap <buffer> <leader>m :execute('!../printmessages ' . b:dir)<CR>
+nnoremap <buffer> <leader>e :execute('!../printmessages ' . b:dir)<CR>
+
+" Goto files
+nnoremap <buffer> <leader>m :exec('tab drop ' . b:dir . '.tex')<CR>
 
 " Better complete
 inoremap <buffer> <expr> <silent> <tab> latex#TeXComplete()
