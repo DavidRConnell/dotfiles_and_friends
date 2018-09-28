@@ -17,9 +17,9 @@ inoremap <buffer> $ $$<left>
 
 " Build and view pdf
 let b:dir = fnamemodify(getcwd(), ':t')
-nnoremap <buffer> <leader>b :w<CR>:execute('!../buildpdf ' . b:dir)<CR>
-nnoremap <buffer> <leader>v :execute('!../viewpdf ' . b:dir)<CR>
-nnoremap <buffer> <leader>e :execute('!../printmessages ' . b:dir)<CR>
+nnoremap <buffer> <leader>b :w<CR>:execute('!buildtexpdf ' . b:dir)<CR>
+nnoremap <buffer> <leader>v :execute('!viewpdf ' . b:dir)<CR>
+nnoremap <buffer> <leader>e :execute('!printtexerrors ' . b:dir)<CR>
 
 " Goto files
 nnoremap <buffer> <leader>m :exec('tab drop ' . b:dir . '.tex')<CR>

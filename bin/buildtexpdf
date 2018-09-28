@@ -1,0 +1,2 @@
+latexmk -pv -xelatex --interaction=nonstopmode $1 &> /dev/null
+printtexerrors $1
