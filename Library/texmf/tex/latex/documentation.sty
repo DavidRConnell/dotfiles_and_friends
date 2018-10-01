@@ -31,82 +31,15 @@
     urlcolor=rushlightblue
   }
 
-\usepackage{graphicx}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.14}
-\usepackage[font=footnotesize, labelfont=bf]{caption}
-\renewcommand{\equationautorefname}{eq.}
-\newcommand*{\Appendixautorefname}{appendix}
-\usepackage{subcaption}
+\usepackage{floatmacros}
+  \settablewidth{1.5\linewidth plus 0.5\linewidth minus 0.5\linewidth}
+	\if@twocolumn
+		\setfigwidth{0.95\columnwidth}
+	\else
+		\setfigwidth{0.8\columnwidth}
+	\fi
 
-\newcommand{\figwidth}{0.8\columnwidth}
-\newcommand{\inputfigure}[2][]{%
-  \begin{figure}[ht]
-    \centering
-		\includefigure{#2}
-    \caption{#1}
-  \end{figure}
-}
-
-\newcommand{\inputsubfigure}[5]{%
-  \begin{figure}[ht]
-  \centering
-    \begin{subfigure}[t]{0.4\textwidth}
-      \centering
-			\includefigure{#3}
-      \caption{\footnotesize#1}
-    \end{subfigure}%
-    \quad
-    \begin{subfigure}[t]{0.4\textwidth}
-      \centering
-			\includefigure{#4}
-      \subcaption{\footnotesize#2}
-    \end{subfigure}
-  \caption{#5}
-  \end{figure}
-}
-
-\newcommand{\includefigure}[1]{
-	\IfFileExists{./figures/#1.pgf}{
-		\resizebox{\figwidth}{!}{\input{./figures/#1.pgf}}
-	}{\IfFileExists{./figures/#1.tex}{
-		\resizebox{\figwidth}{!}{\input{./figures/#1.tex}}
-	}{\includegraphics[width=\figwidth]{./figures/#1}}
-}}
-
-\usepackage{threeparttable}
-\usepackage{booktabs}
-\usepackage{tabularx}
-  \captionsetup[table]{%
-    labelsep=space,
-    justification=raggedright,
-    singlelinecheck=off
-  }
-
-\newcommand{\tablewidth}{\linewidth}
-\newcommand{\inputtable}[2][]{%
-  \begin{table*}[tb]
-    \centering
-    \large
-    \colorbox{tablegray}{%
-      \begin{threeparttable}
-        \caption{#1}
-        \input{./tables/#2}
-      \end{threeparttable}
-    }
-  \end{table*}
-}
-
-\usepackage{bm}
-\usepackage{amssymb}
-\usepackage{amsmath}
-  \DeclareMathOperator*{\argmax}{argmax}
-  \newcommand{\myvec}[1]{\vec{#1}}
-  \newcommand{\mymat}[1]{\bm{#1}}
-
-\newenvironment{sbmatrix}[1]
- {\def\mysubscript{#1}\mathop\bgroup\begin{bmatrix}}
- {\end{bmatrix}\egroup_{\textstyle\mathstrut\mysubscript}}
+\usepackage{standardmath}
 
 \newlength{\defaultbaselineskip}
 \setlength{\defaultbaselineskip}{\baselineskip}

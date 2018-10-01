@@ -1,0 +1,14 @@
+%  
+\ProvidesPackage{standardmath}
+
+\usepackage{bm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+  \DeclareMathOperator*{\argmax}{argmax}
+  \newcommand{\myvec}[1]{\vec{#1}}
+  \newcommand{\mymat}[1]{\bm{#1}}
+
+\newenvironment{sbmatrix}[1]
+ {\def\mysubscript{#1}\mathop\bgroup\begin{bmatrix}}
+ {\end{bmatrix}\egroup_{\textstyle\mathstrut\mysubscript}}
+

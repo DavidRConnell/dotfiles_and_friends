@@ -1,0 +1,72 @@
+%
+\ProvidesPackage{floatmacros}
+
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.14}
+\usepackage[font=footnotesize, labelfont=bf]{caption}
+\renewcommand{\equationautorefname}{eq.}
+\newcommand*{\Appendixautorefname}{appendix}
+\usepackage{subcaption}
+
+\newlength{\figwidth}
+\setlength{\figwidth}{0.8\columnwidth}
+\newcommand{\setfigwidth}[1]{\setlength{\figwidth}{#1}}
+\newcommand{\inputfigure}[2][]{%
+  \begin{figure}[ht]
+    \centering
+    \includefigure{#2}
+    \caption{#1}
+  \end{figure}
+}
+
+\newcommand{\inputsubfigure}[5]{%
+  \begin{figure}[ht]
+  \centering
+    \begin{subfigure}[t]{0.4\textwidth}
+      \centering
+      \includefigure{#3}
+      \caption{\footnotesize#1}
+    \end{subfigure}%
+    \quad
+    \begin{subfigure}[t]{0.4\textwidth}
+      \centering
+      \includefigure{#4}
+      \subcaption{\footnotesize#2}
+    \end{subfigure}
+  \caption{#5}
+  \end{figure}
+}
+
+\newcommand{\includefigure}[1]{
+  \IfFileExists{./figures/#1.pgf}{
+     \resizebox{\figwidth}{!}{\input{./figures/#1.pgf}}
+  }{\IfFileExists{./figures/#1.tex}{
+    \resizebox{\figwidth}{!}{\input{./figures/#1.tex}}
+  }{\includegraphics[width=\figwidth]{./figures/#1}}
+}}
+
+\usepackage{threeparttable}
+\usepackage{booktabs}
+\usepackage{tabularx}
+  \captionsetup[table]{%
+    labelsep=space,
+    justification=raggedright,
+    singlelinecheck=off
+  }
+
+\newlength{\tablewidth}
+\setlength{\tablewidth}{\linewidth}
+\newcommand{\settablewidth}[1]{\setlength{\tablewidth}{#1}}
+\newcommand{\inputtable}[2][]{%
+  \begin{table*}[tb]
+    \centering
+    \large
+    \colorbox{tablegray}{%
+      \begin{threeparttable}
+        \caption{#1}
+        \input{./tables/#2}
+      \end{threeparttable}
+    }
+  \end{table*}
+}
