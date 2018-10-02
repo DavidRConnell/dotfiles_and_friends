@@ -3,6 +3,7 @@ alias cddot="cd ~/dotfiles_and_friends"
 alias cdgene="cd /Volumes/PhysioNet/geneactiv/program"
 alias cddoc="cd ~/Google_Drive/Rush/Documentation"
 alias matlab="matlab -nodesktop -nosplash"
+alias mutt="neomutt"
 
 # Run with md2pdf file.pdf file.md
 alias md2pdf="pandoc -V geometry:margin=1in --pdf-engine=xelatex --variable mainfont=Helvetica -f gfm -o"
