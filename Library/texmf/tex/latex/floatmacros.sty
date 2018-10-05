@@ -1,12 +1,21 @@
+% Provides macros for inputting tables and figures taking care of all the
+% redundant information.
 %
+% Example of inputting subfigures. Displays a and b over c.
+% \begin{figure}[ht]
+% \centering
+% 	\inputsubfigureh[caption a]{0.4\textwidth}{figa}
+% 	\inputsubfigureh[caption b]{0.4\textwidth}{figb}
+% 	\inputsubfigurev[caption c]{\figwidth}{figc}
+% \caption{Combine caption}
+% \end{figure}
+
 \ProvidesPackage{floatmacros}
 
 \usepackage{graphicx}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.14}
 \usepackage[font=footnotesize, labelfont=bf]{caption}
-\renewcommand{\equationautorefname}{eq.}
-\newcommand*{\Appendixautorefname}{appendix}
 \usepackage{subcaption}
 
 \newlength{\figwidth}
@@ -15,36 +24,37 @@
 \newcommand{\inputfigure}[2][]{%
   \begin{figure}[ht]
     \centering
-    \includefigure{#2}
+		\addfigure{\figwidth}{#2}
     \caption{#1}
   \end{figure}
 }
 
-\newcommand{\inputsubfigure}[5]{%
-  \begin{figure}[ht]
-  \centering
-    \begin{subfigure}[t]{0.4\textwidth}
-      \centering
-      \includefigure{#3}
-      \caption{\footnotesize#1}
-    \end{subfigure}%
-    \quad
-    \begin{subfigure}[t]{0.4\textwidth}
-      \centering
-      \includefigure{#4}
-      \subcaption{\footnotesize#2}
-    \end{subfigure}
-  \caption{#5}
-  \end{figure}
+\newcommand{\addfigure}[2]{%
+  \IfFileExists{./figures/#2.pgf}{
+     \resizebox{#1}{!}{\input{./figures/#2.pgf}}
+  }{\IfFileExists{./figures/#2.tex}{
+    \resizebox{#1}{!}{\input{./figures/#2.tex}}
+  }{\includegraphics[width=#1]{./figures/#2}}
+}}
+
+% Normal command stacks horizontally; star command sacks vertically.
+\newcommand{\inputsubfigureh}[3][]{
+	\begin{subfigure}[t]{#2}
+		\centering
+		\addfigure{\figwidth}{#3}
+		\caption{\footnotesize#1}
+	\end{subfigure}%
+	\quad
 }
 
-\newcommand{\includefigure}[1]{
-  \IfFileExists{./figures/#1.pgf}{
-     \resizebox{\figwidth}{!}{\input{./figures/#1.pgf}}
-  }{\IfFileExists{./figures/#1.tex}{
-    \resizebox{\figwidth}{!}{\input{./figures/#1.tex}}
-  }{\includegraphics[width=\figwidth]{./figures/#1}}
-}}
+\newcommand{\inputsubfigurev}[3][]{
+	\begin{subfigure}[t]{#2}
+		\centering
+		\addfigure{\figwidth}{#3}
+		\caption{\footnotesize#1}
+	\end{subfigure}
+	\quad
+}
 
 \usepackage{threeparttable}
 \usepackage{booktabs}
@@ -62,7 +72,7 @@
   \begin{table*}[tb]
     \centering
     \large
-    \colorbox{tablegray}{%
+    \colorbox{\tablebgcolor}{%
       \begin{threeparttable}
         \caption{#1}
         \input{./tables/#2}

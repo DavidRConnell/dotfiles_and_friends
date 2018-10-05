@@ -1,85 +1,16 @@
 \ProvidesPackage{documentation}
 
-\usepackage{fontspec}
-\setmainfont[Ligatures=TeX]{Helvetica Neue Light}
-\setsansfont[Ligatures=TeX]{Helvetica Neue Light}
-
-\usepackage{polyglossia}
-  \setdefaultlanguage{english}
-
-\usepackage{csquotes}
-\usepackage[
-  backend=biber,
-  style=ieee
-]{biblatex}
-
-\usepackage[
-  top=1in,
-  bottom=1in
-]{geometry}
-
+\usepackage{paperformat}
 \usepackage{xcolor}
-  \definecolor{rushgreen}{HTML}{1d6f42}
-  \definecolor{rushlightblue}{HTML}{436092}
-  \definecolor{tablegray}{gray}{0.8}
+	\definecolor{rushgreen}{HTML}{1d6f42}
+	\definecolor{rushlightblue}{HTML}{436092}
+	\definecolor{tablegray}{gray}{0.8}
 
-\usepackage{hyperref}
-  \hypersetup{%
-    colorlinks,
-    linkcolor=rushlightblue,
-    citecolor=rushlightblue,
-    urlcolor=rushlightblue
-  }
+\setcolor{\titlecolor}{rushgreen}
+\setcolor{\tablebgcolor}{tablegray}
 
-\usepackage{floatmacros}
-  \settablewidth{1.5\linewidth plus 0.5\linewidth minus 0.5\linewidth}
-	\if@twocolumn
-		\setfigwidth{0.95\columnwidth}
-	\else
-		\setfigwidth{0.8\columnwidth}
-	\fi
-
-\usepackage{standardmath}
-
-\newlength{\defaultbaselineskip}
-\setlength{\defaultbaselineskip}{\baselineskip}
-
-\renewcommand{\maketitle}{%
-  \setlength\baselineskip{3em}
-  \makeatletter
-  \noindent
-  {\huge\textbf{\color{rushgreen}\@title}} \\[0.25em]
-  {\large\@author} \\
-  {\large\@date} \\[0.5em]
-  \makeatother
-  \setlength\baselineskip{\defaultbaselineskip}
+\hypersetup{
+	linkcolor=rushlightblue,
+	urlcolor=rushlightblue,
+	citecolor=rushlightblue
 }
-
-\renewcommand{\abstract}[1]{%
-  \rule{\textwidth}{0.25mm}
-  \emph{\input{./sections/Abstract}}
-  \rule{\textwidth}{0.25mm}
-}
-
-\newcommand{\maketitleandabstract}[1]{%
-  \thispagestyle{empty}
-  \twocolumn[
-    \begin{@twocolumnfalse}
-      \centering
-      \maketitle
-      \abstract{#1}
-    \end{@twocolumnfalse}
-  ]
-}
-
-\usepackage{sectsty}
-  \sectionfont{\color{black}}
-  \subsectionfont{\normalsize}
-  \subsubsectionfont{\normalsize\normalfont\emph}
-  \paragraphfont{\normalfont\emph}
-
-\newcommand{\inputsection}[2]{\section*{#2} \input{./sections/#1}}
-\newcommand{\inputsubsection}[2]{\subsection*{#2} \input{./sections/#1}}
-\newcommand{\subsubsubsection}[1]{\vspace{0.5em} \emph{#1:} \\[0.5em]}
-
-\newcommand{\inputappendix}[2]{\section{#1} \input{./appendices/#2}}
