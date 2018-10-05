@@ -1,0 +1,119 @@
+% Provides paperformat package which calls all packages and sets up all
+% formatting for writing papers. 
+%
+% Use setmainfont and setsansfont to change the font. Similarly colors can
+% be set using the setcolor and hypersetup commands. Unset colors default
+% to black.
+% Figure width and table width's can be set with setfigwidth and
+% settablewidth respectively.
+
+\ProvidesPackage{paperformat}
+
+% Colors
+\usepackage{xcolor}
+	\definecolor{defaultcolor}{gray}{0.0}
+	\newcommand{\titlecolor}{defaultcolor}
+	\newcommand{\sectioncolor}{defaultcolor}
+	\newcommand{\tablebgcolor}{defaultcolor}
+
+	\newcommand{\setcolor}[2]{%
+		\renewcommand{#1}{#2}
+	}
+
+% Set fonts
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{Helvetica Neue Light}
+\setsansfont[Ligatures=TeX]{Helvetica Neue Light}
+
+% Setup bibliographies
+\usepackage{polyglossia}
+	\setdefaultlanguage{english}
+
+\usepackage{csquotes}
+\usepackage[
+	backend=biber,
+	style=ieee
+]{biblatex}
+
+% Reference colors
+\usepackage{hyperref}
+	\hypersetup{%
+		colorlinks,
+		linkcolor=defaultcolor,
+		citecolor=defaultcolor,
+		urlcolor=defaultcolor
+}
+
+\renewcommand{\equationautorefname}{eq.}
+\newcommand*{\Appendixautorefname}{appendix}
+
+% Custom package for setting standard styles.
+\usepackage{floatmacros}
+	\settablewidth{\linewidth plus 0.5\linewidth minus 0.5\linewidth}
+	\if@twocolumn
+		\setfigwidth{0.95\columnwidth}
+	\else
+		\setfigwidth{0.8\columnwidth}
+	\fi
+
+\usepackage{standardmath}
+
+% Custom title and abstract functions.
+\newlength{\defaultbaselineskip}
+\setlength{\defaultbaselineskip}{\baselineskip}
+
+\renewcommand{\maketitle}{%
+	\setlength\baselineskip{3em}
+	\makeatletter
+	\noindent
+	{\huge\textbf{\color{\titlecolor}\@title}} \\[0.25em]
+	{\large\@author} \\
+	{\large\@date} \\[-1.5em]
+	\makeatother
+	\setlength\baselineskip{\defaultbaselineskip}
+}
+
+\renewcommand{\abstract}[1]{%
+	\rule{\textwidth}{0.25mm}
+	\emph{\input{./sections/Abstract}}
+	\rule{\textwidth}{0.25mm}
+}
+
+\newcommand{\maketitleandabstract}[1]{%
+	\thispagestyle{empty}
+	\twocolumn[
+		\begin{@twocolumnfalse}
+			\centering
+			\maketitle
+			\abstract{#1}
+		\end{@twocolumnfalse}
+	]
+}
+
+% Setting sections
+\usepackage{sectsty}
+	\sectionfont{\color{\sectioncolor}}
+	\subsectionfont{\normalsize}
+	\subsubsectionfont{\normalsize\normalfont\emph}
+	\paragraphfont{\normalfont\emph}
+
+\usepackage{xifthen}
+\newcommand{\inputsection}[2][]{%
+	\ifthenelse{\isempty{#1}}%
+		{\section*{#2}\input{./sections/#2}}%
+		{\section*{#1}\input{./sections/#2}}%
+}
+
+\newcommand{\inputsubsection}[2][]{%
+	\ifthenelse{\isempty{#1}}%
+		{\subsection*{#2}\input{./sections/#2}}%
+		{\subsection*{#1}\input{./sections/#2}}%
+}
+
+\newcommand{\subsubsubsection}[1]{\vspace{0.5em} \emph{#1:} \\[0.5em]}
+
+\newcommand{\inputappendix}[2][]{%
+	\ifthenelse{\isempty{#1}}%
+		{\section{#2}\input{./appendices/#2}}%
+		{\section{#1}\input{./appendices/#2}}%
+}

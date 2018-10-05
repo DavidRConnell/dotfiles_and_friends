@@ -4,7 +4,7 @@ autocmd CompleteDone *.tex inoremap <buffer> <expr> <silent> <tab> latex#TeXComp
 
 setlocal tabstop=2
 setlocal shiftwidth=2
-setlocal iskeyword+=:
+setlocal iskeyword+=:,\
 setlocal define=\newcommand{
 setlocal include=\usepackage{
 
