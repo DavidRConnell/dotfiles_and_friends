@@ -1,7 +1,17 @@
 \inputsection
 \inputsubsection
 \inputfigure
+\inputsubfigureh
+\inputsubfigurev
 \inputtable
+\inputappendix
+\maketitle
+\maketitleandabstract
+\setcolor
+\setfigwidth
+\settablewidth
+\setmainfont
+\setsansfont
 \cite
 \autoref
 \ref
@@ -14,3 +24,4 @@
 \setcounter
 \stepcounter
 \addtocounter
+\usepackage
