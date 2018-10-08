@@ -41,19 +41,20 @@
 \newcommand{\inputsubfigureh}[3][]{
 	\begin{subfigure}[t]{#2}
 		\centering
-		\addfigure{\figwidth}{#3}
-		\caption{\footnotesize#1}
+		\addfigure{\textwidth}{#3}
+		\vspace{-2em}
+		\caption{\footnotesize{#1}}
 	\end{subfigure}%
-	\quad
 }
 
 \newcommand{\inputsubfigurev}[3][]{
 	\begin{subfigure}[t]{#2}
 		\centering
-		\addfigure{\figwidth}{#3}
+		\addfigure{\textwidth}{#3}
+		\vspace{-2em}
 		\caption{\footnotesize#1}
 	\end{subfigure}
-	\quad
+
 }
 
 \usepackage{threeparttable}
