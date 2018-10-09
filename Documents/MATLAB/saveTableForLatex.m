@@ -26,7 +26,9 @@ function saveTableForLatex(dataStruct, name, projectPath, varargin)
 
 	[fmt, align] = processOptionals(varargin);
 	pathToTables = strcat(projectPath, '/tables');
-	if ~exist(pathToTables, 'dir')
+	if ~exist(projectPath, 'dir')
+		error('No project at %s.', projectPath);
+	elseif ~exist(pathToTables, 'dir')
 		mkdir(pathToTables);
 	end
 	savePath = strcat(pathToTables, '/', name, '.tex');

@@ -7,7 +7,9 @@ function saveFigForLatex(name, projectPath)
 	% flag to true.
 
 	pathToFigures = strcat(projectPath, '/figures');
-	if ~exist(pathToFigures, 'dir')
+	if ~exist(projectPath, 'dir')
+		error('No project at %s.', projectPath);
+	elseif ~exist(pathToFigures, 'dir')
 		mkdir(pathToFigures)
 	end
 
