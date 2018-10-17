@@ -25,3 +25,7 @@
 \stepcounter
 \addtocounter
 \usepackage
+\columnwidth
+\textwidth
+\paperwidth
+\linewidth
