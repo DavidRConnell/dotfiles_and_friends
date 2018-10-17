@@ -7,11 +7,9 @@ set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin('~/.config/nvim/bundle')
 Plugin 'VundleVim/Vundle.vim'
 " Add plugins here
-" Plugin 'neomake/neomake'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-commentary'
 Plugin 'airblade/vim-gitgutter'
-" Plugin 'joshdick/onedark.vim'
 Plugin 'dracula/vim'
 
 Plugin 'ervandew/supertab'
@@ -84,6 +82,8 @@ noremap Q <nop>
 	" Tabs
 nnoremap <leader>t :tab drop<space>
 nnoremap <leader>h :tab help<space>
+nnoremap <leader><tab> gt
+nnoremap <leader><S-tab> gT
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt
