@@ -30,6 +30,7 @@ colorscheme dracula
 let g:airline_theme='dracula'
 set background=dark
 syntax enable
+syntax spell toplevel
 set termguicolors
 
 " ui config

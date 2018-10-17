@@ -8,10 +8,6 @@ setlocal iskeyword+=:,\
 setlocal define=\newcommand{
 setlocal include=\usepackage{
 
-" Make spell check work outside of document enviornment
-syntax enable
-syntax spell toplevel
-
 " Enable $ sign completion
 inoremap <buffer> $ $$<left>
 
