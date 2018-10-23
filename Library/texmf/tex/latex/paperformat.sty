@@ -98,15 +98,16 @@
 	\paragraphfont{\normalfont\emph}
 
 \usepackage{xifthen}
+\usepackage{mfirstuc}
 \newcommand{\inputsection}[2][]{%
 	\ifthenelse{\isempty{#1}}%
-		{\section*{#2}\input{./sections/#2}}%
+		{\section*{\capitalisewords{#2}}\input{./sections/#2}}%
 		{\section*{#1}\input{./sections/#2}}%
 }
 
 \newcommand{\inputsubsection}[2][]{%
 	\ifthenelse{\isempty{#1}}%
-		{\subsection*{#2}\input{./sections/#2}}%
+		{\subsection*{\capitalisewords{#2}}\input{./sections/#2}}%
 		{\subsection*{#1}\input{./sections/#2}}%
 }
 
@@ -114,6 +115,6 @@
 
 \newcommand{\inputappendix}[2][]{%
 	\ifthenelse{\isempty{#1}}%
-		{\section{#2}\input{./appendices/#2}}%
+		{\section{\capitalisewords{#2}}\input{./appendices/#2}}%
 		{\section{#1}\input{./appendices/#2}}%
 }
