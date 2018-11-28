@@ -1,7 +1,6 @@
 setlocal formatoptions+=t
 
 " Remove quote completion
-inoremap <buffer> " "
 inoremap <buffer> ' '
 
 " Ditionary and spelling
