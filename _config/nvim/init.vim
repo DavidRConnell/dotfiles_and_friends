@@ -136,8 +136,9 @@ nnoremap <leader>d [<C-d>
 	" From current line to line containing word
 onoremap s //+0<left><left><left>
 
-	" Toggle spell check
+	" Toggles
 nnoremap <leader>c :set spell!<CR>
+nnoremap <leader>/ :nohl<CR>
 
 " Remap
 nnoremap ; :
