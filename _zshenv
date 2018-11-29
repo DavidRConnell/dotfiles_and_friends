@@ -12,5 +12,9 @@ alias gc="git commit"
 alias gd="git diff"
 alias ga="git add"
 
+alias df="df -h"
+alias du="du -h"
+alias free="free -h"
+
 # Run with md2pdf file.pdf file.md
 alias md2pdf="pandoc -V geometry:margin=1in --pdf-engine=xelatex --variable mainfont=Helvetica -f gfm -o"
