@@ -73,4 +73,3 @@ compctl -g "$work/programs/"'*'"/(:t)" cdprog
 compctl -g "$work/cronscripts/"'*'"/(:t)" cdcron
 compctl -g "$work/docs/"'*'"/(:t)" cddoc
 compctl -g "$work/presentations/"'*'"/(:t)" cdpres
->>>>>>> 6df077eba9fbb414f3ad91296810e0350d9d8f24
