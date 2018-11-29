@@ -1,7 +1,6 @@
 setlocal formatoptions+=t
 
 " Remove quote completion
-inoremap <buffer> " "
 inoremap <buffer> ' '
 
 " Ditionary and spelling
@@ -10,4 +9,4 @@ setlocal complete=.,kspell
 setlocal infercase
 
 " Spell complete
-nnoremap <buffer> <expr> <silent> <leader><tab> spell#FixSpelling()
+nnoremap <buffer> <expr> <silent> <tab> spell#FixSpelling()

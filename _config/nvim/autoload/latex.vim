@@ -5,7 +5,7 @@ function! latex#TeXComplete()
 	let charleftofcurser = strpart(line, col('.')-1, 1)
 	let isempty = strlen(charleftofcurser) == 0
 
-	if charleftofcurser =~ "\\s" || isempty
+	if isempty || charleftofcurser =~ "\\s"
 		return "\<tab>"
 	endif
 
@@ -53,7 +53,6 @@ function! ListFolder(findstart, base, folder)
 		let res = []
 		let files = expand("./" . a:folder . "/**", 0, 1)
 		for f in files
-			" let m = matchstr(f, '[^\(./' . a:folder . '/\)].*\.')
 			let m = matchstr(f, a:folder . '/.*')
 			let m = m[strlen(a:folder . '/'):]
 			let m = fnamemodify(m, ":r")
@@ -105,7 +104,7 @@ function! ListLabels(findstart, base)
 endfunction
 
 function! GetArgBetween(string, left, right)
-	" Pulls out a atom inbetween symbols left and right.
+	" Pulls out an atom inbetween symbols left and right.
 
 	let strprt = matchstr(a:string, a:left . '.*' . a:right)
 	return matchstr(strprt, '[^' . a:left . a:right . ']\+')

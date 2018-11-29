@@ -11,3 +11,5 @@
 [merge]
 	tool = vimdiff3
 	conflictstyle = diff3
+[credential]
+	helper = $gitcredentialhelper

@@ -145,6 +145,7 @@ nnoremap ; :
 nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
+nnoremap gf :tab drop <cfile><CR>
 
 " Auto close
 inoremap " ""<left>
