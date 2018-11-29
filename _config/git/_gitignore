@@ -1,3 +1,4 @@
 README.pdf
 .DS_STORE
 .tags
+*.mat
