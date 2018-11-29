@@ -8,21 +8,19 @@ ZSH_THEME="robbyrussell"
 zstyle ':completion:*' menu select
 
 plugins=(
-  git
-  vi-mode
-  colored-man-pages
-  osx
+	git
+	vi-mode
+	colored-man-pages
+	osx
 )
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+	export EDITOR='vim'
 else
-  export EDITOR='nvim'
+	export EDITOR='nvim'
 fi
 
 unsetopt inc_append_history
@@ -36,3 +34,44 @@ bindkey -a j history-beginning-search-forward
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 source ~/.bash_profile
+
+function _getdir {
+	echo $work/$1
+}
+
+function _cddir {
+	dpath=$(_getdir $1)
+	shift
+
+	if [[ $# -gt 1 ]]; then
+		echo 'Only one argument allowed.'
+	fi
+
+	cd $dpath/$1 || cd $dpath
+}
+
+function cddata {
+	_cddir data "$@"
+}
+
+function cdprog {
+	_cddir programs "$@"
+}
+
+function cdcron {
+	_cddir cronscripts "$@"
+}
+
+function cddoc {
+	_cddir docs "$@"
+}
+
+function cdpres {
+	_cddir presentations "$@"
+}
+
+compctl -g "$work/data/"'*'"/(:t)" cddata
+compctl -g "$work/programs/"'*'"/(:t)" cdprog
+compctl -g "$work/cronscripts/"'*'"/(:t)" cdcron
+compctl -g "$work/docs/"'*'"/(:t)" cddoc
+compctl -g "$work/presentations/"'*'"/(:t)" cdpres

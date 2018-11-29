@@ -1,9 +1,7 @@
 source $HOME/.zshlocal
+bin=$work/programs/bin
 
-alias cddot="cd ~/dotfiles_and_friends"
-alias cddata="cd $work/Data"
-alias cdgene="cd $work/geneactiv/program"
-alias cdpat="cd $work/watchpat"
+alias cddot="$HOME/dotfiles_and_friends/"
 
 alias vi="nvim"
 alias matlab="matlab -nodesktop -nosplash"
