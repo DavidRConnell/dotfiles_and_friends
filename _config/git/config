@@ -5,7 +5,7 @@
 	email = davidconnell12@gmail.com
 [core]
 	editor = nvim
-	excludesfile = /Users/davidconnell/.config/git/.gitignore
+	excludesfile = ~/.config/git/.gitignore
 [alias]
 	logall = log --oneline --decorate --graph --all
 [merge]
