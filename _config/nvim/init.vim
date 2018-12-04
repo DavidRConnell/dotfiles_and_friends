@@ -14,6 +14,7 @@ Plugin 'dracula/vim'
 
 Plugin 'ervandew/supertab'
 Plugin 'vim-airline/vim-airline'
+Plugin 'junegunn/vader.vim'
 call vundle#end()
 
 filetype plugin indent on
