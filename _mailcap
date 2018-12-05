@@ -1,2 +1,2 @@
 text/html; firefox '%s' &; test=test -n "$DISPLAY"; needsterminal;
-text/html; lynx -dump %s; nametemplate=%s.html; copiousoutput;
+text/html; w3m -dump %s; nametemplate=%s.html; copiousoutput;

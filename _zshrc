@@ -73,3 +73,29 @@ compctl -g "$work/programs/"'*'"/(:t)" cdprog
 compctl -g "$work/cronscripts/"'*'"/(:t)" cdcron
 compctl -g "$work/docs/"'*'"/(:t)" cddoc
 compctl -g "$work/presentations/"'*'"/(:t)" cdpres
+
+function duck {
+	query=''
+	[[ $# -gt 0 ]] && query='?q='
+	for key in "$@"; do
+		query+="+$key"
+	done
+
+	w3m "duckduckgo.com/$query"
+}
+
+function matdocs {
+	graphical=false
+	[[ $1 =~ '-g' ]] && graphical=true && shift
+
+	address="mathworks.com/help/matlab/ref/$1.html"
+	file=$(w3m -dump $address)
+	firstline=$(echo $file | grep -n ^$1$ -m1 | grep -o '^[[:digit:]]*')
+
+	if $graphical; then
+		((firstline+=23))
+		w3m $address +$firstline
+	else
+		echo $file | tail -n+$firstline | less
+	fi
+}
