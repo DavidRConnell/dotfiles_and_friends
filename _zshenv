@@ -1,4 +1,5 @@
 source $HOME/.zshlocal
+source ~/.config/accounts
 rushbin=$work/programs/bin
 
 alias cddot="$HOME/dotfiles_and_friends/"
