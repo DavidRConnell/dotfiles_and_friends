@@ -7,16 +7,6 @@ function addToLogAndDeleteFile(path, file, ME)
 	footer = '\nFile Deleted\n\n';
 
 	addToLog(path, ME, header, footer);
-	moveToBadFiles(file)
-
-
-	function moveToBadFiles(file)
-		badFiles = strcat(file.folder, '/badfiles');
-		filePath = strcat(file.folder, '/', file.name);
-		if ~exist(badFiles)
-			mkdir(badFiles);
-		end
-
-		delete(filePath);
-	end
+	filePath = strcat(file.folder, '/', file.name);
+	delete(filePath);
 end
