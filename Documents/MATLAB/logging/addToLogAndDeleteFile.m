@@ -4,7 +4,7 @@ function addToLogAndDeleteFile(path, file, ME)
 	% structure with fields name and folder).
 
 	header = sprintf('Error reading %s:\n', file.name);
-	footer = '\nFile moved to ./badFiles\n\n';
+	footer = '\nFile Deleted\n\n';
 
 	addToLog(path, ME, header, footer);
 	moveToBadFiles(file)
