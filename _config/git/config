@@ -4,7 +4,7 @@
 	name = "David R Connell"
 	email = davidconnell12@gmail.com
 [core]
-	editor = nvim
+	editor = nvim +'set filetype=text'
 	excludesfile = ~/.config/git/.gitignore
 [alias]
 	logall = log --oneline --decorate --graph --all
