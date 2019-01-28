@@ -1,7 +1,6 @@
-function matlab#InsertFunctionStub()
+function! matlab#InsertFunctionStub()
 	let filename = expand("%:t:r")
 	exe "normal!ggifunction " . filename
-	normal!A()
 	normal!oend
 	normal!gg
 endfunction
@@ -51,6 +50,17 @@ function! matlab#GotoDefinition()
 endfunction
 
 function! DoesFileContain(func, file)
-	let errcode = system('grep "' . a:func . '" ' . a:file . ' 1>/dev/null; echo $?')
-	return errcode == 0
+	" let errcode = system('grep "' . a:func . '" ' . a:file . ' 1>/dev/null; echo $?')
+	let numinstances = system('grep -c "' . a:func . '" ' . a:file)
+	return numinstances > 0
+endfunction
+
+let b:searchpath = ['.', '~/Documents/MATLAB/', "$work/programs/readers/"]
+function! GetWordsIn(file)
+	return system("grep -o '[[:alpha:]][[:alnum:]]*' " . a:file)
+endfunction
+
+function! GetFunctionsIn(path)
+	let pattern = " -name '*.m' -not -path 'private' -exec basename {} \;"
+	return system("find " . a:path . pattern . " | grep -o '^[[:alnum:]]*[^\.]'")
 endfunction
