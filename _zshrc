@@ -84,7 +84,7 @@ function duck {
 	w3m "duckduckgo.com/$query"
 }
 
-function matdocs {
+function matman {
 	graphical=false
 	[[ $1 =~ '-g' ]] && graphical=true && shift
 
