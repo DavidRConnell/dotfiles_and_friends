@@ -23,6 +23,7 @@ filetype plugin indent on
 set updatetime=100
 set nobackup
 set noswapfile
+set shell=zsh\ -i
 
 " Colors and fonts
 colorscheme dracula
@@ -83,6 +84,7 @@ noremap Q <nop>
 	" Tabs
 nnoremap <leader>t :tab drop<space>
 nnoremap <leader>h :tab help<space>
+nnoremap <leader>. :tab drop ~/.config/nvim/
 nnoremap <leader>k gt
 nnoremap <leader>j gT
 nnoremap <leader>1 1gt
