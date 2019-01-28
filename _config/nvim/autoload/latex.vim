@@ -1,11 +1,10 @@
 function! latex#TeXComplete()
 	let line = getline('.')
+
+	"Exists only to use expand('<cWORD>') delete if remove that.
 	call cursor(line, col('.')-1)
 
-	let charleftofcurser = strpart(line, col('.')-1, 1)
-	let isempty = strlen(charleftofcurser) == 0
-
-	if isempty || charleftofcurser =~ "\\s"
+	if strpart(line, 0, col('.')-1) =~ '^\s*$'
 		return "\<tab>"
 	endif
 
