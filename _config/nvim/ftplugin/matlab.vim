@@ -9,3 +9,4 @@ setlocal tags=$PWD/.tags
 
 nnoremap <buffer> <expr> <silent> <leader>g matlab#GenerateTags()
 nnoremap <buffer> <expr> <silent> <leader>d matlab#GotoDefinition()
+nnoremap <buffer> <leader>? :!matman <cword><CR>g
