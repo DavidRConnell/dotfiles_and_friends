@@ -3,3 +3,4 @@ README.pdf
 .tags
 *.mat
 ._*
+*.bak
