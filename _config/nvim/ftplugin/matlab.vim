@@ -1,3 +1,4 @@
+source $VIMRUNTIME/ftplugin/matlab.vim
 setlocal commentstring=%\ %s
 setlocal define=function\\(.*=\\)\\{0,1}
 
@@ -10,3 +11,8 @@ setlocal tags=$PWD/.tags
 nnoremap <buffer> <expr> <silent> <leader>g matlab#GenerateTags()
 nnoremap <buffer> <expr> <silent> <leader>d matlab#GotoDefinition()
 nnoremap <buffer> <leader>? :!matman <cword><CR>g
+
+" Matchit
+let b:match_words = '\<\%(if\|switch\|for\|while\|function\)\>:'
+			\ . '\<\%(elseif\|else\|case\|otherwise\)\>:'
+			\ .	'\<end\>$'
