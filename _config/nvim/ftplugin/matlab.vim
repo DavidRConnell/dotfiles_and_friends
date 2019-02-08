@@ -7,8 +7,7 @@ setlocal define=function\\(.*=\\)\\{0,1}
 let b:custom_path = [
 			\ '$PWD',
 			\ '$HOME/Documents/MATLAB',
-			\ '$rush/programs/readers',
-			\ '$rush/programs/bin']
+			\ '$work/programs/readers']
 
 
 setlocal complete+=k~/.config/nvim/dicts/matlabbuiltins.txt

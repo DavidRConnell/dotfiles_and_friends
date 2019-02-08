@@ -12,13 +12,12 @@ function! matlab#GotoDefinition()
 		return "[\<C-d>"
 	endif
 
-	for p in b:custom_path
-		let func_path = system('find ' . p . '/**/' . func . '.m | head -n1')
-		
-		if func_path !~ 'no matches found'
-			return ":tab drop " . func_path . "\<CR>"
-		endif
-	endfor
+	let search_paths = join(b:custom_path, ',')
+	let func_path = system('find {' . search_paths . '} -name ' . func . '.m | head -n1')
+
+	if !empty(func_path)
+		return ":tab drop " . func_path . "\<CR>"
+	endif
 
 	echom "Function not found"
 endfunction
