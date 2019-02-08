@@ -11,6 +11,7 @@ setlocal tags=$PWD/.tags
 nnoremap <buffer> <expr> <silent> <leader>g matlab#GenerateTags()
 nnoremap <buffer> <expr> <silent> <leader>d matlab#GotoDefinition()
 nnoremap <buffer> <leader>? :!matman <cword><CR>g
+nnoremap <buffer> <leader>l :grep -h 'function' %<CR>
 
 " Matchit
 let b:match_words = '\<\%(if\|switch\|for\|while\|function\)\>:'
