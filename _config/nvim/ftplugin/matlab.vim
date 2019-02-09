@@ -17,7 +17,7 @@ setlocal complete+=k~/.config/nvim/dicts/matlabbuiltins.txt
 nnoremap <buffer> <expr> <silent> <leader>g matlab#GenerateTags()
 nnoremap <buffer> <expr> <silent> <leader>d matlab#GotoDefinition()
 nnoremap <buffer> <leader>? :!matman <cword><CR>g
-nnoremap <buffer> <leader>l :grep -h 'function' %<CR>
+nnoremap <buffer> <leader>l :!grep -nh function %<CR>
 
 " Better complete
 " inoremap <buffer> <expr> <silent> <tab> matlab#Complete()

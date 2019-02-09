@@ -3,4 +3,4 @@ setlocal iskeyword+=.
 
 nnoremap <buffer> <leader>x :w<CR>:!python3 %<CR>
 nnoremap <buffer> <leader>? :!echo "help(<cword>)" \| python3<CR>g
-nnoremap <buffer> <leader>l :grep -h 'def' %<CR>
+nnoremap <buffer> <leader>l :!grep -nh 'def' %<CR>
