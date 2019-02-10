@@ -165,6 +165,10 @@ nnoremap ; :
 nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
+nnoremap J L
+nnoremap K H
+nnoremap L $
+nnoremap H ^
 nnoremap gf :tab drop <cfile><CR>
 
 " Auto close
