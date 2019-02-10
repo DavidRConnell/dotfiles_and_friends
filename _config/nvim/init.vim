@@ -101,18 +101,35 @@ nnoremap <leader>9 9gt
 nnoremap <leader>s :vsplit<space>
 nnoremap <leader>n <C-w><C-w>
 nnoremap <leader>p <C-w><C-p>
-nnoremap <leader><C-h> <C-w>h
-nnoremap <leader><C-j> <C-w>j
-nnoremap <leader><C-k> <C-w>k
-nnoremap <leader><C-l> <C-w>l
+nnoremap <leader>H <C-w>h
+nnoremap <leader>J <C-w>j
+nnoremap <leader>K <C-w>k
+nnoremap <leader>L <C-w>l
 set splitright
 
 	"Jumps
 nnoremap <leader>o <C-o>
 
-	"Commentj
+	"Comments
 map <leader>cl gcc
 map <leader>cp gcap
+
+	"Git
+nnoremap <leader>gs :!gs<CR>g
+nnoremap <leader>gl :!git logall<CR>g
+nnoremap <leader>ga :silent !ga %<CR>
+nnoremap <leader>gA :silent !ga .<CR>
+nnoremap <leader>gr :!git reset HEAD %<CR>
+nnoremap <leader>gR :!git reset HEAD .<CR>
+nnoremap <leader>gp :tab drop term://ga\ -p\ %<CR>
+nnoremap <leader>gc :!gc -m ""<left>
+nnoremap <leader>gC :tab drop term://gc<CR>
+nnoremap <leader>gb :!git checkout<Space>
+nnoremap <leader>gB :!git checkout -b<Space>
+nnoremap <expr> <silent> <leader>gn git#CheckoutCommit('next', v:count1)
+nnoremap <expr> <silent> <leader>gN git#CheckoutCommit('previous', v:count1)
+nnoremap <leader>gpu :silent !git stash push<CR>
+nnoremap <leader>gpo :silent !git stash pop<CR>
 
 	" Search and replace all in line or visual selection.
 vnoremap <leader>r :s//g<left><left>
