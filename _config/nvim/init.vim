@@ -53,7 +53,7 @@ set smartcase
 set showmatch
 set incsearch
 set hlsearch
-set complete=.,t
+set complete=.
 
 " Tabs and spaces
 set tabstop=4
