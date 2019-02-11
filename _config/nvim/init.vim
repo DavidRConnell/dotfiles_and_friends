@@ -115,6 +115,8 @@ map <leader>cl gcc
 map <leader>cp gcap
 
 	"Git
+command! -complete=custom,git#ListBranches -nargs=1 GitCheckout :!git checkout <args>
+
 nnoremap <leader>gs :!gs<CR>g
 nnoremap <leader>gl :!git logall<CR>g
 nnoremap <leader>ga :silent !ga %<CR>
@@ -124,8 +126,8 @@ nnoremap <leader>gR :!git reset HEAD .<CR>
 nnoremap <leader>gp :tab drop term://ga\ -p\ %<CR>
 nnoremap <leader>gc :!gc -m ""<left>
 nnoremap <leader>gC :tab drop term://gc<CR>
-nnoremap <leader>gb :!git checkout<Space>
-nnoremap <leader>gB :!git checkout -b<Space>
+nnoremap <leader>gb :silent GitCheckout<Space>
+nnoremap <leader>gB :silent !git checkout -b<Space>
 nnoremap <expr> <silent> <leader>gn git#CheckoutCommit('next', v:count1)
 nnoremap <expr> <silent> <leader>gN git#CheckoutCommit('previous', v:count1)
 nnoremap <leader>gpu :silent !git stash push<CR>

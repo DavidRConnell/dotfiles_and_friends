@@ -1,4 +1,4 @@
-function! GetBranch()
+function! GetCurrentBranch()
 	let branch = system('git branch | grep \* | cut -d" " -f2')
 	if branch =~ 'HEAD'
 		return -1
@@ -6,7 +6,7 @@ function! GetBranch()
 	return branch
 endfunction
 
-let g:branch=GetBranch()
+let g:branch=GetCurrentBranch()
 
 function! git#CheckoutCommit(direction, count)
 	let current_commit = GetSha1()
@@ -52,4 +52,11 @@ endfunction
 
 function! GetCommitList()
 	return systemlist('git log --all --oneline | cut -d" " -f1')
+endfunction
+
+function! git#ListBranches(A,L,P)
+	let branches = system('git branch | tr " " \* | cut -d\* -f3')
+	let commits = system('git log --all --oneline | cut -d" " -f1')
+	echom(branches . commits)
+	return branches . commits
 endfunction
