@@ -91,7 +91,6 @@ function! Open(args, ishelp)
 	let num_windows = winnr('$') + 1
 	let screen_width = &columns
 	let max_window_width = &colorcolumn
-	echom(a:args)
 
 	if (screen_width / num_windows) > max_window_width
 		if a:ishelp
@@ -108,12 +107,12 @@ function! Open(args, ishelp)
 	endif
 endfunction
 
-nnoremap <leader>o :Open<space>
-nnoremap <leader>H :Help<space>
+nnoremap <leader>o :silent Open<space>
+nnoremap <leader>H :silent Help<space>
 nnoremap gf :tab drop <cfile><CR>
 
-nnoremap <leader>. :Open ~/.config/nvim/
-nnoremap <leader>.. :Open ~/.config/nvim/init.vim<CR>
+nnoremap <leader>. :silent Open ~/dotfiles_and_friends/_config/nvim/
+nnoremap <leader>.. :silent Open ~/dotfiles_and_friends/_config/nvim/init.vim<CR>
 nnoremap <leader>.S :so ~/.config/nvim/
 nnoremap <leader>.s :so ~/.config/nvim/init.vim<CR>
 
@@ -154,9 +153,9 @@ nnoremap <leader>ga :silent !ga %<CR>
 nnoremap <leader>gA :silent !ga .<CR>
 nnoremap <leader>gr :!git reset HEAD %<CR>
 nnoremap <leader>gR :!git reset HEAD .<CR>
-nnoremap <leader>gp :tab drop term://ga\ -p\ %<CR>
+nnoremap <leader>gp :tab drop term://ga\ -p\ %<CR>i
 nnoremap <leader>gc :!gc -m ""<left>
-nnoremap <leader>gC :tab drop term://gc<CR>
+nnoremap <leader>gC :tab drop term://gc<CR>i
 nnoremap <leader>gb :silent GitCheckout<Space>
 nnoremap <leader>gB :silent !git checkout -b<Space>
 nnoremap <expr> <silent> <leader>gn git#CheckoutCommit('next', v:count1)
