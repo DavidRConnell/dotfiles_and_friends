@@ -70,7 +70,8 @@ set formatoptions=cqr
 
 " Leader shortcuts
 nnoremap <space> <Nop>
-let mapleader =" "
+let mapleader=" "
+let localmapleader="\\"
 
 	"Save and quit
 nnoremap <leader>w :w<CR>
@@ -81,12 +82,44 @@ nnoremap <leader>Q :qa<CR>
 	"Don't enter ex mode
 noremap Q <nop>
 
+	" Opening files
+set splitright
+command! -complete=file -nargs=+ Open :call Open("<args>", 0)
+command! -complete=help -nargs=+ Help :call Open("<args>", 1)
+
+function! Open(args, ishelp)
+	let num_windows = winnr('$') + 1
+	let screen_width = &columns
+	let max_window_width = &colorcolumn
+	echom(a:args)
+
+	if (screen_width / num_windows) > max_window_width
+		if a:ishelp
+			exe('vert help ' . a:args)
+		else
+			exe('vsplit ' . a:args)
+		endif
+	else
+		if a:ishelp
+			exe('tab help ' . a:args)
+		else
+			exe('tab drop ' . a:args)
+		endif
+	endif
+endfunction
+
+nnoremap <leader>o :Open<space>
+nnoremap <leader>H :Help<space>
+nnoremap gf :tab drop <cfile><CR>
+
+nnoremap <leader>. :Open ~/.config/nvim/
+nnoremap <leader>.. :Open ~/.config/nvim/init.vim<CR>
+nnoremap <leader>.S :so ~/.config/nvim/
+nnoremap <leader>.s :so ~/.config/nvim/init.vim<CR>
+
 	" Tabs
-nnoremap <leader>t :tab drop<space>
-nnoremap <leader>h :tab help<space>
-nnoremap <leader>. :tab drop ~/.config/nvim/
-nnoremap <leader>k gt
-nnoremap <leader>j gT
+nnoremap <leader>} gt
+nnoremap <leader>{ gT
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt
@@ -98,17 +131,15 @@ nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
 
 	"Splits
-nnoremap <leader>s :vsplit<space>
 nnoremap <leader>n <C-w><C-w>
 nnoremap <leader>p <C-w><C-p>
-nnoremap <leader>H <C-w>h
-nnoremap <leader>J <C-w>j
-nnoremap <leader>K <C-w>k
-nnoremap <leader>L <C-w>l
-set splitright
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
 
 	"Jumps
-nnoremap <leader>o <C-o>
+nnoremap <leader>b <C-o>
 
 	"Comments
 map <leader>cl gcc
@@ -171,7 +202,7 @@ nnoremap J L
 nnoremap K H
 nnoremap L $
 nnoremap H ^
-nnoremap gf :tab drop <cfile><CR>
+nnoremap <leader>? K
 
 " Auto close
 inoremap " ""<left>
@@ -191,9 +222,12 @@ let g:airline#extensions#tabline#tab_nr_type=1
 let airline#extensions#tabline#show_splits=0
 let g:airline_powerline_fonts = 1
 
-" SuperTab
+	" SuperTab
 let g:SuperTabDefaultCompletionType="context"
 let g:SuperTabCompletionContexts=['s:ContextText', 's:ContextDiscover']
 let g:SuperTabContextTextOmniPrecedence=['&completefunc', '&omnifunc']
 let g:SuperTabContextDiscoverDiscovery=
 		\ ["&completefunc:<c-p>", "&omnifunc:<c-x><c-o>"]
+
+	" Git gutter
+let g:gitgutter_map_keys=0

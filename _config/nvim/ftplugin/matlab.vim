@@ -15,6 +15,9 @@ setlocal complete+=k~/.config/nvim/dicts/matlabbuiltins.txt
 
 " Local key bindings
 nnoremap <buffer> <expr> <silent> <leader>g matlab#GenerateTags()
+nnoremap <buffer> <localleader>.. :Open ~/.config/nvim/ftplugin/matlab.vim<CR>
+nnoremap <buffer> <localleader>.s :so ~/.config/nvim/ftplugin/matlab.vim<CR>
+
 nnoremap <buffer> <expr> <silent> <leader>d matlab#GotoDefinition()
 nnoremap <buffer> <leader>? :!matman <cword><CR>g
 nnoremap <buffer> <leader>l :!grep -nh function %<CR>
