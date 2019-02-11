@@ -115,6 +115,7 @@ nnoremap <leader>. :silent Open ~/dotfiles_and_friends/_config/nvim/
 nnoremap <leader>.. :silent Open ~/dotfiles_and_friends/_config/nvim/init.vim<CR>
 nnoremap <leader>.S :so ~/.config/nvim/
 nnoremap <leader>.s :so ~/.config/nvim/init.vim<CR>
+nnoremap <leader>% :so %<CR>
 
 	" Tabs
 nnoremap <leader>} gt
