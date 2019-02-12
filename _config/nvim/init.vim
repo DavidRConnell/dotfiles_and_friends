@@ -150,6 +150,7 @@ command! -complete=custom,git#ListBranches -nargs=1 GitCheckout :!git checkout <
 
 nnoremap <leader>gs :!gs<CR>g
 nnoremap <leader>gl :!git logall<CR>g
+nnoremap <leader>gd :!gd -U1 % \| grep ^\[+\\|-\]\[^+\\|-\]<CR>g
 nnoremap <leader>ga :silent !ga %<CR>
 nnoremap <leader>gA :silent !ga .<CR>
 nnoremap <leader>gr :!git reset HEAD %<CR>
