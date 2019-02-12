@@ -84,8 +84,8 @@ noremap Q <nop>
 
 	" Opening files
 set splitright
-command! -complete=file -nargs=+ Open :call Open("<args>", 0)
-command! -complete=help -nargs=+ Help :call Open("<args>", 1)
+command! -complete=file -nargs=+ Open :silent call Open("<args>", 0)
+command! -complete=help -nargs=+ Help :silent call Open("<args>", 1)
 
 function! Open(args, ishelp)
 	let num_windows = winnr('$') + 1
@@ -107,12 +107,12 @@ function! Open(args, ishelp)
 	endif
 endfunction
 
-nnoremap <leader>o :silent Open<space>
-nnoremap <leader>H :silent Help<space>
+nnoremap <leader>o :Open<space>
+nnoremap <leader>H :Help<space>
 nnoremap gf :tab drop <cfile><CR>
 
-nnoremap <leader>. :silent Open ~/dotfiles_and_friends/_config/nvim/
-nnoremap <leader>.. :silent Open ~/dotfiles_and_friends/_config/nvim/init.vim<CR>
+nnoremap <leader>. :Open ~/dotfiles_and_friends/_config/nvim/
+nnoremap <leader>.. :Open ~/dotfiles_and_friends/_config/nvim/init.vim<CR>
 nnoremap <leader>.S :so ~/.config/nvim/
 nnoremap <leader>.s :so ~/.config/nvim/init.vim<CR>
 nnoremap <leader>% :so %<CR>
