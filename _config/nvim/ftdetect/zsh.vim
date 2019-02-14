@@ -1,2 +1,2 @@
 autocmd BufNewFile,BufRead *.sh,*.command set filetype=zsh
-autocmd BufNewFile,BufRead * if strlen(expand('%:e')) == 0 | set filetype=zsh | endif
+autocmd BufNewFile,BufRead * if getline(1) =~ '#!/bin/zsh' | set filetype=zsh | endif
