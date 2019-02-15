@@ -7,14 +7,11 @@ set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin('~/.config/nvim/bundle')
 Plugin 'VundleVim/Vundle.vim'
 " Add plugins here
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-commentary'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-airline/vim-airline'
 Plugin 'dracula/vim'
 
 Plugin 'ervandew/supertab'
-Plugin 'vim-airline/vim-airline'
-Plugin 'junegunn/vader.vim'
 call vundle#end()
 
 filetype plugin indent on
@@ -142,8 +139,14 @@ nnoremap <leader>l <C-w>l
 nnoremap <leader>b <C-o>
 
 	"Comments
-map <leader>cl gcc
-map <leader>cp gcap
+nnoremap <silent> <leader>c :set opfunc=comments#CommentLines<CR>g@
+nnoremap <silent> <leader>cl :call comments#CommentLines(v:count1)<CR>
+
+	" Search and replace all in line or visual selection.
+vnoremap <leader>r :s//g<left><left>
+nnoremap <leader>r :s/\<<C-r><C-w>\>//g<left><left>
+noremap <leader>R :%s/\<<C-r><C-w>\>//g<left><left>
+noremap <leader>f ;
 
 	"Git
 command! -complete=custom,git#ListBranches -nargs=1 GitCheckout :!git checkout <args>
@@ -158,18 +161,12 @@ nnoremap <leader>gR :!git reset HEAD .<CR>
 nnoremap <leader>gp :tab drop term://ga\ -p\ %<CR>i
 nnoremap <leader>gc :!gc -m ""<left>
 nnoremap <leader>gC :tab drop term://gc<CR>i
-nnoremap <leader>gb :silent GitCheckout<Space>
-nnoremap <leader>gB :silent !git checkout -b<Space>
+nnoremap <leader>gb :GitCheckout<Space>
+nnoremap <leader>gB :<silent> !git checkout -b<Space>
 nnoremap <expr> <silent> <leader>gn git#CheckoutCommit('next', v:count1)
 nnoremap <expr> <silent> <leader>gN git#CheckoutCommit('previous', v:count1)
 nnoremap <leader>gpu :silent !git stash push<CR>
 nnoremap <leader>gpo :silent !git stash pop<CR>
-
-	" Search and replace all in line or visual selection.
-vnoremap <leader>r :s//g<left><left>
-nnoremap <leader>r :s/\<<C-r><C-w>\>//g<left><left>
-noremap <leader>R :%s/\<<C-r><C-w>\>//g<left><left>
-noremap <leader>f ;
 
 	" Change surrounding parenthesis/brackets.
 nnoremap <leader>( mt%r)`tr(
@@ -191,7 +188,7 @@ nnoremap <leader>d [<C-d>
 onoremap s //+0<left><left><left>
 
 	" Toggles
-nnoremap <leader>c :set spell!<CR>
+nnoremap <leader>S :set spell!<CR>
 nnoremap <leader>/ :nohl<CR>
 
 " Remap
