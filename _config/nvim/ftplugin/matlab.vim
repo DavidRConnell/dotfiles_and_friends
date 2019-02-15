@@ -19,7 +19,7 @@ nnoremap <buffer> <localleader>.s :so ~/.config/nvim/ftplugin/matlab.vim<CR>
 
 nnoremap <buffer> <expr> <silent> <leader>d matlab#GotoDefinition()
 nnoremap <buffer> <leader>? :!matman <cword><CR>g
-nnoremap <buffer> <leader>l :!grep -nh function %<CR>
+nnoremap <buffer> <leader>s :!grep -nh function %<CR>
 
 " Better complete
 " inoremap <buffer> <expr> <silent> <tab> matlab#Complete()
