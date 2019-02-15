@@ -18,7 +18,7 @@ function! git#CheckoutCommit(direction, count)
 		if idx == 0
 			echo("At Earlist Commit")
 		elseif idx - a:count <= 0
-			let branch = GetBranch()
+			let branch = GetCurrentBranch()
 			if g:branch == -1 && branch == -1
 				let _ = system('git reset ' . commit_list[0] . ' &>/dev/null')
 				echo("Reset to earlist commit " . commit_list[0])
@@ -51,12 +51,17 @@ function! GetSha1()
 endfunction
 
 function! GetCommitList()
-	return systemlist('git log --all --oneline | cut -d" " -f1')
+	return systemlist('git log --all --oneline ' . expand('%') . ' | cut -d" " -f1')
 endfunction
 
 function! git#ListBranches(A,L,P)
 	let branches = system('git branch | tr " " \* | cut -d\* -f3')
+
+	if branches[0] == '('
+		let to_remove = strlen(split(branches)[0]) + 1
+		let branches = branches[to_remove:]
+	endif
+
 	let commits = system('git log --all --oneline | cut -d" " -f1')
-	echom(branches . commits)
 	return branches . commits
 endfunction
