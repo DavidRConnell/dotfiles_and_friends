@@ -1,5 +1,5 @@
 function! comments#CommentLines(...)
-	let comment_symbol = substitute(&commentstring, '%s', '', '')
+	let comment_symbol = substitute(&commentstring, '\s*%s\s*', '', '')
 
 	if a:1 == 'char' || a:1 == 'line'
 		let line_start = line("'[")
@@ -12,10 +12,10 @@ function! comments#CommentLines(...)
 	for lnum in range(line_start, line_end)
 		if getline(lnum) =~ '^$'
 			continue
-		elseif getline(lnum) =~ '^' . comment_symbol
-			exe lnum . "s/" . comment_symbol . "//"
+		elseif getline(lnum) =~ '^\s*' . comment_symbol
+			exe lnum . 's/^\(\s*\)' . comment_symbol . '\(\s\{-}\) \?/\1\2/'
 		else
-			exe lnum . "s/^/" . comment_symbol . "/"
+			exe lnum . 's/^\(\s*\)/\1' . comment_symbol . ' /'
 		endif
 	endfor
 
