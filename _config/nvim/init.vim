@@ -113,7 +113,15 @@ nnoremap <leader>.. :Open ~/dotfiles_and_friends/_config/nvim/init.vim<CR>
 nnoremap <leader>.S :so ~/.config/nvim/
 nnoremap <leader>.s :so ~/.config/nvim/init.vim<CR>
 nnoremap <leader>% :so %<CR>
+
+	" Command-line mode
+nnoremap ; :
 nnoremap <leader>; :<up><CR>
+cnoremap <C-a> <home>
+cnoremap <C-f> <right>
+cnoremap <C-b> <left>
+cnoremap <C-n> <down>
+cnoremap <C-p> <up>
 
 	" Tabs
 nnoremap <leader>} gt
@@ -193,7 +201,6 @@ nnoremap <leader>S :set spell!<CR>
 nnoremap <leader>/ :nohl<CR>
 
 " Remap
-nnoremap ; :
 nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
