@@ -1,2 +1,10 @@
-latexmk -pv -xelatex --interaction=nonstopmode $1 &> /dev/null
+#!/bin/zsh
+
+time latexmk -pv -xelatex -silent --interaction=nonstopmode $1
 printtexerrors $1
+
+dropboxpath=~/Dropbox/documentation
+basepath=${$(dirname $1)//\./$PWD}
+tailfilepath=${basepath#*docs}
+
+cp $1.pdf ${dropboxpath}${tailfilepath}.pdf
