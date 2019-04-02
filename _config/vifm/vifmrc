@@ -1,0 +1,37 @@
+" General Vim
+colorscheme dracula
+set shell=zsh\ -i
+set vicmd=vi
+set wildmenu
+set wildstyle=popup
+set confirm=
+
+" Searching and autocomplete
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+
+" Command-line mode
+nnoremap ; :
+cnoremap <C-a> <home>
+cnoremap <C-f> <right>
+cnoremap <C-b> <left>
+cnoremap <C-n> <down>
+cnoremap <C-p> <up>
+
+" Remap
+nnoremap Y y$
+nnoremap J L
+nnoremap K H
+
+" Hotkeys
+nnoremap <C-v> :view<CR>
+nnoremap <C-g> :goto<space>
+nnoremap q :q<CR>
+
+" Tabs/splits
+nnoremap { :tabprevious<CR>
+nnoremap } :tabnext<CR>
+nnoremap <C-t> :tabnew<CR>
+nnoremap <C-s> :vsplit<CR>
