@@ -31,71 +31,31 @@ bindkey -a k history-beginning-search-backward
 bindkey -a j history-beginning-search-forward
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-function _getdir {
-	echo $work/$1
-}
-
-function _cddir {
-	dpath=$(_getdir $1)
-	shift
-
-	if [[ $# -gt 1 ]]; then
-		echo 'Only one argument allowed.'
-	fi
-
-	cd $dpath/$1 || cd $dpath
-}
-
+# CD work
 function cddata {
-	_cddir data "$@"
+	cd $work/data/"$@"
 }
 
 function cdprog {
-	_cddir programs "$@"
+	cd $work/programs/"$@"
 }
 
 function cdcron {
-	_cddir cronscripts "$@"
+	cd $work/cronscripts/"$@"
 }
 
 function cddoc {
-	_cddir docs "$@"
+	cd $work/docs/"$@"
 }
 
 function cdpres {
-	_cddir presentations "$@"
+	cd $work/presentations/"$@"
 }
 
-compctl -g "$work/data/"'*'"/(:t)" cddata
-compctl -g "$work/programs/"'*'"/(:t)" cdprog
-compctl -g "$work/cronscripts/"'*'"/(:t)" cdcron
-compctl -g "$work/docs/"'*'"/(:t)" cddoc
-compctl -g "$work/presentations/"'*'"/(:t)" cdpres
-
-function duck {
-	query=''
-	[[ $# -gt 0 ]] && query='?q='
-	for key in "$@"; do
-		query+="+$key"
-	done
-
-	w3m "duckduckgo.com/$query"
-}
-
-function matman {
-	graphical=false
-	[[ $1 =~ '-g' ]] && graphical=true && shift
-
-	address="mathworks.com/help/matlab/ref/$1.html"
-	file=$(w3m -dump $address)
-	firstline=$(echo $file | grep -n ^$1$ -m1 | grep -o '^[[:digit:]]*')
-
-	if $graphical; then
-		((firstline+=23))
-		w3m $address +$firstline
-	else
-		echo $file | tail -n+$firstline | less
-	fi
-}
+compctl -/ -W "$work/data" cddata
+compctl -/ -W "$work/programs" cdprog
+compctl -/ -W "$work/cronscripts" cdcron
+compctl -/ -W "$work/docs" cddoc
+compctl -/ -W "$work/presentations" cdpres
