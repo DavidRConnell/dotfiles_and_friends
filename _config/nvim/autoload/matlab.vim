@@ -16,7 +16,7 @@ function! matlab#GotoDefinition()
 	let func_path = system('find {' . search_paths . '} -name ' . func . '.m | head -n1')
 
 	if !empty(func_path)
-		return ":tab drop " . func_path . "\<CR>"
+		return ":Open " . func_path . "\<CR>"
 	endif
 
 	echom "Function not found"
