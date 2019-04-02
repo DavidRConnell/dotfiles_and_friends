@@ -1,4 +1,3 @@
 mkdir $1
-TEXDIR=$(texhome)
-cp $TEXDIR/tex/latex/doctemplate.tex $1/$1.tex
+cp $TEXPATH/tex/latex/doctemplate.tex $1/$1.tex
 mkdir $1/sections
