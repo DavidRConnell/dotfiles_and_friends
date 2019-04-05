@@ -145,7 +145,7 @@ nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 
 	"Jumps
-nnoremap <leader>b <C-o>
+nnoremap <leader>B <C-o>
 
 	"Comments
 nnoremap <silent> <leader>c :set opfunc=comments#CommentLines<CR>g@
@@ -153,8 +153,12 @@ nnoremap <silent> <leader>cl :call comments#CommentLines(v:count1)<CR>
 
 	" Search and replace all in line or visual selection.
 vnoremap <leader>r :s//g<left><left>
-nnoremap <leader>r :s/\<<C-r><C-w>\>//g<left><left>
-noremap <leader>R :%s/\<<C-r><C-w>\>//g<left><left>
+nnoremap <leader>rc :s///g<left><left><left>
+noremap <leader>Rc :%s///g<left><left><left>
+nnoremap <leader>rw :s/\<<C-r><C-w>\>//g<left><left>
+noremap <leader>Rw :%s/\<<C-r><C-w>\>//g<left><left>
+nnoremap <leader>rW :s/\<<C-r><C-a>\>//g<left><left>
+noremap <leader>RW :%s/\<<C-r><C-a>\>//g<left><left>
 noremap <leader>f ;
 
 	"Git
@@ -204,10 +208,10 @@ nnoremap <leader>/ :nohl<CR>
 nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
-nnoremap J L
-nnoremap K H
-nnoremap L $
-nnoremap H ^
+nnoremap J <C-e>
+nnoremap K <C-y>
+noremap L $
+noremap H ^
 nnoremap <leader>? K
 
 " Auto close
