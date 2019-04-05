@@ -145,7 +145,7 @@ nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 
 	"Jumps
-nnoremap <leader>b <C-o>
+nnoremap <leader>B <C-o>
 
 	"Comments
 nnoremap <silent> <leader>c :set opfunc=comments#CommentLines<CR>g@
@@ -208,10 +208,10 @@ nnoremap <leader>/ :nohl<CR>
 nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
-nnoremap J L
-nnoremap K H
-nnoremap L $
-nnoremap H ^
+nnoremap J <C-e>
+nnoremap K <C-y>
+noremap L $
+noremap H ^
 nnoremap <leader>? K
 
 " Auto close

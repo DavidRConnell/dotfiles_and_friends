@@ -5,6 +5,7 @@ set vicmd=vi
 set wildmenu
 set wildstyle=popup
 set confirm=
+set number relativenumber
 
 " Searching and autocomplete
 set ignorecase
@@ -28,10 +29,11 @@ nnoremap K H
 " Hotkeys
 nnoremap <C-v> :view<CR>
 nnoremap <C-g> :goto<space>
+nnoremap <C-d> :set dotfiles!<CR>
 nnoremap q :q<CR>
 
 " Tabs/splits
 nnoremap { :tabprevious<CR>
 nnoremap } :tabnext<CR>
-nnoremap <C-t> :tabnew<CR>
+nnoremap <C-t> :tabnew %c<CR>
 nnoremap <C-s> :vsplit<CR>
