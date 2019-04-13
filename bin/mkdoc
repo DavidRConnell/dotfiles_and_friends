@@ -1,3 +1,0 @@
-mkdir $1
-cp $TEXPATH/tex/latex/doctemplate.tex $1/$1.tex
-mkdir $1/sections
