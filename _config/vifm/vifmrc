@@ -1,7 +1,6 @@
-" General Vim
+
 colorscheme dracula
-set shell=zsh\ -i
-set vicmd=vi
+set vicmd=nvim
 set wildmenu
 set wildstyle=popup
 set confirm=
@@ -22,18 +21,22 @@ cnoremap <C-n> <down>
 cnoremap <C-p> <up>
 
 " Remap
-nnoremap Y y$
 nnoremap J L
 nnoremap K H
 
 " Hotkeys
 nnoremap <C-v> :view<CR>
-nnoremap <C-g> :goto<space>
-nnoremap <C-d> :set dotfiles!<CR>
 nnoremap q :q<CR>
 
 " Tabs/splits
 nnoremap { :tabprevious<CR>
 nnoremap } :tabnext<CR>
-nnoremap <C-t> :tabnew %c<CR>
-nnoremap <C-s> :vsplit<CR>
+"nnoremap <C-t> :tabnew %c<CR>
+"nnoremap <C-s> :vsplit<CR>
+
+" Opening and viewing
+filetype *.pdf open
+filetype *.html w3m
+
+fileviewer *.md
+	\ pandoc -t html %f | w3m -T text/html
