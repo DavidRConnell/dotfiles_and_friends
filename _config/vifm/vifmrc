@@ -1,4 +1,3 @@
-
 colorscheme dracula
 set vicmd=nvim
 set wildmenu
@@ -25,18 +24,25 @@ nnoremap J L
 nnoremap K H
 
 " Hotkeys
-nnoremap <C-v> :view<CR>
 nnoremap q :q<CR>
+
+" Use comma like <leader>
+nnoremap ,v :view<CR>
+nnoremap ,g :goto<space>
+nnoremap ,b :bmgo<space><tab>
+nnoremap ,cd :cd <C-x>d<CR>
+nnoremap ,t :!zsh<CR>
+nnoremap ,. :edit $MYVIFMRC | restart<CR>
 
 " Tabs/splits
 nnoremap { :tabprevious<CR>
 nnoremap } :tabnext<CR>
-"nnoremap <C-t> :tabnew %c<CR>
-"nnoremap <C-s> :vsplit<CR>
+nnoremap <C-t> :tabnew %c<CR>
+nnoremap <C-s> :vsplit<CR>
 
 " Opening and viewing
 filetype *.pdf open
 filetype *.html w3m
 
 fileviewer *.md
-	\ pandoc -t html %f | w3m -T text/html
+	\ pandoc -t html %c | w3m -T text/html
