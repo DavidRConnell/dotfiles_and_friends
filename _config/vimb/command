@@ -1,0 +1,32 @@
+open trello
+tabopen radc.rush.edu
+help Downloads
+set download-path ~/Downloads
+set download-path=~/Downloads
+set default-font?
+tabopen vimb
+set editor-command?
+set default-font=Deja-vu Sans mono
+set default-font?
+set default-font=Deja-vu Sans
+nnoremap ; :
+so ~/.config/vimb/config
+so ~/.config/vimb/config
+set incsearch?
+so ~/.config/vimb/config
+so ~/.config/vimb/config
+quit
+so .config/vimb/config
+so .config/vimb/config
+so .config/vimb/config
+so .config/vimb/config
+so ~/.config/vimb//config
+so ~/.config/vimb//config
+so ~/.config/vimb//config
+bmr
+shortcut-add
+shortcut-default
+open qq plot
+tabopen vimb themes
+quit
+open webemail.rush.edu
