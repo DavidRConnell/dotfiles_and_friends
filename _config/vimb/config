@@ -8,3 +8,5 @@ set sans-serif-font=DejaVu Sans
 set serif-font=DejaVu Serif
 
 nnoremap ; :
+nnoremap ZZ :quit<CR>
+nnoremap <C-R> :e! simplyread();<CR>
