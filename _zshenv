@@ -3,6 +3,7 @@ source ~/.config/accounts
 export rushbin=$work/programs/bin
 
 alias vi="nvim"
+alias e="emacs"
 alias matlab="matlab -nodesktop -nosplash"
 alias mutt="neomutt"
 
