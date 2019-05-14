@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+function missingfile {
+	echo "No .rclonepath file in current directory"
+	exit 1
+}
+
+[ -f '.rclonepath' ] || missingfile
+remote=$(cat '.rclonepath')
+rclone sync $remote $PWD
