@@ -1,5 +1,5 @@
 set download-path=~/Downloads
-set editor-command=deepin-terminal -e "nvim %s"
+set editor-command="nvim"
 set incsearch=true
 
 set default-font=DejaVu Sans
@@ -8,5 +8,12 @@ set sans-serif-font=DejaVu Sans
 set serif-font=DejaVu Serif
 
 nnoremap ; :
+nnoremap H ^
+nnoremap L $
 nnoremap ZZ :quit<CR>
 nnoremap <C-R> :e! simplyread();<CR>
+nnoremap b :open !
+nnoremap B :tabopen !
+
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
