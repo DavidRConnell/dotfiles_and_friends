@@ -1,5 +1,4 @@
 source ~/.zshlocal
-# source ~/.config/accounts
 # export rushbin=$work/programs/bin
 
 alias vi="nvim"
