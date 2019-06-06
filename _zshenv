@@ -41,6 +41,10 @@ function cdpres {
 	cd $work/presentations/"$@"
 }
 
+function cdout {
+	cd $work/out/"$@"
+}
+
 function cddot {
 	cd $HOME/dotfiles_and_friends/"$@"
 }
@@ -50,4 +54,5 @@ compctl -/ -W "$work/programs" cdprog
 compctl -/ -W "$work/cronscripts" cdcron
 compctl -/ -W "$work/docs" cddoc
 compctl -/ -W "$work/presentations" cdpres
+compctl -/ -W "$work/out" cdout
 compctl -/ -W "$HOME/dotfiles_and_friends" cddot
