@@ -224,6 +224,9 @@ inoremap (<CR> (<CR>)<ESC>O
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
+" Autocomplete
+inoremap C-f C-xc-f
+
 " Plugin Options
 	" Airline
 let g:airline#extensions#tabline#enabled=1
