@@ -29,3 +29,5 @@ unsetopt share_history
 # Custom key bindings
 bindkey -a k history-beginning-search-backward
 bindkey -a j history-beginning-search-forward
+bindkey -a H vi-beginning-of-line
+bindkey -a L vi-end-of-line
