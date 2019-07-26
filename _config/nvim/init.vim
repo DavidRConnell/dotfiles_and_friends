@@ -8,7 +8,6 @@ call vundle#begin('~/.config/nvim/bundle')
 Plugin 'VundleVim/Vundle.vim'
 " Add plugins here
 Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-airline/vim-airline'
 Plugin 'dracula/vim'
 
 Plugin 'ervandew/supertab'
@@ -24,11 +23,11 @@ set shell=zsh\ -i
 
 " Colors and fonts
 colorscheme dracula
-let g:airline_theme='dracula'
 set background=dark
 syntax enable
 syntax spell toplevel
 set termguicolors
+so ~/.config/nvim/statusline.vim
 
 " ui config
 set	mouse=a
@@ -226,15 +225,9 @@ inoremap {;<CR> {<CR>};<ESC>O
 
 " Autocomplete
 inoremap C-f C-xc-f
+imap <C-space> <tab>
 
 " Plugin Options
-	" Airline
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#formatter='unique_tail'
-let g:airline#extensions#tabline#tab_nr_type=1
-let airline#extensions#tabline#show_splits=0
-let g:airline_powerline_fonts = 1
-
 	" SuperTab
 let g:SuperTabDefaultCompletionType="context"
 let g:SuperTabCompletionContexts=['s:ContextText', 's:ContextDiscover']
