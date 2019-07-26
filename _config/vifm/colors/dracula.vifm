@@ -25,7 +25,7 @@ highlight clear
 highlight Win             cterm=none ctermfg=default    ctermbg=none
 
 highlight TopLine         cterm=none ctermfg=blue       ctermbg=none
-highlight TopLineSel      cterm=none ctermfg=magenta    ctermbg=none
+highlight TopLineSel      cterm=none ctermfg=147    ctermbg=none
 highlight StatusLine      cterm=none ctermfg=blue       ctermbg=none
 highlight Border          cterm=none ctermfg=blue       ctermbg=none
 
@@ -33,7 +33,7 @@ highlight Selected        cterm=bold ctermfg=magenta    ctermbg=default
 highlight CurrLine        cterm=bold ctermfg=236    ctermbg=blue
 
 highlight WildMenu        cterm=none,reverse ctermfg=blue ctermbg=236
-highlight CmdLine         cterm=none ctermfg=255 ctermbg=236
+highlight CmdLine         cterm=none ctermfg=147 ctermbg=none
 highlight ErrorMsg        cterm=none ctermfg=red ctermbg=black
 
 highlight Directory       cterm=none ctermfg=blue ctermbg=default

@@ -11,9 +11,18 @@ nnoremap ; :
 nnoremap H ^
 nnoremap L $
 nnoremap ZZ :quit<CR>
-nnoremap <C-R> :e! simplyread();<CR>
+nnoremap <C-d> :quit<CR>
 nnoremap b :open !
 nnoremap B :tabopen !
 
-cnoremap <C-P> <Up>
-cnoremap <C-N> <Down>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+nnoremap <C-p> <Up>
+nnoremap <C-n> <Down>
+
+set default-zoom=110
+nnoremap + zI
+nnoremap - zO
+nnoremap = zz
+
+shortcut-add sch=https://scholar.google.com/scholar?hl=en&as_sdt=0%2C14&q=$0&oq=
