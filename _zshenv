@@ -1,5 +1,5 @@
 source ~/.zshlocal
-# export rushbin=$work/programs/bin
+export rushbin=$work/programs/bin
 
 alias vi="nvim"
 alias e="emacs -fs"
