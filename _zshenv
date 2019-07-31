@@ -21,38 +21,13 @@ alias to="todo.sh"
 alias md2pdf="pandoc -V geometry:margin=1in --pdf-engine=xelatex --variable mainfont=Helvetica -f gfm -o"
 
 # CD work
-function cddata {
-	cd $work/data/"$@"
-}
-
-function cdprog {
-	cd $work/programs/"$@"
-}
-
-function cdcron {
-	cd $work/cronscripts/"$@"
-}
-
-function cddoc {
-	cd $work/docs/"$@"
-}
-
-function cdpres {
-	cd $work/presentations/"$@"
-}
-
-function cdout {
-	cd $work/out/"$@"
+function cdrush {
+	cd $work/"$@"
 }
 
 function cddot {
 	cd $HOME/dotfiles_and_friends/"$@"
 }
 
-compctl -/ -W "$work/data" cddata
-compctl -/ -W "$work/programs" cdprog
-compctl -/ -W "$work/cronscripts" cdcron
-compctl -/ -W "$work/docs" cddoc
-compctl -/ -W "$work/presentations" cdpres
-compctl -/ -W "$work/out" cdout
+compctl -/ -W "$work" cdrush
 compctl -/ -W "$HOME/dotfiles_and_friends" cddot
