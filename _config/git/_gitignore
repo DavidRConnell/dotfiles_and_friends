@@ -5,3 +5,4 @@ README.pdf
 ._*
 *.bak
 .rclonepath
+*.mex*
