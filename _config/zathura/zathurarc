@@ -8,6 +8,8 @@ set selection-clipboard clipboard
 map <C-/> nohlsearch
 map + zoom in
 map - zoom out
+map ZZ quit
+map <C-d> quit
 
 set highlight-active-color "#8986d1"
 set highlight-transparency 0.3
@@ -19,4 +21,3 @@ set completion-highlight-bg "#8986d1"
 set completion-highlight-fg "#282a36"
 set statusbar-bg "#8986d1"
 set statusbar-fg "#282a36"
-
