@@ -33,7 +33,7 @@ nnoremap q :q<CR>
 nnoremap ,v :!alacritty -e nvim %f &<CR>
 nnoremap ,e :!emacsclient -c %f &<CR>
 nnoremap ,g :goto<space>
-nnoremap ,b :bmgo<space><tab>
+nnoremap ,b :bmgo<space>
 nnoremap ,cd :cd <C-x>d<CR>
 nnoremap ,t :!zsh<CR>
 nnoremap ,. :edit $MYVIFMRC | restart<CR>
@@ -42,7 +42,6 @@ nnoremap ,. :edit $MYVIFMRC | restart<CR>
 nnoremap { :tabprevious<CR>
 nnoremap } :tabnext<CR>
 nnoremap <C-t> :tabnew %c<CR>
-nnoremap <C-s> :vsplit<CR>
 
 " Opening and viewing
 filetype *.pdf zathura %f &
