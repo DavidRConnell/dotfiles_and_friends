@@ -3,6 +3,7 @@ set vicmd=nvim
 set wildmenu
 set wildstyle=popup
 set confirm=
+set caseoptions=p
 set number relativenumber
 only
 
