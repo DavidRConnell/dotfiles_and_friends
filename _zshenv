@@ -15,8 +15,6 @@ alias df="df -h"
 alias du="du -h"
 alias free="free -h"
 
-alias to="todo.sh"
-
 # Run with md2pdf file.pdf file.md
 alias md2pdf="pandoc -V geometry:margin=1in --pdf-engine=xelatex --variable mainfont=Helvetica -f gfm -o"
 
