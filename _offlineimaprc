@@ -1,0 +1,28 @@
+[general]
+accounts = gmail
+maxsyncaccounts = 5
+pythonfile = ~/.config/offlineimap/getaccount.py
+
+[Account gmail]
+autorefresh =  10
+localrepository = gmail-Local
+remoterepository = gmail-Remote
+synclabels = yes
+postsynchook = ~/.config/offlineimap/postsync.sh
+
+[Repository gmail-Local]
+type = Maildir
+localfolders = ~/mail/gmail
+
+[Repository gmail-Remote]
+type = Gmail
+maxconnections = 3
+remoteusereval = get_user("gmail")
+remotepasseval = get_pass("gmail")
+nametrans = lambda foldername: re.sub ('^\[gmail\]', 'bak',
+                               re.sub ('sent_mail', 'sent',
+                               re.sub ('starred', 'flagged',
+                               re.sub (' ', '_', foldername.lower()))))
+folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail']
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl_version = tls1_2
