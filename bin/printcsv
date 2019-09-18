@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+if [[ $1 =~ '-s' ]]; then
+	delim=${1#-s}
+	shift
+else
+	delim=','
+fi
+
+column -s"$delim" -t $1 | vi -R \
+	'+setlocal nowrap'\
+	'+setlocal colorcolumn=0'\
+	'+nnoremap <buffer> <tab> W'\
+	'+nnoremap <buffer> <S-tab> B'
