@@ -1,0 +1,4 @@
+#!/bin/bash
+
+query=$(yaourt -q $1 | fzf)
+yaourt -S $query
