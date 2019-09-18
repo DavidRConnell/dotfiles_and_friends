@@ -11,6 +11,7 @@ plugins=(
 	git
 	vi-mode
 	colored-man-pages
+	fzf
 )
 
 export KEYTIMEOUT=1

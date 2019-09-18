@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#stolen from pass
+function clip {
+	if [[ -n $WAYLAND_DISPLAY ]]; then
+		local copy_cmd=( wl-copy )
+		if [[ $X_SELECTION == primary ]]; then
+			local copy_cmd+=( --primary )
+		fi
+	elif [[ -n $DISPLAY ]]; then
+		local copy_cmd=( xclip -selection clip )
+	else
+		die "Error: No X11 or Wayland display detected"
+	fi
+
+	echo -n "$1" | "${copy_cmd[@]}"
+}
+
+word=$(cat /usr/share/dict/words | fzf)
+clip $word
