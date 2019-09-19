@@ -3,7 +3,12 @@ function! GitBranch()
 endfunction
 
 function! StatusLineGitBranch()
-	return strlen(b:branchname) > 0? '  ' . b:branchname . ' | ':''
+	try
+		return strlen(b:branchname) > 0? '  ' . b:branchname . ' | ':''
+	catch
+		call GitBranch()
+		call StatusLineGitBranch()
+	endtry
 endfunction
 
 function! StatusLinePWD()
