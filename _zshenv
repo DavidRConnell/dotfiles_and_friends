@@ -4,7 +4,6 @@ export rushbin=$work/programs/bin
 alias vi="nvim"
 alias e="emacs -fs"
 alias matlab="matlab -nodesktop -nosplash"
-alias mutt="neomutt"
 
 alias gs="git status"
 alias gc="git commit"

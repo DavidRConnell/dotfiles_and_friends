@@ -1,0 +1,39 @@
+IMAPAccount gmail
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+SSLType IMAPS
+Host imap.gmail.com
+User davidconnell12@gmail.com
+PassCmd "pass show email/gmail.com | head -n1"
+# PassCmd "echo 'email/gmail.com pass' | python ~/bin/getaccount.py"
+
+MaildirStore gmail-local
+Subfolders Verbatim
+# The trailing "/" is important
+Path ~/.mail/gmail/
+Inbox ~/.mail/gmail/Inbox
+
+IMAPStore gmail-remote
+Account gmail
+
+Channel gmail-default
+Master :gmail-remote:
+Slave :gmail-local:
+# Select some mailboxes to sync
+Patterns "INBOX" "arch"
+Create Slave
+
+Channel gmail-sent
+Master :gmail-remote:"[Gmail]/Sent Mail"
+Slave :gmail-local:sent
+Create Slave
+
+Channel gmail-trash
+Master :gmail-remote:"[Gmail]/Trash"
+Slave :gmail-local:trash
+Create Slave
+
+# Get all the channels together into a group.
+Group gmail
+Channel gmail-default
+Channel gmail-sent
+Channel gmail-trash
