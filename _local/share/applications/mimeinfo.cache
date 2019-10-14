@@ -1,0 +1,12 @@
+[MIME Cache]
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;qpdfview.desktop;
+application/postscript=org.pwmt.zathura-pdf-mupdf.desktop;org.gnome.Evince.desktop;qpdfview.desktop;
+text/pdf=org.pwmt.zathura-pdf-mupdf.desktop;qpdfview.desktop;
+inode/directory=ranger.desktop;dde-file-manager.desktop;
+text/html=luakit.desktop;chromium.desktop;
+text/xml=luakit.desktop;chromium.desktop;
+x-scheme-handler/http=luakit.desktop;chromium.desktop;
+x-scheme-handler/https=luakit.desktop;chromium.desktop;
+application/csv=emacs.desktop;libreoffice-calc.desktop;
+text/csv=emacs.desktop;libreoffice-calc.desktop;
+text/x-csv=emacs.desktop;libreoffice-calc.desktop;

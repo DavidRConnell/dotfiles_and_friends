@@ -2,3 +2,5 @@
 bundle/*
 *.netrwhist
 matlabToTikz/*
+_local/share/luakit/*
+_local/share/ranger/*
