@@ -22,6 +22,7 @@ if [ $# == 0 ]; then
 	run
 elif [[ $1 == "--all" ]] || [[ $1 == "-a" ]]; then
 	shopt -s globstar
+	shopt -s dotglob
 	cd ~ || exit 3
 	for p in $(rg --files ~/**/.rclonepath); do
 		d=$(dirname "$p")
