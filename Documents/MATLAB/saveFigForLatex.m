@@ -14,10 +14,11 @@ function saveFigForLatex(name, projectPath)
 	end
 
 	fullPath = strcat(pathToFigures, '/', name, '.tex');
+
+	isLegend = ~isempty(findall(gcf, 'type', 'Legend'));
 	cleanfigure;
 	matlab2tikz(fullPath, 'showInfo', false);
 
-	isLegend = ~isempty(findall(gcf, 'type', 'Legend'));
 	if ~isLegend
 		clearLegend(fullPath)
 	end
