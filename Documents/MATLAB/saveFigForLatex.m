@@ -29,7 +29,7 @@ function clearLegend(path)
 	clearedFileString = deleteLegendIn(fileString);
 	writeString(clearedFileString, path);
 
-	function newStr = deleteLegendIn(str);
+	function newStr = deleteLegendIn(str)
 		newStr = regexp(str, '\\addlegendentry[^\n]*\n', 'split');
 		newStr = regexp(strjoin(newStr, ''), 'legend[^\n]*\n', 'split');
 		newStr = strjoin(newStr, '');
