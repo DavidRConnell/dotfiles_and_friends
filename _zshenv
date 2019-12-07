@@ -17,7 +17,7 @@ alias free="free -h"
 
 alias yq="yaourtsearchandinstall"
 alias pc="printcsv -s\"|\""
-alias svg="feh --conversion-timeout 1"
+alias svg="feh -x --reload 1 --conversion-timeout 1"
 
 # Run with md2pdf file.pdf file.md
 alias md2pdf="pandoc -V geometry:margin=1in --pdf-engine=xelatex --variable mainfont=Helvetica -f gfm -o"
