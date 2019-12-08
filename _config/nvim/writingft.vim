@@ -10,5 +10,3 @@ setlocal infercase
 
 " Spell complete
 nnoremap <buffer> <expr> <silent> <tab> spell#FixSpelling()
-
-setlocal statusline+=\ \|\ wc\ %{StatusLineWordCount()}\ ""

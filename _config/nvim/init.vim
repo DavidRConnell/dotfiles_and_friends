@@ -7,9 +7,7 @@ set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin('~/.config/nvim/bundle')
 Plugin 'VundleVim/Vundle.vim'
 " Add plugins here
-Plugin 'airblade/vim-gitgutter'
 Plugin 'dracula/vim'
-
 Plugin 'ervandew/supertab'
 call vundle#end()
 
@@ -27,7 +25,6 @@ set background=dark
 syntax enable
 syntax spell toplevel
 set termguicolors
-so ~/.config/nvim/statusline.vim
 
 " ui config
 set	mouse=a
