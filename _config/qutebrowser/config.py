@@ -22,6 +22,7 @@ config.bind('<Ctrl-P>', 'completion-item-focus --history prev', mode='command')
 config.bind('<Ctrl-Space>', 'completion-item-fucus next', mode='command')
 config.bind('<Ctrl-Space>', 'completion-item-fucus next', mode='prompt')
 
-config.bind('<Ctrl-D>', 'quit', mode='normal')
+config.unbind('<Ctrl-W>')
+config.bind('<Ctrl-D>', 'close', mode='normal')
 config.bind('<Ctrl-I>', 'forward', mode='normal')
 config.bind('<Ctrl-O>', 'back', mode='normal')
