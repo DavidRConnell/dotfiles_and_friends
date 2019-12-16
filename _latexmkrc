@@ -1,1 +1,1 @@
-$pdf_previewer = 'open -a zathura';
+$pdf_previewer = 'start zathura';
