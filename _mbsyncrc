@@ -31,8 +31,32 @@ Master :gmail-remote:"[Gmail]/Trash"
 Slave :gmail-local:trash
 Create Slave
 
+# IMAPAccount rush
+# CertificateFile /etc/ssl/certs/ca-certificates.crt
+# SSLType IMAPS
+# Host webemail.rush.edu
+# User RUSH\dconnell
+# PassCmd "pass show email/rush.edu | head -n1"
+
+# MaildirStore rush-local
+# Subfolders Verbatim
+# Path ~/.mail/rush/
+# Inbox ~/.mail/rush/Inbox
+
+# IMAPStore rush-remote
+# Account rush
+
+# Channel rush-default
+# Master :rush-remote:
+# Slave :rush-local:
+# Patterns "INBOX"
+# Create Slave
+
 # Get all the channels together into a group.
 Group gmail
 Channel gmail-default
 Channel gmail-sent
 Channel gmail-trash
+
+# Group rush
+# Channel rush-default
