@@ -9,7 +9,8 @@ dracula.draw.blood(c, {
     }
 })
 
-c.hints.mode = 'number'
+c.hints.mode = 'letter'
+c.hints.chars = 'aoeuhtns'
 c.fonts.monospace = 'hack nerd font'
 c.url.start_pages = ["https://en.wikipedia.org/wiki/Special:Random"]
 c.url.default_page = "https://en.wikipedia.org/wiki/Special:Random"
