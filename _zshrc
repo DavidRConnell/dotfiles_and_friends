@@ -32,6 +32,7 @@ bindkey -a k history-beginning-search-backward
 bindkey -a j history-beginning-search-forward
 bindkey -a H vi-beginning-of-line
 bindkey -a L vi-end-of-line
+bindkey -v ^@ fzf-completion #^@ is <C-Space>
 bindkey -r -a v
 
 # Change cursor based on vi-mode
