@@ -26,3 +26,6 @@ config.unbind('<Ctrl-W>')
 config.bind('<Ctrl-D>', 'close', mode='normal')
 config.bind('<Ctrl-I>', 'forward', mode='normal')
 config.bind('<Ctrl-O>', 'back', mode='normal')
+
+c.colors.keyhint.suffix.fg = '#50fa7b'
+c.colors.hints.fg = '#50fa7b'
