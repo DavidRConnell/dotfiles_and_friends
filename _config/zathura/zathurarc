@@ -11,13 +11,13 @@ map - zoom out
 map ZZ quit
 map <C-d> quit
 
-set highlight-active-color "#8986d1"
+set highlight-active-color "#a9a1e1"
 set highlight-transparency 0.3
-set inputbar-bg "#282a36"
-set inputbar-fg "#8986d1"
-set completion-bg "#282a36"
-set completion-fg "#8986d1"
-set completion-highlight-bg "#8986d1"
-set completion-highlight-fg "#282a36"
-set statusbar-bg "#8986d1"
-set statusbar-fg "#282a36"
+set inputbar-bg "#282c34"
+set inputbar-fg "#a9a1e1"
+set completion-bg "#282c34"
+set completion-fg "#a9a1e1"
+set completion-highlight-bg "#a9a1e1"
+set completion-highlight-fg "#282c34"
+set statusbar-bg "#a9a1e1"
+set statusbar-fg "#282c34"
