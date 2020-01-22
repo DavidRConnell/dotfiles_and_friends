@@ -3,7 +3,7 @@ export rushbin=$work/programs/bin
 export JULIA_NUM_THREADS=4
 
 alias vi="nvim"
-alias e="emacs -fs"
+alias e="emacsclient -c"
 alias matlab="matlab -nodesktop -nosplash"
 
 alias gs="git status"
