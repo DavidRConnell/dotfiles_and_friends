@@ -181,9 +181,9 @@ colors:
   normal:
     black:   '#44475a' 
     red:     '#ff5555' 
-    green:   '#50fa7b' 
+    green:   '#98be65' 
     yellow:  '#ffb86c' 
-    blue:    '#8be9fd' 
+    blue:    '#51afef' 
     magenta: '#bd93f9' 
     cyan:    '#ff79c6' 
     white:   '#94A3A5' 
@@ -191,11 +191,11 @@ colors:
   bright:
     black:   '#000000' 
     red:     '#ff5555'
-    green:   '#50fa7b'
+    green:   '#98be65'
     yellow:  '#ffb86c'
-    blue:    '#8be9fd'
-    magenta: '#bd93f9'
-    cyan:    '#ff79c6'
+    blue:    '#51afef'
+    magenta: '#ff79c6'
+    cyan:    '#c678dd'
     white:   '#ffffff'
 
   # Indexed Colors
