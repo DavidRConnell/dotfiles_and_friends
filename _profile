@@ -1,0 +1,11 @@
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+export PYTHONPATH=$HOME/projects:$PYTHONPATH
+export CPATH=$CPATH:/usr/local/MATLAB/extern/include
+export PATH=/usr/local/MATLAB/bin/glnxa64:$HOME/.gem/ruby/2.7.0/bin:$PATH
+export PATH=$HOME/bin:$PATH
+export JULIA_NUM_THREADS=4
+
+setxkbmap -option ctrl:nocaps
+setxkbmap -layout dvorak
+xrandr --output eDP1 --mode 1680x1050
+xsetroot -cursor_name left_ptr
