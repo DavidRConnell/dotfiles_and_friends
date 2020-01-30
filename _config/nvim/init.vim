@@ -7,7 +7,7 @@ set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin('~/.config/nvim/bundle')
 Plugin 'VundleVim/Vundle.vim'
 " Add plugins here
-Plugin 'dracula/vim'
+Plugin 'joshdick/onedark.vim'
 Plugin 'ervandew/supertab'
 call vundle#end()
 
@@ -20,7 +20,7 @@ set noswapfile
 set shell=zsh\ -i
 
 " Colors and fonts
-colorscheme dracula
+colorscheme onedark
 set background=dark
 syntax enable
 syntax spell toplevel
