@@ -1,13 +1,8 @@
 #!/usr/bin/env python3
 
-import dracula.draw
+from colorschemes import onedark as theme
 
-dracula.draw.blood(c, {
-    'spacing': {
-        'vertical': 6,
-        'horizontal': 8
-    }
-})
+theme.draw(c, {"spacing": {"vertical": 6, "horizontal": 8}})
 
 c.hints.mode = 'letter'
 c.hints.chars = 'aoeuhtns'
