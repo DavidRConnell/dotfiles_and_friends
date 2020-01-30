@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 source ~/.zshlocal
 export rushbin=$work/programs/bin
 export JULIA_NUM_THREADS=4
