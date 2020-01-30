@@ -7,10 +7,16 @@ ZSH_THEME="robbyrussell"
 zstyle ':completion:*' menu select
 
 plugins=(
-	git
 	vi-mode
 	colored-man-pages
 	fzf
+	pass
+	pip
+	ripgrep
+	zsh-syntax-highlighting
+	zsh-autosuggestions
+	zsh-completions
+	colorize
 )
 
 export KEYTIMEOUT=1
@@ -32,6 +38,7 @@ bindkey -a j history-beginning-search-forward
 bindkey -a H vi-beginning-of-line
 bindkey -a L vi-end-of-line
 bindkey -v ^@ fzf-completion #^@ is <C-Space>
+bindkey -v ^F forward-char
 bindkey -r -a v
 
 # Change cursor based on vi-mode
