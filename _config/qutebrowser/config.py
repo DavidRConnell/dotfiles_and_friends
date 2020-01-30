@@ -23,8 +23,6 @@ c.bindings.key_mappings = {
     "<Ctrl-Space>": "<Tab>",
 }
 
-config.bind('<Ctrl-Space>', 'completion-item-fucus next', mode='command')
-config.bind('<Ctrl-Space>', 'completion-item-fucus next', mode='prompt')
 config.unbind("<Ctrl-N>")
 config.unbind("<Ctrl-P>")
 config.bind("<Ctrl-N>", "completion-item-focus --history next", mode="command")
@@ -32,11 +30,33 @@ config.bind("<Ctrl-P>", "completion-item-focus --history prev", mode="command")
 config.bind("<Ctrl-N>", "prompt-item-focus next", mode="prompt")
 config.bind("<Ctrl-P>", "prompt-item-focus prev", mode="prompt")
 
+config.bind("<Ctrl-P>", "hint links fill :open -p {hint-url}", mode="normal")
+config.bind("<Ctrl-SHIFT-P>", "open -p", mode="normal")
+config.bind("F", "hint all tab-bg", mode="normal")
+config.bind("{", "tab-prev", mode="normal")
+config.bind("}", "tab-next", mode="normal")
 
 
 config.unbind("<Ctrl-W>")
 config.bind("<Ctrl-D>", "close", mode="normal")
 config.bind("<Ctrl-I>", "forward", mode="normal")
 config.bind("<Ctrl-O>", "back", mode="normal")
+
+config.bind("m", "enter-mode set_mark", mode="normal")
+config.bind("<Ctrl-m>", "enter-mode jump_mark", mode="normal")
+config.bind("M", "quickmark-save", mode="normal")
+
+# Downloads
+config.unbind("D", mode="normal")
+config.bind("Dc", "download-cancel", mode="normal")
+config.bind("DC", "download-clear", mode="normal")
+config.bind("Dd", "download-delete", mode="normal")
+config.bind("Do", "download-open", mode="normal")
+config.bind("DR", "download-remove", mode="normal")
+config.bind("Dr", "download-retry", mode="normal")
+
+config.bind("L", "move-to-end-of-line", mode="caret")
+config.bind("H", "move-to-start-of-line", mode="caret")
+
 c.colors.keyhint.suffix.fg = "#50fa7b"
 c.colors.hints.fg = "#50fa7b"
