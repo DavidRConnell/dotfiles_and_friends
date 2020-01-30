@@ -64,7 +64,7 @@ set formatoptions=cqr
 " Leader shortcuts
 nnoremap <space> <Nop>
 let mapleader=" "
-let localmapleader="\\"
+let localmapleader=","
 
 	"Save and quit
 nnoremap <leader>w :w<CR>
