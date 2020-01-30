@@ -189,7 +189,7 @@ colors:
     white:   '#94A3A5' 
 
   bright:
-    black:   '#000000' 
+    black:   '#bbc2cf'
     red:     '#ff5555'
     green:   '#98be65'
     yellow:  '#ffb86c'
