@@ -1,9 +1,10 @@
 # Additional git repositories to pull
 git_repos = [
    "~/projects/*/",
-   "~/.oh-my-zsh/plugins/zsh-autosuggestions"
-   "~/.oh-my-zsh/plugins/zsh-completions"
-   "~/.oh-my-zsh/plugins/zsh-syntax-highlighting"
+   "~/.oh-my-zsh/plugins/zsh-autosuggestions",
+   "~/.oh-my-zsh/plugins/zsh-completions",
+   "~/.oh-my-zsh/plugins/zsh-syntax-highlighting",
+   "~/programs/MatlabPackages/stable/*/",
 ]
 
 # Don't pull the predefined git repos
@@ -25,8 +26,8 @@ git_repos = [
 
 # Custom commands
 [commands]
-"Update pass store" = "pass git pull"
-"Link new dot files" = "~/dotfiles_and_friends/.linkfiles"
+"Pass store" = "pass git pull"
+# "Link new dot files" = "~/dotfiles_and_friends/.linkfiles"
 
 # Cleanup temporary or old files
 #cleanup = true
