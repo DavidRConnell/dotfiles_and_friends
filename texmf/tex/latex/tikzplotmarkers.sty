@@ -1,0 +1,10 @@
+% Exposes commands for adding plot markers in text.
+
+\ProvidesPackage{tikzplotmarkers}
+
+\newcommand{\markercircle}[2]{\raisebox{0.65pt}{\tikz \filldraw[#1] (0,0) circle (#2);}}
+\newcommand{\markersquare}[2]{\raisebox{0.65pt}{\tikz \filldraw[#1] (0,0) rectangle
+    (#2,#2);}}
+\newcommand{\linesolid}[2]{%
+  \raisebox{1.3pt}{\tikz \draw[line width=#2, color=#1] (0,0) -- (0.25, 0);}}
+\newcommand{\newmarkerbox}[2]{\newsavebox{#1}\savebox{#1}{#2}}
