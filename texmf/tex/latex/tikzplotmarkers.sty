@@ -7,4 +7,7 @@
     (#2,#2);}}
 \newcommand{\linesolid}[2]{%
   \raisebox{1.3pt}{\tikz \draw[line width=#2, color=#1] (0,0) -- (0.25, 0);}}
+\newcommand{\linesin}[2]{%
+  \raisebox{1.3pt}{\tikz \draw[line width=#2, color=#1] (0,0.0625) sin (0.0625,0.125)
+    cos (0.125,0.0625) sin (0.1875,0) cos (0.25,0.0625);}}
 \newcommand{\newmarkerbox}[2]{\newsavebox{#1}\savebox{#1}{#2}}
