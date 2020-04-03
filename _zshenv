@@ -3,6 +3,7 @@
 source ~/.zshlocal
 export rushbin=$work/programs/bin
 export JULIA_NUM_THREADS=4
+export WORKON_HOME=$HOME/.local/share/virtualenvs
 
 alias vi="nvim"
 alias e="emacsclient -c"
