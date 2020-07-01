@@ -9,8 +9,8 @@ DISABLE_AUTO_UPDATE="true"
 
 plugins=(
 	vi-mode
-	colored-man-pages
 	fzf
+	fzf-tab
 	pass
 	pip
 	ripgrep
@@ -18,6 +18,7 @@ plugins=(
 	zsh-autosuggestions
 	zsh-completions
 	colorize
+	colored-man-pages
 )
 
 export KEYTIMEOUT=1
@@ -38,7 +39,7 @@ bindkey -a k history-beginning-search-backward
 bindkey -a j history-beginning-search-forward
 bindkey -a H vi-beginning-of-line
 bindkey -a L vi-end-of-line
-bindkey -v ^@ fzf-completion #^@ is <C-Space>
+bindkey -v ^@ fzf-tab-complete #^@ is <C-Space>
 bindkey -v ^F forward-char
 bindkey -r -a v
 
