@@ -1,12 +1,3 @@
-# Additional git repositories to pull
-git_repos = [
-   "~/projects/*/",
-   "~/.oh-my-zsh/plugins/zsh-autosuggestions",
-   "~/.oh-my-zsh/plugins/zsh-completions",
-   "~/.oh-my-zsh/plugins/zsh-syntax-highlighting",
-   "~/programs/MatlabPackages/stable/*/",
-]
-
 # Don't pull the predefined git repos
 # predefined_git_repos = false
 
@@ -16,12 +7,26 @@ git_repos = [
 # Arguments to pass Git when pulling Repositories
 #git_arguments = "--rebase --autostash"
 
+# Additional git repositories to pull
+[git]
+max_concurrency = 5
+repos = [
+   "~/clones/*/",
+   "~/.oh-my-zsh/plugins/zsh-autosuggestions",
+   "~/.oh-my-zsh/plugins/zsh-completions",
+   "~/.oh-my-zsh/plugins/zsh-syntax-highlighting",
+   "~/Documents/MATLAB/gramm",
+   "~/Documents/MATLAB/matlab2tikz",
+   "~/Documents/MATLAB/export_fig",
+   "~/programs/MatlabPackages/stable/*/"
+]
+
 # Arguments to pass yay when updating packages
 #yay_arguments = "--nodevel"
 
 # Commands to run before anything
-[pre_commands]
-"RPull" = "rpull -a"
+# [pre_commands]
+# "RPull" = "rpull -a"
 #"Emacs Snapshot" = "rm -rf ~/.emacs.d/elpa.bak && cp -rl ~/.emacs.d/elpa ~/.emacs.d/elpa.bak"
 
 # Custom commands
