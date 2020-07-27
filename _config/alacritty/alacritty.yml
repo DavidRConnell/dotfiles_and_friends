@@ -133,12 +133,12 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Colors (Dracula)
+# Colors
 colors:
   # Default colors
   primary:
-    background: '#282c34'
-    foreground: '#a9a1e1'
+    background: '#ffffff'
+    foreground: '#000000'
 
     # Bright and dim foreground colors
     #
@@ -167,24 +167,24 @@ colors:
 
   # Normal colors
   normal:
-    black:   '#44475a' 
-    red:     '#ff5555' 
-    green:   '#98be65' 
-    yellow:  '#ffb86c' 
-    blue:    '#51afef' 
-    magenta: '#bd93f9' 
-    cyan:    '#ff79c6' 
-    white:   '#94A3A5' 
+    black:   '#191919'
+    red:     '#a60000'
+    green:   '#005e00'
+    yellow:  '#813e00'
+    blue:    '#0030a6'
+    magenta: '#721045'
+    cyan:    '#00538b'
+    white:   '#efedef'
 
   bright:
-    black:   '#bbc2cf'
-    red:     '#ff5555'
-    green:   '#98be65'
-    yellow:  '#ffb86c'
-    blue:    '#51afef'
-    magenta: '#ff79c6'
-    cyan:    '#c678dd'
-    white:   '#ffffff'
+    black:   '#6320a0'
+    red:     '#930000'
+    green:   '#005300'
+    yellow:  '#703700'
+    blue:    '#0033c0'
+    magenta: '#6320a0'
+    cyan:    '#004882'
+    white:   '#e0e0e0'
 
   # Indexed Colors
   #
