@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 
-from colorschemes import onedark as theme
+from colorschemes import modus as theme
 
 theme.draw(c, {"spacing": {"vertical": 6, "horizontal": 8}})
 
 c.hints.mode = "letter"
 c.hints.chars = "aoeuhtns"
 c.input.partial_timeout = 60000
-c.fonts.monospace = "hack nerd font"
 c.url.start_pages = ["https://en.wikipedia.org/wiki/Special:Random"]
 c.url.default_page = "https://en.wikipedia.org/wiki/Special:Random"
 c.editor.command = ["emacsclient", "-c", "{file}"]
 c.bindings.key_mappings = {
     "<Ctrl-[>": "<Escape>",
+    "<Ctrl-G>": "<Escape>",
     "<Ctrl-6>": "<Ctrl-^>",
     "<Ctrl-M>": "<Return>",
     "<Ctrl-J>": "<Return>",
@@ -66,9 +66,9 @@ config.bind("Dd", "download-delete", mode="normal")
 config.bind("Do", "download-open", mode="normal")
 config.bind("DR", "download-remove", mode="normal")
 config.bind("Dr", "download-retry", mode="normal")
+config.bind("Dv", "spawn mpv {url}", mode="normal")
+
+config.bind(";v", "hint links spawn mpv {hint-url}", mode="normal")
 
 config.bind("L", "move-to-end-of-line", mode="caret")
 config.bind("H", "move-to-start-of-line", mode="caret")
-
-c.colors.keyhint.suffix.fg = "#50fa7b"
-c.colors.hints.fg = "#50fa7b"
