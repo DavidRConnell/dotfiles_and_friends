@@ -1,1 +1,20 @@
-libreoffice --headless --convert-to pdf "$@" > /dev/null
+#! /bin/bash
+
+if ! [ -f "$1" ]; then
+    echo "$1 does not exist."
+    exit 1
+fi
+
+if [ "$#" -ne 1 ]; then
+    echo "Should have exactly one argument."
+    exit 2
+fi
+
+ext=${1#*.}
+
+if [ "$ext" != "pptx" ]; then
+    echo "Input should be a pptx file."
+    exit 3
+fi
+
+libreoffice --headless --convert-to pdf "$1" > /dev/null
