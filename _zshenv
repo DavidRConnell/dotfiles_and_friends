@@ -38,5 +38,5 @@ function cddot {
 
 compctl -/ -W "$work" cdrush
 compctl -/ -W "$HOME/dotfiles_and_friends" cddot
-compctl -g '*.pptx' pptx2pdf
+compctl -g '*.ppt*' pptx2pdf
 compctl -g '*.docx' docx2pdf
