@@ -6,7 +6,7 @@ export JULIA_NUM_THREADS=4
 export WORKON_HOME=$HOME/.local/share/virtualenvs
 
 alias vi="nvim"
-alias e="emacsclient -ca 'emacs --daemon'"
+alias e="emacsclient -ca ''"
 alias matlab="matlab -nodesktop -nosplash"
 
 alias gs="git status"
