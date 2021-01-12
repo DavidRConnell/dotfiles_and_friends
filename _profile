@@ -6,6 +6,7 @@ export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
 export PATH="/usr/local/MATLAB/bin/glnxa64:/usr/local/MATLAB/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export JULIA_NUM_THREADS=4
+export STOW_DIR="~/.dotfiles"
 
 setxkbmap -option ctrl:nocaps
 setxkbmap -layout dvorak
