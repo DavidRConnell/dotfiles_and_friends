@@ -1,8 +1,10 @@
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export PYTHONPATH=$HOME/projects:$PYTHONPATH
 export CPATH=$CPATH:/usr/local/MATLAB/extern/include
-export PATH=$HOME/bin:$HOME/.emacs.d/bin:$PATH:$HOME/.gem/ruby/2.7.0/bin
-export PATH=/usr/local/MATLAB/bin/glnxa64:/usr/local/MATLAB/bin:$PATH
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
+export PATH="/usr/local/MATLAB/bin/glnxa64:/usr/local/MATLAB/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 export JULIA_NUM_THREADS=4
 
 setxkbmap -option ctrl:nocaps
