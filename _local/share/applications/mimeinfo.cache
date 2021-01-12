@@ -15,6 +15,6 @@ image/gif=feh.desktop;gimp.desktop;deepin-draw.desktop;deepin-image-viewer.deskt
 image/jpeg=feh.desktop;gimp.desktop;deepin-draw.desktop;deepin-image-viewer.desktop;
 image/jpg=feh.desktop;deepin-draw.desktop;deepin-image-viewer.desktop;
 image/pjpeg=feh.desktop;
-image/png=feh.desktop;gimp.desktop;deepin-draw.desktop;deepin-image-viewer.desktop;
+image/png=feh.desktop;
 image/svg+xml=feh.desktop;deepin-image-viewer.desktop;gimp.desktop;
 image/svg=feh.desktop;deepin-draw.desktop;deepin-image-viewer.desktop;
