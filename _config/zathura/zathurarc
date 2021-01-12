@@ -1,11 +1,14 @@
-set font "DejaVu Sans Mono 12"
+set font "Hack Nerd Font Mono 12"
 
+set adjust-open "width"
 set incremental-search "true"
 set statusbar-home-tilde "true"
 set window-title-basename "true"
 set selection-clipboard clipboard
 
 map <C-/> nohlsearch
+map <C-j> navigate next
+map <C-k> navigate previous
 map + zoom in
 map - zoom out
 map ZZ quit
@@ -19,5 +22,5 @@ set completion-bg "#ffffff"
 set completion-fg "#000000"
 set completion-highlight-bg "#ffffff"
 set completion-highlight-fg "#000000"
-set statusbar-bg "#e0e0e0"
-set statusbar-fg "#191919"
+set statusbar-bg "#ffffff"
+set statusbar-fg "#000000"
