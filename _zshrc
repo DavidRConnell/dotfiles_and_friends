@@ -14,9 +14,11 @@ plugins=(
 	pass
 	pip
 	ripgrep
+	zsh-pandoc-completion
 	zsh-syntax-highlighting
 	zsh-autosuggestions
 	zsh-completions
+	zsh-autopair
 	colorize
 	colored-man-pages
 )
