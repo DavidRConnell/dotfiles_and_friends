@@ -106,6 +106,8 @@ def draw(c, options={}):
     ##   - hsl: Interpolate in the HSL color system.
     ##   - none: Don't show a gradient.
     c.colors.downloads.system.bg = "none"
+    c.colors.downloads.start.fg = palette["background"]
+    c.colors.downloads.stop.fg = palette["foreground"]
 
     ## Background color for hints. Note that you can use a `rgba(...)` value
     ## for transparency.
@@ -145,7 +147,7 @@ def draw(c, options={}):
     c.colors.messages.info.border = palette["background-alt"]
 
     ## Foreground color an info message.
-    c.colors.messages.info.fg = palette["comment"]
+    c.colors.messages.info.fg = palette["foreground-alt"]
 
     ## Background color of a warning message.
     c.colors.messages.warning.bg = palette["background"]

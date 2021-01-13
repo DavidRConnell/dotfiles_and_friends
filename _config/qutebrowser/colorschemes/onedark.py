@@ -307,7 +307,6 @@ def draw(c, options={}):
     font_size_str = str(font_size) + "pt"
     font_size_small_str = str(font_size - 1) + "pt"
 
-    c.fonts.monospace = monospace
     c.fonts.completion.entry = font_size_str + " monospace"
     c.fonts.completion.category = "bold"
     c.fonts.debug_console = font_size_str + " monospace"
@@ -319,7 +318,6 @@ def draw(c, options={}):
     c.fonts.messages.warning = font_size_str + " monospace"
     c.fonts.prompts = font_size_str + " monospace"
     c.fonts.statusbar = font_size_small_str + " monospace"
-    c.fonts.tabs = font_size_str + " monospace"
     c.fonts.web.family.standard = ""
     c.fonts.web.family.fixed = ""
     c.fonts.web.family.serif = ""
