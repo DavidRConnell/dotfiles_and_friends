@@ -5,3 +5,4 @@ matlabToTikz/*
 _local/share/luakit/*
 _local/share/ranger/*
 .mypy_cache/
+**/.auctex-auto/*
