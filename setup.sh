@@ -10,6 +10,7 @@ git submodule update
 base=(
     bash
     nvim
+    tmux
 )
 
 # folders that should, or only need to be installed for a local user
