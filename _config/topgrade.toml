@@ -15,6 +15,7 @@ repos = [
    "~/.oh-my-zsh/plugins/zsh-autosuggestions",
    "~/.oh-my-zsh/plugins/zsh-completions",
    "~/.oh-my-zsh/plugins/zsh-syntax-highlighting",
+   "~/.oh-my-zsh/plugins/zsh-autopairs",
    "~/Documents/MATLAB/gramm",
    "~/Documents/MATLAB/matlab2tikz",
    "~/Documents/MATLAB/export_fig",
