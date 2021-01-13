@@ -18,3 +18,5 @@
 	process = git-lfs filter-process
 [pull]
 	rebase = true
+[commit]
+	template = /home/voidee/.config/git/gitmessage
