@@ -1,62 +1,44 @@
+Create Slave
+SyncState *
+
 IMAPAccount gmail
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 SSLType IMAPS
 Host imap.gmail.com
 User davidconnell12@gmail.com
 PassCmd "pass show email/gmail.com | head -n1"
+PipelineDepth 50
 
 MaildirStore gmail-local
 Subfolders Verbatim
-# The trailing "/" is important
 Path ~/.mail/gmail/
 Inbox ~/.mail/gmail/Inbox
 
 IMAPStore gmail-remote
 Account gmail
 
-Channel gmail-default
+Channel gmail
 Master :gmail-remote:
 Slave :gmail-local:
-# Select some mailboxes to sync
-Patterns "INBOX" "arch"
-Create Slave
+Patterns "[Gmail]/Sent Mail" "[Gmail]/All Mail" "INBOX"
 
-Channel gmail-sent
-Master :gmail-remote:"[Gmail]/Sent Mail"
-Slave :gmail-local:sent
-Create Slave
+IMAPAccount rush
+Host localhost
+Port 1143
+User david_r_connell@rush.edu
+PassCmd "pass show email/rush.edu | head -n1"
+SSLType NONE
+AUTHMechs LOGIN
 
-Channel gmail-trash
-Master :gmail-remote:"[Gmail]/Trash"
-Slave :gmail-local:trash
-Create Slave
+MaildirStore rush-local
+Subfolders Verbatim
+Path ~/.mail/rush/
+Inbox ~/.mail/rush/Inbox
 
-# IMAPAccount rush
-# CertificateFile /etc/ssl/certs/ca-certificates.crt
-# SSLType IMAPS
-# Host webemail.rush.edu
-# User RUSH\dconnell
-# PassCmd "pass show email/rush.edu | head -n1"
+IMAPStore rush-remote
+Account rush
 
-# MaildirStore rush-local
-# Subfolders Verbatim
-# Path ~/.mail/rush/
-# Inbox ~/.mail/rush/Inbox
-
-# IMAPStore rush-remote
-# Account rush
-
-# Channel rush-default
-# Master :rush-remote:
-# Slave :rush-local:
-# Patterns "INBOX"
-# Create Slave
-
-# Get all the channels together into a group.
-Group gmail
-Channel gmail-default
-Channel gmail-sent
-Channel gmail-trash
-
-# Group rush
-# Channel rush-default
+Channel rush
+Master :rush-remote:
+Slave :rush-local:
+Patterns *
