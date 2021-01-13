@@ -72,3 +72,6 @@ config.bind(";v", "hint links spawn mpv {hint-url}", mode="normal")
 
 config.bind("L", "move-to-end-of-line", mode="caret")
 config.bind("H", "move-to-start-of-line", mode="caret")
+
+# Org-roam
+config.bind("<Ctrl-r>", "open javascript:location.href='org-protocol://roam-ref?template=d&ref='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title)")
