@@ -1,16 +1,5 @@
 set nocompatible
 
-" Vundle setup
-filetype off
-
-set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#begin('~/.config/nvim/bundle')
-Plugin 'VundleVim/Vundle.vim'
-" Add plugins here
-Plugin 'joshdick/onedark.vim'
-Plugin 'ervandew/supertab'
-call vundle#end()
-
 filetype plugin indent on
 
 " General Vim
@@ -20,15 +9,15 @@ set noswapfile
 set shell=zsh\ -i
 
 " Colors and fonts
-colorscheme onedark
-set background=dark
 syntax enable
 syntax spell toplevel
 set termguicolors
 
 " ui config
 set	mouse=a
-set number relativenumber
+set number nonumber
+hi! link FoldColumn Normal
+set foldcolumn=3
 set lazyredraw
 
 " Tab complete
@@ -111,7 +100,6 @@ nnoremap <leader>.s :so ~/.config/nvim/init.vim<CR>
 nnoremap <leader>% :so %<CR>
 
 	" Command-line mode
-nnoremap ; :
 nnoremap <leader>; :<up><CR>
 cnoremap <C-a> <home>
 cnoremap <C-f> <right>
@@ -140,12 +128,10 @@ nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 
-	"Jumps
-nnoremap <leader>B <C-o>
-
 	"Comments
 nnoremap <silent> <leader>c :set opfunc=comments#CommentLines<CR>g@
 nnoremap <silent> <leader>cl :call comments#CommentLines(v:count1)<CR>
+nnoremap <silent> gcc :call comments#CommentLines(v:count1)<CR>
 
 	" Search and replace all in line or visual selection.
 vnoremap <leader>r :s//g<left><left>
@@ -223,6 +209,7 @@ inoremap {;<CR> {<CR>};<ESC>O
 " Autocomplete
 inoremap C-f C-xc-f
 imap <C-space> <tab>
+cmap <C-space> <tab>
 
 " Plugin Options
 	" SuperTab
