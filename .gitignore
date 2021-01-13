@@ -1,7 +1,2 @@
 *.DS_Store
-bundle/*
-*.netrwhist
-matlabToTikz/*
-.mypy_cache/
-**/.auctex-auto/*
-**/qutebrowser/quickmarks
+.rclonepath
