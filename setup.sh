@@ -22,6 +22,7 @@ useronly=(
     pass-git-helper
     topgrade
     qutebrowser
+    xdg-mime
     zathura
 )
 
