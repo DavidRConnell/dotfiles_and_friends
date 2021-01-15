@@ -17,7 +17,9 @@ base=(
 useronly=(
     zsh
     bin
+    emacs
     git
+    stumpwm
     isync
     latex
     pass-git-helper
