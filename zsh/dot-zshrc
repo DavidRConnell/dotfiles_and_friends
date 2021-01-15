@@ -21,6 +21,7 @@ plugins=(
 	zsh-autopair
 	colorize
 	colored-man-pages
+	docker
 )
 
 export KEYTIMEOUT=1
