@@ -8,6 +8,7 @@ export WORKON_HOME=$HOME/.local/share/virtualenvs
 alias vi="nvim"
 alias e="emacsclient -ca ''"
 alias matlab="matlab -nodesktop -nosplash"
+alias stow="stow --dotfiles"
 
 alias gs="git status"
 alias gc="git commit"
