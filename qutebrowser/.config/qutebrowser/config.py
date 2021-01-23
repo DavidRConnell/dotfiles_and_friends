@@ -83,3 +83,8 @@ config.bind(
     ";r",
     "hint links userscript download-reference.sh",
 )
+
+config.bind(
+    ";p",
+    "hint links userscript preview-pdf.sh",
+)
