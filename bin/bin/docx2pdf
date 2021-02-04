@@ -18,4 +18,4 @@ if [ "$ext" != "docx" ]; then
     exit 3
 fi
 
-pandoc -i "$1" -o "$name".pdf
+pandoc --pdf-engine="xelatex" -i "$1" -o "$name".pdf
