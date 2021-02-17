@@ -81,7 +81,7 @@ config.bind(
 
 config.bind(
     ";r",
-    "hint links userscript download-reference.sh",
+    "hint links userscript add-entry-from-doi.sh",
 )
 
 config.bind(
