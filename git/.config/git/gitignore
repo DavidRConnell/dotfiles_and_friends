@@ -6,3 +6,5 @@ README.pdf
 *.bak
 .rclonepath
 *.mex*
+.direnv
+.envrc
