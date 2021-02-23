@@ -2,5 +2,5 @@
 	path = emacs/.config/emacs
 	url = https://github.com/DavidRConnell/emacs-from-scratch
 [submodule "stumpwm/.stumpwm.d"]
-	path = stumpwm/.stumpwm.d
+	path = stumpwm/.config/stumpwm
 	url = https://github.com/DavidRConnell/.stumpwm.d
