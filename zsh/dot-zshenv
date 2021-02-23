@@ -1,44 +1,14 @@
 #!/bin/zsh
 
-source ~/.zshlocal
-export rushbin=$work/programs/bin
-export JULIA_NUM_THREADS=4
-export WORKON_HOME=$HOME/.local/share/virtualenvs
+# ZSH files
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export HISTFILE="$XDG_DATA_HOME/zsh/history"
+export HISTSIZE=10000
+export SAVEHIST=10000
 
-alias vi="nvim"
-alias e="emacsclient -ca ''"
-alias matlab="matlab -nodesktop -nosplash"
-alias stow="stow --dotfiles"
+# Editors
+export EDITOR="emacsclient -nw"
+export VISUAL="emacsclient -ca ''"
 
-alias gs="git status"
-alias gc="git commit"
-alias gd="git diff"
-alias ga="git add"
-
-alias df="df -h"
-alias du="du -h"
-alias free="free -h"
-
-alias yq="yay -Slq | fzf -m --preview 'yay -Si {1}' | xargs -ro yay -S"
-alias yqa="yay -Slq | fzf -m --preview 'yay -Si {1}' | xargs -ro yay -Sa"
-alias yr="yay -Qeq | fzf -m --preview 'yay -Q1 {1}' | xargs -ro yay -Rs"
-
-alias pc="printcsv -s\"|\""
-alias svg="feh -x --reload 1 --conversion-timeout 1"
-
-# Run with md2pdf file.pdf file.md
-alias md2pdf="pandoc -V geometry:margin=1in --pdf-engine=xelatex --variable mainfont=Helvetica -f gfm -o"
-
-# CD work
-function cdrush {
-	cd $work/"$@"
-}
-
-function cddot {
-	cd $HOME/dotfiles_and_friends/"$@"
-}
-
-compctl -/ -W "$work" cdrush
-compctl -/ -W "$HOME/dotfiles_and_friends" cddot
-compctl -g '*.ppt*' pptx2pdf
-compctl -g '*.docx' docx2pdf
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export STOW_DIR="$HOME/.dotfiles"

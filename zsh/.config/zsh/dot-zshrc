@@ -1,0 +1,110 @@
+#!/bin/zsh
+
+# Aliases
+alias e="emacsclient -ca ''"
+alias matlab="matlab -nodesktop -nosplash"
+alias stow="stow --dotfiles"
+
+alias gs="git status"
+alias gc="git commit"
+alias gd="git diff"
+alias ga="git add"
+
+alias df="df -h"
+alias du="du -h"
+alias free="free -h"
+
+alias ls="ls --color"
+alias l='ls -la'
+alias ..="cd .."
+alias '~'="cd ~"
+
+alias svg="feh -x --reload 1 --conversion-timeout 1"
+alias md2pdf="pandoc -V geometry:margin=1in --pdf-engine=xelatex --variable mainfont=Helvetica -t pdf -f gfm -i"
+
+if $(hash xdg-open 2>/dev/null); then
+    alias open="xdg-open"
+fi
+
+compctl -g '*.md' md2pdf
+compctl -g '*.ppt*' pptx2pdf
+compctl -g '*.docx' docx2pdf
+
+# Plugins
+if [[ ! -f "$ZDOTDIR/antigen.zsh" ]]; then
+  curl -L git.io/antigen > $ZDOTDIR/antigen.zsh
+fi
+source $ZDOTDIR/antigen.zsh
+
+plugins=(
+    Aloxaf/fzf-tab
+    Zsh-Packages/fzf
+    zsh-users/zsh-completions
+    zsh-users/zsh-syntax-highlighting
+    zsh-users/zsh-autosuggestions
+    hlissner/zsh-autopair
+    ael-code/zsh-colored-man-pages
+)
+
+load_plugins() {
+    for plugin in $plugins; do
+	antigen bundle $plugin
+    done
+    antigen apply 2>/dev/null
+}
+load_plugins
+
+# Set vi bindings and add custom key bindings
+bindkey -v
+bindkey -a k history-beginning-search-backward
+bindkey -a j history-beginning-search-forward
+bindkey -a H vi-beginning-of-line
+bindkey -a L vi-end-of-line
+bindkey -v ^@ fzf-tab-complete #^@ is <C-Space>
+bindkey -v ^F forward-char
+bindkey -v ^P history-beginning-search-backward
+bindkey -v ^N history-beginning-search-forward
+bindkey -v ^R fzf
+bindkey -r -a v
+
+export KEYTIMEOUT=1
+
+# Change cursor based on vi-mode
+zle-keymap-select () {
+    if [ $KEYMAP = vicmd ]; then
+        echo -ne "\e[2 q"
+    else
+        echo -ne "\e[5 q"
+    fi
+}
+
+zle-line-init () {
+    echo -ne "\e[5 q"
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
+
+# Prompt
+fpath=("$ZDOTDIR" $fpath)
+autoload -Uz prompt.zsh; prompt.zsh
+
+# Directories
+setopt AUTO_PUSHD
+setopt PUSHD_SILENT
+alias d="dirs -v"
+for index ({1..9}) alias "$index"="cd +${index}"; unset index
+
+# plugins=(
+#     vi-mode
+#     pass
+#     pip
+#     ripgrep
+#     zsh-pandoc-completion
+#     colorize
+#     docker
+# )
+
+# Completion
+autoload -Uz compinit; compinit
+_comp_options+=(globdots)
+source "$ZDOTDIR/completion.zsh"
