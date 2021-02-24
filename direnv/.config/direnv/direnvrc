@@ -1,22 +1,51 @@
 use_guix() {
+    # Generate an enviornment from a list of guix manifests and save
+    # the resulting profile. If a profile already exists and was
+    # created after all of the manifests were last edited, source the
+    # profile to create the enviornment. Otherwise, create a new
+    # profile.
+    #
+    # BUG: if a manifest is passed to this function that wasn't used
+    # to create the project's profile and is older than the profile,
+    # the profile will be sourced instead of remade, resulting in a
+    # profile without the extra manifests enviornment variables. In
+    # this case, manually remove the project's profile or touch a
+    # manifest and rerun.
+
     local gcroots="$GUIX_DATA_HOME/gcroots"
     local gcroot="$gcroots/$(basename $PWD)"
-    local rootprofile="$gcroot/etc/profile"
-    local is_profile_fresh=$([[ -e "$rootprofile" ]])
+    local root_profile="$gcroot/etc/profile"
 
+    newer_than () {
+        # -nt conditional failed. possibly because $gcroot is a link and
+        # the modification date of the file it's linked to is 1969.
+        [[ $(stat -c %y "$1") > $(stat -c %y "$2") ]]
+    }
+
+    [ -e "$gcroots" ] || mkdir -p "$gcroots"
+
+    local is_profile_fresh="false"
+    [ -e "$root_profile" ] && is_profile_fresh="true"
+
+    local manifests=""
     for manifest in "$@"; do
-        echo $manifest >&2
+        [ "$is_profile_fresh" = "true" ] && \
+            newer_than "$gcroot" "$manifest" || \
+            is_profile_fresh="false"
+
+        if [ ! -e "$manifest" ]; then
+            echo "Warning $manifest not found skipping..." >&2
+        else
+            manifests="-m $manifest $manifests"
+        fi
     done
 
-    # manifests=""
-    # for manifest in "$@"; do
-    #     extra_manifests="$extra_manifests -m $manifest"
-    # done
-
-    # if [[ -e "$gcroot/etc/profile" ]]; then
-    #     source "$gcroot/etc/profile"
-    # else
-    #     mkdir -p "$gcroots"
-    #     eval "$(guix environment --search-paths --root=$gcroot --pure guix -m $base_manifest -m $project_manifest $extra_manifests)"
-    # fi
+    if [ "$is_profile_fresh" = "true" ]; then
+        source "$root_profile"
+    elif [ -z "$manifests" ]; then
+        echo "Warning no $manfests found. Not changing enviornment" >&2
+    else
+        [ -e "$gcroot" ] && rm -rf "$gcroot"
+        eval "$(guix environment --search-paths --root=$gcroot --pure guix $manifests)"
+    fi
 }
