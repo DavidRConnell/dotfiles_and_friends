@@ -26,6 +26,13 @@ if $(hash xdg-open 2>/dev/null); then
     alias open="xdg-open"
 fi
 
+if $(hash guix 2>/dev/null); then
+    alias gpu="guix_profile --update"
+    alias gpi="guix_profile --install"
+    alias gpr="guix_profile --remove"
+    alias gpe="guix_profile --export-manifest"
+fi
+
 compctl -g '*.md' md2pdf
 compctl -g '*.ppt*' pptx2pdf
 compctl -g '*.docx' docx2pdf

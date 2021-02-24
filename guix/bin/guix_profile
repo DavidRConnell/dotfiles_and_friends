@@ -1,0 +1,139 @@
+#!/bin/zsh
+
+# Wrappers around guix for working with profiles. Looks like I
+# misunderstood the use of manifest will need to go back over this
+# later.
+
+if [ ! -v GUIX_DATA_HOME ]; then
+    echo "GUIX_DATA_HOME not set."
+    exit 1
+elif [ "$#" -eq 0 ]; then
+    usage
+    exit 2
+fi
+
+local profiles_dir="$GUIX_DATA_HOME/extra_profiles"
+local manifests_dir="$GUIX_DATA_HOME/manifests"
+
+usage() {
+    echo "Requires a flag."
+}
+
+list_profiles() {
+    ls "$profiles_dir"
+    exit 0
+}
+
+load_profiles() {
+    if [ "$#" -eq 0 ]; then
+	echo "Requires a list of profiles to load."
+	exit 4
+    fi
+
+    for profile in "$@"; do
+	if [ ! -f "$profiles_dir/$profile/$profile/etc/profile" ]; then
+	    echo "$profile not found in $profiles_dir, skipping"
+	    continue
+	fi
+
+	source $profiles_dir/$profile/$profile/etc/profile
+    done
+
+    unset profile
+    exit 0
+}
+
+modify_profile() {
+    case $1 in
+	--install)
+	    install=true;;
+	--remove)
+	    install=false;;
+	*)
+	    echo "Argument must be --install or --remove."
+	    exit 5
+    esac
+    shift
+
+    if [ "$1" != -p ]; then
+	echo "Must provide the profile to install to with the '-p' flag."
+	exit 6
+    fi
+    shift
+    local profile="$1"
+    shift
+
+    if [ "$#" -eq 0 ]; then
+	echo "Must provide packages to install."
+	exit 7
+    fi
+
+    [ -d "$profiles_dir/$profile" ] || mkdir -p "$profiles_dir/$profile"
+
+    if $install; then
+	guix package \
+	    --profile="$profiles_dir/$profile/$profile" \
+	    --install="$@"
+    else
+	guix package \
+	    --profile="$profiles_dir/$profile/$profile" \
+	    --remove="$@"
+    fi
+}
+
+update_profiles() {
+    if [ "$#" -eq 0 ]; then
+	profiles="$profiles_dir/*"
+    else
+	profiles="$@"
+    fi
+
+    for profile in $profiles; do
+	profile=$(basename $profile)
+	guix package \
+	    --manifest="$manifests_dir/$profile.scm" \
+	    --profile="$profiles_dir/$profile/$profile"
+    done
+}
+
+export_profile_to_manifest() {
+    if [ "$1" != -p ]; then
+	echo "Must provide the profile to install to with the '-p' flag."
+	exit 6
+    fi
+    shift
+    local profile="$1"
+    shift
+
+    if [ ! -f "$profiles_dir/$profile/$profile/etc/profile" ]; then
+	echo "$profile not found in $profiles_dir"
+	exit 8
+    fi
+
+    guix package \
+	--profile="$profiles_dir/$profile/$profile" \
+	--export-manifest > "$manifests_dir/$profile.scm"
+}
+
+case "$1" in
+    --list)
+	list_profiles ;;
+    --load)
+	shift
+	load_profiles "$@";;
+    --install)
+	shift
+	modify_profile --install "$@";;
+    --remove)
+	shift
+	modify_profile --remove "$@";;
+    --manifest)
+	shift
+	update_profiles "$@";;
+    --export-manifest)
+	shift
+	export_profile_to_manifest "$@";;
+    *)
+	usage
+	exit 3;;
+esac

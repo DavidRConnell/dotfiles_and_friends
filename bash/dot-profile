@@ -6,10 +6,17 @@ export XDG_CACHE_HOME="$HOME/.cache"
 setxkbmap -option ctrl:nocaps
 
 local builtin_monitor_on=$(\
-    [[ $(2>/dev/null hash xrandr) && \
+    [[ $(hash xrandr 2>/dev/null) && \
     $(xrandr --listactivemonitors | grep -ce "eDP1") -eq 1 ]] || \
     echo false)
 
 if $builtin_monitor_on; then
     xrandr --output eDP1 --mode 1680x1050
 fi
+
+if $(hash guix 2>/dev/null); then
+    export GUIX_DATA_HOME="$XDG_DATA_HOME/guix"
+    [ -d "$GUIX_DATA_HOME" ] || \
+	mkdir -p "$GUIX_DATA_HOME/{extra_profiles,manifests}"
+fi
+
