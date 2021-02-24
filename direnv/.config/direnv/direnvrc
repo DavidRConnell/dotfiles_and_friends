@@ -1,0 +1,22 @@
+use_guix() {
+    local gcroots="$GUIX_DATA_HOME/gcroots"
+    local gcroot="$gcroots/$(basename $PWD)"
+    local rootprofile="$gcroot/etc/profile"
+    local is_profile_fresh=$([[ -e "$rootprofile" ]])
+
+    for manifest in "$@"; do
+        echo $manifest >&2
+    done
+
+    # manifests=""
+    # for manifest in "$@"; do
+    #     extra_manifests="$extra_manifests -m $manifest"
+    # done
+
+    # if [[ -e "$gcroot/etc/profile" ]]; then
+    #     source "$gcroot/etc/profile"
+    # else
+    #     mkdir -p "$gcroots"
+    #     eval "$(guix environment --search-paths --root=$gcroot --pure guix -m $base_manifest -m $project_manifest $extra_manifests)"
+    # fi
+}
