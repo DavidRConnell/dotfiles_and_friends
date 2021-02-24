@@ -1,0 +1,2 @@
+(specifications->manifest
+ (list "r"))
