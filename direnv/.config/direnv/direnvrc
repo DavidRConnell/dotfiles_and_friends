@@ -13,7 +13,8 @@ use_guix() {
     # manifest and rerun.
 
     local profile_name="$(basename $PWD)"
-    local profile="$GUIX_PROFILE_PATH/$profile_name"
+    local profile_dir="$GUIX_PROFILE_PATH/$profile_name"
+    GUIX_PROFILE="$profile_dir/$profile_name"
 
     newer_than () {
         # -nt conditional failed. possibly because $gcroot is a link and
@@ -21,15 +22,15 @@ use_guix() {
         [[ $(stat -c %y "$1") > $(stat -c %y "$2") ]]
     }
 
-    [ -e "$profile" ] || mkdir -p "$profile"
+    [ -e "$profile_dir" ] || mkdir -p "$profile_dir"
 
     local is_profile_fresh="false"
-    [ -e "$profile/$profile_name" ] && is_profile_fresh="true"
+    [ -e "$GUIX_PROFILE" ] && is_profile_fresh="true"
 
     local manifests=""
     for manifest in "$@"; do
         [ "$is_profile_fresh" = "true" ] && \
-            newer_than "$profile/$profile_name" "$manifest" || \
+            newer_than "$GUIX_PROFILE" "$manifest" || \
             is_profile_fresh="false"
 
         if [ ! -e "$manifest" ]; then
@@ -44,11 +45,10 @@ use_guix() {
         exit 1
     elif [ "$is_profile_fresh" = "false" ]; then
         echo "Updating stale profile..." >&2
-        eval "$(guix package --profile=$profile/$profile_name $manifests)"
+        eval "$(guix package --profile=$GUIX_PROFILE $manifests)"
     fi
 
     eval "$(guix environment --search-paths --pure guix)"
 
-    GUIX_PROFILE=$profile/$profile_name
     source $GUIX_PROFILE/etc/profile
 }
