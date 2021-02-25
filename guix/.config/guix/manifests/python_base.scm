@@ -1,2 +1,2 @@
 (specifications->manifest
- (list "r"))
+ (list "python-black"))

@@ -12,9 +12,8 @@ use_guix() {
     # this case, manually remove the project's profile or touch a
     # manifest and rerun.
 
-    local profiles_dir="$GUIX_DATA_HOME/extra_profiles"
     local profile_name="$(basename $PWD)"
-    local profile="$profiles_dir/$profile_name"
+    local profile="$GUIX_PROFILE_PATH/$profile_name"
 
     newer_than () {
         # -nt conditional failed. possibly because $gcroot is a link and
@@ -41,7 +40,7 @@ use_guix() {
     done
 
     if [ -z "$manifests" ]; then
-        echo "Warning no $manfests found. Not changing enviornment" >&2
+        echo "Warning no $manifests found. Not changing enviornment" >&2
         exit 1
     elif [ "$is_profile_fresh" = "false" ]; then
         echo "Updating stale profile..." >&2

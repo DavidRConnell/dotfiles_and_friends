@@ -4,39 +4,37 @@
 # misunderstood the use of manifest will need to go back over this
 # later.
 
-if [ ! -v GUIX_DATA_HOME ]; then
-    echo "GUIX_DATA_HOME not set."
+if [ ! -v GUIX_PROFILE_PATH ]; then
+    echo "GUIX_PROFILE_PATH not set."
     exit 1
 elif [ "$#" -eq 0 ]; then
     usage
     exit 2
 fi
 
-local profiles_dir="$GUIX_DATA_HOME/extra_profiles"
-local manifests_dir="$GUIX_DATA_HOME/manifests"
-
 usage() {
     echo "Requires a flag."
 }
 
 list_profiles() {
-    ls "$profiles_dir"
+    ls "$GUIX_PROFILE_PATH"
     exit 0
 }
 
 load_profiles() {
     if [ "$#" -eq 0 ]; then
-	echo "Requires a list of profiles to load."
-	exit 4
+        echo "Requires a list of profiles to load."
+        exit 4
     fi
 
     for profile in "$@"; do
-	if [ ! -f "$profiles_dir/$profile/$profile/etc/profile" ]; then
-	    echo "$profile not found in $profiles_dir, skipping"
-	    continue
-	fi
+        GUIX_PROFILE="$GUIX_PROFILE_PATH/$porfile/$profile"
+        if [ ! -f "$GUIX_PROFLE/etc/profile" ]; then
+            echo "$profile not found in $GUIX_PROFILE_PATH, skipping"
+            continue
+        fi
 
-	source $profiles_dir/$profile/$profile/etc/profile
+        source $GUIX_PROFILE/etc/profile
     done
 
     unset profile
@@ -44,75 +42,64 @@ load_profiles() {
 }
 
 modify_profile() {
-    case $1 in
-	--install)
-	    install=true;;
-	--remove)
-	    install=false;;
-	*)
-	    echo "Argument must be --install or --remove."
-	    exit 5
-    esac
-    shift
-
     if [ "$1" != -p ]; then
-	echo "Must provide the profile to install to with the '-p' flag."
-	exit 6
+        echo "Must provide the profile to install to with the '-p' flag."
+        exit 5
     fi
     shift
     local profile="$1"
     shift
 
     if [ "$#" -eq 0 ]; then
-	echo "Must provide packages to install."
-	exit 7
+        echo "Must provide packages to install."
+        exit 7
     fi
 
-    [ -d "$profiles_dir/$profile" ] || mkdir -p "$profiles_dir/$profile"
+    [ -d "$GUIX_PROFILE_PATH/$profile" ] || mkdir -p "$GUIX_PROFILE_PATH/$profile"
 
-    if $install; then
-	guix package \
-	    --profile="$profiles_dir/$profile/$profile" \
-	    --install="$@"
-    else
-	guix package \
-	    --profile="$profiles_dir/$profile/$profile" \
-	    --remove="$@"
-    fi
+    guix package \
+        --profile="$GUIX_PROFILE_PATH/$profile/$profile" \
+        "$@"
 }
 
 update_profiles() {
     if [ "$#" -eq 0 ]; then
-	profiles="$profiles_dir/*"
+        profiles=("$GUIX_MANIFEST_PATH"/*) # All profiles with a manifest
     else
-	profiles="$@"
+        profiles=("${@}")
     fi
 
     for profile in $profiles; do
-	profile=$(basename $profile)
-	guix package \
-	    --manifest="$manifests_dir/$profile.scm" \
-	    --profile="$profiles_dir/$profile/$profile"
+        profile=${$(basename $profile)%.*}
+        GUIX_PROFILE="$GUIX_PROFILE_PATH/$profile/$profile"
+        if [ -e "$GUIX_PROFILE" ]; then
+            guix package \
+                --manifest="$GUIX_MANIFEST_PATH/$profile.scm" \
+                --profile="$GUIX_PROFILE"
+        fi
     done
+    unset profile
 }
 
 export_profile_to_manifest() {
-    if [ "$1" != -p ]; then
-	echo "Must provide the profile to install to with the '-p' flag."
-	exit 6
-    fi
-    shift
-    local profile="$1"
-    shift
-
-    if [ ! -f "$profiles_dir/$profile/$profile/etc/profile" ]; then
-	echo "$profile not found in $profiles_dir"
-	exit 8
+    if [ "$#" -eq 0 ]; then
+        echo "Requires a profile to export."
+        exit 4
     fi
 
+    profile="$1"
+    if [ ! -f "$GUIX_PROFILE_PATH/$profile/$profile/etc/profile" ]; then
+        echo "$profile not found in $GUIX_PROFILE_PATH"
+        exit 8
+    fi
+
+    local generated_manifests="$GUIX_PROFILE_PATH/../generated_manifests"
+    [ -d "$generated_manifests" ] || mkdir -p "$generated_manifests"
     guix package \
-	--profile="$profiles_dir/$profile/$profile" \
-	--export-manifest > "$manifests_dir/$profile.scm"
+        --profile="$GUIX_PROFILE_PATH/$profile/$profile" \
+        --export-manifest > "$generated_manifests/$profile.scm"
+    echo "Manifests exported to $generated_manifests/$profile.scm" >&2
+    exit 0
 }
 
 case "$1" in
