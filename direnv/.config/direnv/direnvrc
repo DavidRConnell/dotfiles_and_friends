@@ -1,8 +1,8 @@
 use_guix() {
     # Generate an enviornment from a list of guix manifests and save
     # the resulting profile. If a profile already exists and was
-    # created after all of the manifests were last edited, source the
-    # profile to create the enviornment. Otherwise, create a new
+    # created after all of the manifests were last edited, enter an
+    # enviornment with only that profile. Otherwise, create a new
     # profile.
     #
     # BUG: if a manifest is passed to this function that wasn't used
@@ -12,9 +12,9 @@ use_guix() {
     # this case, manually remove the project's profile or touch a
     # manifest and rerun.
 
-    local gcroots="$GUIX_DATA_HOME/gcroots"
-    local gcroot="$gcroots/$(basename $PWD)"
-    local root_profile="$gcroot/etc/profile"
+    local profiles_dir="$GUIX_DATA_HOME/extra_profiles"
+    local profile_name="$(basename $PWD)"
+    local profile="$profiles_dir/$profile_name"
 
     newer_than () {
         # -nt conditional failed. possibly because $gcroot is a link and
@@ -22,15 +22,15 @@ use_guix() {
         [[ $(stat -c %y "$1") > $(stat -c %y "$2") ]]
     }
 
-    [ -e "$gcroots" ] || mkdir -p "$gcroots"
+    [ -e "$profile" ] || mkdir -p "$profile"
 
     local is_profile_fresh="false"
-    [ -e "$root_profile" ] && is_profile_fresh="true"
+    [ -e "$profile/$profile_name" ] && is_profile_fresh="true"
 
     local manifests=""
     for manifest in "$@"; do
         [ "$is_profile_fresh" = "true" ] && \
-            newer_than "$gcroot" "$manifest" || \
+            newer_than "$profile/$profile_name" "$manifest" || \
             is_profile_fresh="false"
 
         if [ ! -e "$manifest" ]; then
@@ -40,12 +40,16 @@ use_guix() {
         fi
     done
 
-    if [ "$is_profile_fresh" = "true" ]; then
-        source "$root_profile"
-    elif [ -z "$manifests" ]; then
+    if [ -z "$manifests" ]; then
         echo "Warning no $manfests found. Not changing enviornment" >&2
-    else
-        [ -e "$gcroot" ] && rm -rf "$gcroot"
-        eval "$(guix environment --search-paths --root=$gcroot --pure guix $manifests)"
+        exit 1
+    elif [ "$is_profile_fresh" = "false" ]; then
+        echo "Updating stale profile..." >&2
+        eval "$(guix package --profile=$profile/$profile_name $manifests)"
     fi
+
+    eval "$(guix environment --search-paths --pure guix)"
+
+    GUIX_PROFILE=$profile/$profile_name
+    source $GUIX_PROFILE/etc/profile
 }
