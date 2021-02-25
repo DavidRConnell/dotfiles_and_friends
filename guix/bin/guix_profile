@@ -5,7 +5,7 @@
 # later.
 
 if [ ! -v GUIX_PROFILE_PATH ]; then
-    echo "GUIX_PROFILE_PATH not set."
+    echo "GUIX_PROFILE_PATH not set." >&2
     exit 1
 elif [ "$#" -eq 0 ]; then
     usage
@@ -13,7 +13,7 @@ elif [ "$#" -eq 0 ]; then
 fi
 
 usage() {
-    echo "Requires a flag."
+    echo "Requires a flag." >&2
 }
 
 list_profiles() {
@@ -23,14 +23,14 @@ list_profiles() {
 
 load_profiles() {
     if [ "$#" -eq 0 ]; then
-        echo "Requires a list of profiles to load."
+        echo "Requires a list of profiles to load." >&2
         exit 4
     fi
 
     for profile in "$@"; do
         GUIX_PROFILE="$GUIX_PROFILE_PATH/$porfile/$profile"
         if [ ! -f "$GUIX_PROFLE/etc/profile" ]; then
-            echo "$profile not found in $GUIX_PROFILE_PATH, skipping"
+            echo "$profile not found in $GUIX_PROFILE_PATH, skipping" >&2
             continue
         fi
 
@@ -43,7 +43,7 @@ load_profiles() {
 
 modify_profile() {
     if [ "$1" != -p ]; then
-        echo "Must provide the profile to install to with the '-p' flag."
+        echo "Must provide the profile to install to with the '-p' flag." >&2
         exit 5
     fi
     shift
@@ -51,7 +51,7 @@ modify_profile() {
     shift
 
     if [ "$#" -eq 0 ]; then
-        echo "Must provide packages to install."
+        echo "Must provide packages to install." >&2
         exit 7
     fi
 
@@ -83,13 +83,13 @@ update_profiles() {
 
 export_profile_to_manifest() {
     if [ "$#" -eq 0 ]; then
-        echo "Requires a profile to export."
+        echo "Requires a profile to export." >&2
         exit 4
     fi
 
     profile="$1"
     if [ ! -f "$GUIX_PROFILE_PATH/$profile/$profile/etc/profile" ]; then
-        echo "$profile not found in $GUIX_PROFILE_PATH"
+        echo "$profile not found in $GUIX_PROFILE_PATH" >&2
         exit 8
     fi
 
