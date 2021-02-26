@@ -38,58 +38,49 @@ compctl -g '*.ppt*' pptx2pdf
 compctl -g '*.docx' docx2pdf
 
 # Plugins
-if [[ ! -f "$ZDOTDIR/antigen.zsh" ]]; then
-  curl -L git.io/antigen > $ZDOTDIR/antigen.zsh
-fi
-source $ZDOTDIR/antigen.zsh
-
 plugins=(
-    Aloxaf/fzf-tab
-    Zsh-Packages/fzf
     zsh-users/zsh-completions
     zsh-users/zsh-syntax-highlighting
     zsh-users/zsh-autosuggestions
     hlissner/zsh-autopair
     ael-code/zsh-colored-man-pages
+    jeffreytse/zsh-vi-mode
+    omz/pip
+    # omz/pass
+    # omz/ripgrep
+    # omz/zsh-pandoc-completion
+    omz/fzf@delay
+    Aloxaf/fzf-tab@delay
 )
 
-load_plugins() {
-    for plugin in $plugins; do
-	antigen bundle $plugin
-    done
-    antigen apply 2>/dev/null
-}
-load_plugins
+source $ZDOTDIR/plugins.zsh
 
 # Set vi bindings and add custom key bindings
-bindkey -v
-bindkey -a k history-beginning-search-backward
-bindkey -a j history-beginning-search-forward
-bindkey -a H vi-beginning-of-line
-bindkey -a L vi-end-of-line
-bindkey -v ^@ fzf-tab-complete #^@ is <C-Space>
-bindkey -v ^F forward-char
-bindkey -v ^P history-beginning-search-backward
-bindkey -v ^N history-beginning-search-forward
-bindkey -v ^R fzf
-bindkey -r -a v
+zvm_after_lazy_keybindings() {
+    # bindkey -v
+    bindkey -a k history-beginning-search-backward
+    bindkey -a j history-beginning-search-forward
+    bindkey -a H vi-beginning-of-line
+    bindkey -a L vi-end-of-line
+    bindkey -r -a v
+}
+bindkey -v '^@' fzf-tab-complete #^@ is <C-Space>
+bindkey -v '^F' forward-char
+bindkey -v '^P' history-beginning-search-backward
+bindkey -v '^N' history-beginning-search-forward
+bindkey -v '^R' fzf
 
 export KEYTIMEOUT=1
 
 # Change cursor based on vi-mode
-zle-keymap-select () {
-    if [ $KEYMAP = vicmd ]; then
-        echo -ne "\e[2 q"
-    else
+zvm_after_select_vi_mode () {
+    if [ $ZVM_MODE = $ZVM_MODE_INSERT ]; then
         echo -ne "\e[5 q"
+    else
+        echo -ne "\e[2 q"
     fi
 }
-
-zle-line-init () {
-    echo -ne "\e[5 q"
-}
-zle -N zle-keymap-select
-zle -N zle-line-init
+ZVM_CURSOR_STYLE_ENABLED=false
 
 # Prompt
 fpath=("$ZDOTDIR" $fpath)
