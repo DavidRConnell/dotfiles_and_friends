@@ -14,8 +14,8 @@ alias df="df -h"
 alias du="du -h"
 alias free="free -h"
 
-alias ls="ls --color"
-alias l='ls -la'
+alias ls="ls --color --dereference-command-line"
+alias l='ls -lah'
 alias ..="cd .."
 alias '~'="cd ~"
 
