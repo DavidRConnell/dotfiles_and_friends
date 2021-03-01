@@ -4,3 +4,9 @@
 [submodule "stumpwm/.config/stumpwm"]
 	path = stumpwm/.config/stumpwm
 	url = https://github.com/DavidRConnell/.stumpwm.d
+[submodule "nyxt/.config/nyxt"]
+	path = nyxt/.config/nyxt
+	url = https://github.com/DavidRConnell/nyxt
+[submodule "guix/.config/guix"]
+	path = guix/.config/guix
+	url = https://github.com/DavidRConnell/guix
