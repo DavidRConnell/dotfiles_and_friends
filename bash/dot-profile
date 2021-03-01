@@ -7,12 +7,12 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 setxkbmap -option ctrl:nocaps
 
-local builtin_monitor_on=$(\
-    [[ $(hash xrandr 2>/dev/null) && \
-    $(xrandr --listactivemonitors | grep -ce "eDP1") -eq 1 ]] || \
-    echo false)
+local builtin_monitor_on=false
+[ $(hash xrandr 2>/dev/null) ] && \
+    [ $(xrandr --listactivemonitors | grep -ce "eDP1") -eq 1 ] && \
+    builtin_monitor_on=true
 
-if $builtin_monitor_on; then
+if [ $builtin_monitor_on = "true" ]; then
     xrandr --output eDP1 --mode 1680x1050
 fi
 
