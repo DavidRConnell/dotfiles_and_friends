@@ -1,6 +1,6 @@
 [submodule "emacs/.config/emacs"]
 	path = emacs/.config/emacs
 	url = https://github.com/DavidRConnell/emacs-from-scratch
-[submodule "stumpwm/.stumpwm.d"]
+[submodule "stumpwm/.config/stumpwm"]
 	path = stumpwm/.config/stumpwm
 	url = https://github.com/DavidRConnell/.stumpwm.d
