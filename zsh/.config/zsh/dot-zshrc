@@ -27,9 +27,10 @@ if $(hash xdg-open 2>/dev/null); then
 fi
 
 if $(hash guix 2>/dev/null); then
+    alias gpls="guix_profile --list"
+    alias gpl="source guix_profile --load"
     alias gpu="guix_profile --update"
-    alias gpi="guix_profile --install"
-    alias gpr="guix_profile --remove"
+    alias gp="guix_profile --modify"
     alias gpe="guix_profile --export-manifest"
 fi
 

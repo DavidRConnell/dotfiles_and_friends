@@ -24,12 +24,13 @@ list_profiles() {
 load_profiles() {
     if [ "$#" -eq 0 ]; then
         echo "Requires a list of profiles to load." >&2
+        echo $PATH
         exit 4
     fi
 
     for profile in "$@"; do
-        GUIX_PROFILE="$GUIX_PROFILE_PATH/$porfile/$profile"
-        if [ ! -f "$GUIX_PROFLE/etc/profile" ]; then
+        GUIX_PROFILE="$GUIX_PROFILE_PATH/$profile/$profile"
+        if [ ! -f "$GUIX_PROFILE/etc/profile" ]; then
             echo "$profile not found in $GUIX_PROFILE_PATH, skipping" >&2
             continue
         fi
@@ -38,6 +39,8 @@ load_profiles() {
     done
 
     unset profile
+
+    echo $PATH
     exit 0
 }
 
@@ -104,23 +107,23 @@ export_profile_to_manifest() {
 
 case "$1" in
     --list)
-	list_profiles ;;
+        list_profiles ;;
     --load)
-	shift
-	load_profiles "$@";;
+        shift
+        export PATH=$(load_profiles $@) ;;
     --install)
-	shift
-	modify_profile --install "$@";;
+        shift
+        modify_profile --install "$@" ;;
     --remove)
-	shift
-	modify_profile --remove "$@";;
-    --manifest)
-	shift
-	update_profiles "$@";;
+        shift
+        modify_profile --remove "$@" ;;
+    --update)
+        shift
+        update_profiles "$@" ;;
     --export-manifest)
-	shift
-	export_profile_to_manifest "$@";;
+        shift
+        export_profile_to_manifest "$@" ;;
     *)
-	usage
-	exit 3;;
+        usage
+        exit 3 ;;
 esac

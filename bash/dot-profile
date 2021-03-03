@@ -17,8 +17,15 @@ if [ $builtin_monitor_on = "true" ]; then
 fi
 
 if $(hash guix 2>/dev/null); then
-    export GUIX_DATA_HOME="$XDG_DATA_HOME/guix"
-    [ -d "$GUIX_DATA_HOME" ] || \
-	mkdir -p "$GUIX_DATA_HOME/{extra_profiles,manifests}"
+    export GUIX_PROFILE_PATH="$XDG_DATA_HOME/guix/extra_profiles"
+    export GUIX_PACKAGE_PATH="$XDG_CONFIG_HOME/guix/packages"
+    export GUIX_MANIFEST_PATH="$XDG_CONFIG_HOME/guix/manifests"
+
+    default_profiles=(
+        system
+        experimental
+        stumpwm
+    )
+    source guix_profile --load $default_profiles
 fi
 
