@@ -38,5 +38,6 @@ if (hash guix 2>/dev/null); then
 
         source $GUIX_PROFILE/etc/profile
     done
+    export GUIX_LOCPATH=$GUIX_PROFILE_PATH/system/system/lib/locale
 fi
 
