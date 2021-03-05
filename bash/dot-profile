@@ -37,6 +37,8 @@ if (hash guix 2>/dev/null); then
         fi
 
         source $GUIX_PROFILE/etc/profile
+        export MANPATH=$GUIX_PROFILE/share/man:$MANPATH
+        export INFOPATH=$GUIX_PROFILE/share/info:$INFOPATH
     done
     export GUIX_LOCPATH=$GUIX_PROFILE_PATH/system/system/lib/locale
 fi
