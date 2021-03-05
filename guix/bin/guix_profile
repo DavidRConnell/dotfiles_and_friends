@@ -75,11 +75,15 @@ update_profiles() {
     for profile in $profiles; do
         profile=${$(basename $profile)%.*}
         GUIX_PROFILE="$GUIX_PROFILE_PATH/$profile/$profile"
-        if [ -e "$GUIX_PROFILE" ]; then
-            guix package \
-                --manifest="$GUIX_MANIFEST_PATH/$profile.scm" \
-                --profile="$GUIX_PROFILE"
+        if [ ! -e "$GUIX_MANIFEST_PATH/$profile.scm" ]; then
+            echo "No manifest for $profile in $GUIX_MANIFEST_PATH." >&2
+            continue
         fi
+
+        [ -d "$GUIX_PROFILE_PATH/$profile" ] || mkdir -p "$GUIX_PROFILE_PATH/$profile"
+        guix package \
+            --manifest="$GUIX_MANIFEST_PATH/$profile.scm" \
+            --profile="$GUIX_PROFILE"
     done
     unset profile
 }
