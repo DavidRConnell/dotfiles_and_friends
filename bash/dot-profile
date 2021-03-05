@@ -1,4 +1,4 @@
-#-*- sh -*-
+#!/bin/bash
 
 # XDG directories
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -26,6 +26,16 @@ if $(hash guix 2>/dev/null); then
         experimental
         stumpwm
     )
-    source guix_profile --load $default_profiles
+
+    for profile in "${default_profiles[@]}"; do
+	echo $profile
+        GUIX_PROFILE="$GUIX_PROFILE_PATH/$profile/$profile"
+        if [ ! -e $GUIX_PROFILE ]; then
+            echo "$profile not found. Skipping..." >&2
+            continue
+        fi
+
+        source $GUIX_PROFILE/etc/profile
+    done
 fi
 
