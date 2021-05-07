@@ -10,3 +10,6 @@
 [submodule "guix/.config/guix"]
 	path = guix/.config/guix
 	url = https://github.com/DavidRConnell/guix
+[submodule "nix/.config/nixpkgs"]
+	path = nix/.config/nixpkgs
+	url = git@github.com:DavidRConnell/nix-home-manager.git
