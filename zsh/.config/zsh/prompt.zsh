@@ -35,7 +35,7 @@ prompt_git_status() {
     fi
 
     if [[ ! -z "$STATUS" ]]; then
-	echo "$STATUS"
+	echo " $STATUS"
     else
 	echo ""
     fi
@@ -51,7 +51,7 @@ prompt_git_branch() {
 }
 
 prompt_git() {
-    [ ! -z "$vcs_info_msg_0_" ] && echo "(%F{blue}$vcs_info_msg_0_%f $(prompt_git_status)) "
+    [ ! -z "$vcs_info_msg_0_" ] && echo "$vcs_info_msg_0_$(prompt_git_status) "
 }
 
 prompt_purity_precmd() {
@@ -76,7 +76,8 @@ prompt_purification_setup() {
     git_prompt='$(prompt_git)'
     caret_prompt='$(prompt_user)'
 
-    PROMPT="$dir_prompt $git_prompt$caret_prompt "
+    PROMPT=" $git_prompt$caret_prompt "
+    RPS1="%~"
 }
 
 prompt_purification_setup
