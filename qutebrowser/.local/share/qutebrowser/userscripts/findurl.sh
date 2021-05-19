@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Find the URL inside a string.
 # Opitional argument --ext looks for a url with that file extension.

@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 # Download a PDF to /tmp and open with emacs for further processing.
 

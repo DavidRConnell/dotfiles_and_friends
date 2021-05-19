@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 # Add a doi to the master bib and try to download the associated pdf.
 
