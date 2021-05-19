@@ -2,6 +2,7 @@
 
 # Aliases
 alias e="emacsclient -ca ''"
+alias vi="nvim"
 alias matlab="matlab -nodesktop -nosplash"
 alias stow="stow --dotfiles"
 
