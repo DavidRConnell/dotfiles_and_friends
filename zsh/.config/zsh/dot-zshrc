@@ -88,6 +88,22 @@ ZVM_CURSOR_STYLE_ENABLED=false
 fpath=("$ZDOTDIR" $fpath)
 autoload -Uz prompt.zsh; prompt.zsh
 
+# Window title
+autoload -Uz add-zsh-hook
+
+xterm_title_precmd () {
+    print -Pn -- '\e]2;%~ \a'
+}
+
+xterm_title_preexec () {
+    print -Pn -- "\\e\]2;${(q)1}: %~\a"
+}
+
+if [[ "$TERM" == alacritty* ]]; then
+    add-zsh-hook -Uz precmd xterm_title_precmd
+    add-zsh-hook -Uz preexec xterm_title_preexec
+fi
+
 # Directories
 setopt AUTO_PUSHD
 setopt PUSHD_SILENT

@@ -64,6 +64,7 @@ window:
 
   # Window title
   #title: Alacritty
+  dynamic_title: true
 
   # Window class (Linux only):
   #class: Alacritty
