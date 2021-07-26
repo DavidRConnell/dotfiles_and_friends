@@ -41,6 +41,7 @@ config.bind("<Ctrl-F>", "fake-key <Ctrl-Right>", mode="insert")
 config.bind("<Ctrl-B>", "fake-key <Ctrl-Left>", mode="insert")
 config.bind("<Ctrl-P>", "fake-key <Up>", mode="insert")
 config.bind("<Ctrl-N>", "fake-key <Down>", mode="insert")
+config.bind("<Ctrl-I>", "edit-text", mode="insert")
 
 config.bind("O", "set-cmd-text -s :open -w", mode="normal")
 config.bind("Pp", "open -w -- {clipboard}", mode="normal")
