@@ -3,7 +3,6 @@
 # Aliases
 alias e="emacsclient -ca ''"
 alias vi="nvim"
-alias matlab="matlab -nodesktop -nosplash"
 alias stow="stow --dotfiles"
 
 alias gs="git status"
@@ -27,50 +26,41 @@ if $(hash xdg-open 2>/dev/null); then
     alias open="xdg-open"
 fi
 
-if $(hash guix 2>/dev/null); then
-    alias gpls="guix_profile --list"
-    alias gpl="source guix_profile --load"
-    alias gpu="guix_profile --update"
-    alias gp="guix_profile --modify"
-    alias gpe="guix_profile --export-manifest"
-fi
-
 compctl -g '*.md' md2pdf
 compctl -g '*.ppt*' pptx2pdf
 compctl -g '*.docx' docx2pdf
 
 # Plugins
-plugins=(
-    zsh-users/zsh-completions
-    zsh-users/zsh-syntax-highlighting
-    zsh-users/zsh-autosuggestions
-    hlissner/zsh-autopair
-    ael-code/zsh-colored-man-pages
-    jeffreytse/zsh-vi-mode
-    omz/pip
-    # omz/pass
-    # omz/ripgrep
-    # omz/zsh-pandoc-completion
-    omz/fzf@delay
-    Aloxaf/fzf-tab@delay
-)
+# export FZF_BASE="$(fzf-share)"
+# plugins=(
+#     zsh-users/zsh-completions
+#     zsh-users/zsh-syntax-highlighting
+#     zsh-users/zsh-autosuggestions
+#     # hlissner/zsh-autopair@delay
+#     ael-code/zsh-colored-man-pages
+#     jeffreytse/zsh-vi-mode
+#     # omz:pip
+#     omz:pass/_pass
+#     omz:ripgrep/_ripgrep
+#     srijanshetty/zsh-pandoc-completion
+#     omz:fzf@delay
+#     Aloxaf/fzf-tab@delay
+# )
 
-source $ZDOTDIR/plugins.zsh
+# source $ZDOTDIR/plugins.zsh
 
 # Set vi bindings and add custom key bindings
 zvm_after_lazy_keybindings() {
-    # bindkey -v
-    bindkey -a k history-beginning-search-backward
-    bindkey -a j history-beginning-search-forward
+    bindkey -a k history-search-backward
+    bindkey -a j history-search-forward
     bindkey -a H vi-beginning-of-line
     bindkey -a L vi-end-of-line
-    bindkey -r -a v
+    bindkey -a / fzf-history-widget
+    # \e works as meta.
+    bindkey -v '\ep' history-search-backward
+    bindkey -v '\en' history-search-forward
 }
-bindkey -v '^@' fzf-tab-complete #^@ is <C-Space>
-bindkey -v '^F' forward-char
-bindkey -v '^P' history-beginning-search-backward
-bindkey -v '^N' history-beginning-search-forward
-bindkey -v '^R' fzf
+bindkey -v '^@' fzf-tab-complete # ^@ is <C-Space>.
 
 export KEYTIMEOUT=1
 
@@ -105,22 +95,15 @@ if [[ "$TERM" == alacritty* ]]; then
 fi
 
 # Directories
+WORDCHARS=${WORDCHARS//[\/=]} # Remove "/" and "=" so they are not part of words
 setopt AUTO_PUSHD
 setopt PUSHD_SILENT
 alias d="dirs -v"
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
 
-# plugins=(
-#     vi-mode
-#     pass
-#     pip
-#     ripgrep
-#     zsh-pandoc-completion
-#     colorize
-#     docker
-# )
-
 # Completion
 autoload -Uz compinit; compinit
 _comp_options+=(globdots)
-source "$ZDOTDIR/completion.zsh"
+source $ZDOTDIR/completion.zsh
+
+eval "$(direnv hook zsh)"

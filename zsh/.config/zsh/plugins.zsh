@@ -1,9 +1,5 @@
 #! /bin/zsh
 
-# if [[ ! -f "$ZDOTDIR/antigen.zsh" ]]; then
-#     curl -L git.io/antigen > $ZDOTDIR/antigen.zsh
-# fi
-# source $ZDOTDIR/antigen.zsh
 export ZINIT_HOME=$HOME/.local/lib/zsh/zinit
 
 if [ ! -d "$ZINIT_HOME" ]; then
@@ -14,8 +10,8 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 zinit_load() {
-    if [ ${plugin%/*} = "omz" ]; then
-        zinit snippet OMZP::${plugin#omz/}
+    if [ ${plugin%:*} = "omz" ]; then
+        zinit snippet OMZP::${plugin#omz:} 2>/dev/null
     else
         zinit light $plugin
     fi
