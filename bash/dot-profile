@@ -18,28 +18,7 @@ fi
 unset builtin_monitor_on
 
 if (hash guix 2>/dev/null); then
-    export GUIX_PROFILE_PATH="$XDG_DATA_HOME/guix/extra_profiles"
-    export GUIX_PACKAGE_PATH="$XDG_CONFIG_HOME/guix/packages"
-    export GUIX_MANIFEST_PATH="$XDG_CONFIG_HOME/guix/manifests"
-
-    default_profiles=(
-        system
-        experimental
-        stumpwm
-    )
-
-    for profile in "${default_profiles[@]}"; do
-        echo "$profile"
-        GUIX_PROFILE="$GUIX_PROFILE_PATH/$profile/$profile"
-        if [ ! -e "$GUIX_PROFILE" ]; then
-            echo "$profile not found. Skipping..." >&2
-            continue
-        fi
-
-        source $GUIX_PROFILE/etc/profile
-        export MANPATH=$GUIX_PROFILE/share/man:$MANPATH
-        export INFOPATH=$GUIX_PROFILE/share/info:$INFOPATH
-    done
-    export GUIX_LOCPATH=$GUIX_PROFILE_PATH/system/system/lib/locale
+    [ -f "$XDG_CONFIG_HOME/guix/profile.sh" ] && \
+        source "$XDG_CONFIG_HOME/guix/profile.sh"
 fi
 
