@@ -23,6 +23,9 @@ c.bindings.key_mappings = {
     "<Ctrl-Space>": "<Tab>",
 }
 
+config.load_autoconfig()
+c.zoom.default = 90
+
 config.unbind("<Ctrl-N>")
 config.unbind("<Ctrl-P>")
 config.bind("<Ctrl-N>", "completion-item-focus --history next", mode="command")
