@@ -46,23 +46,24 @@ config.bind("<Ctrl-P>", "fake-key <Up>", mode="insert")
 config.bind("<Ctrl-N>", "fake-key <Down>", mode="insert")
 config.bind("<Ctrl-I>", "edit-text", mode="insert")
 
+config.bind("<Ctrl-Space>c", "config-edit", mode="normal")
 config.bind("O", "set-cmd-text -s :open -w", mode="normal")
 config.bind("Pp", "open -w -- {clipboard}", mode="normal")
 config.bind("PP", "open -w -- {primary}", mode="normal")
 config.bind("<Ctrl-P>", "hint links fill :open -p {hint-url}", mode="normal")
 config.bind("<Ctrl-SHIFT-P>", "open -p", mode="normal")
 config.bind("F", "hint all tab-bg", mode="normal")
-config.bind("{", "tab-prev", mode="normal")
-config.bind("}", "tab-next", mode="normal")
+config.bind("<Ctrl-/>", "hint all", mode="normal")
+config.bind("<Alt-/>", "hint links yank", mode="normal")
 
 
 config.unbind("<Ctrl-W>")
-config.bind("<Ctrl-D>", "close", mode="normal")
+config.bind("<Ctrl-D>", "quit --save", mode="normal")
 config.bind("<Ctrl-I>", "forward", mode="normal")
 config.bind("<Ctrl-O>", "back", mode="normal")
 
-config.bind("m", "enter-mode set_mark", mode="normal")
-config.bind("<Ctrl-m>", "enter-mode jump_mark", mode="normal")
+config.bind("m", "mode-enter set_mark", mode="normal")
+config.bind("<Ctrl-m>", "mode-enter jump_mark", mode="normal")
 config.bind("M", "quickmark-save", mode="normal")
 
 # Downloads
