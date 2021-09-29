@@ -15,18 +15,18 @@ base=(
 
 # folders that should, or only need to be installed for a local user
 useronly=(
-    zsh
     bin
     emacs
     git
-    stumpwm
     isync
     latex
+    nixpkgs
     pass-git-helper
-    topgrade
     qutebrowser
+    stumpwm
     xdg-mime
     zathura
+    zsh
 )
 
 # run the stow command for the passed in directory ($2) in location $1
