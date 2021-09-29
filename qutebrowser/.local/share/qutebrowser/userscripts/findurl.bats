@@ -21,3 +21,9 @@ httpfile=http://thisfile.pdf
     result="$(./findurl.sh $httpfile)"
     [ "$result" == "$httpfile" ]
 }
+
+noextfile=http://doi.org/thisfiles
+@test "Find file without extension" {
+    result="$(./findurl.sh $noextfile)"
+    [ "$result" == "$noextfile" ]
+}

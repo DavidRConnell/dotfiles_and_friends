@@ -12,4 +12,4 @@ else
     ext='[a-zA-Z]\+'
 fi
 
-echo "$1" | sed -n "s_.*\(https\?://.*\.$ext\).*_\1_p"
+echo "$1" | sed -n "s_.*\(https\?://.*\(\.$ext\)\?\).*_\1_p"
