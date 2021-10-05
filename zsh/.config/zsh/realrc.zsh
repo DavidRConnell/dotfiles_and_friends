@@ -53,6 +53,9 @@ ZVM_CURSOR_STYLE_ENABLED=false
 
 # Directories
 WORDCHARS=${WORDCHARS//[\/=]} # Remove "/" and "=" so they are not part of words
+setopt AUTO_PUSHD
+setopt PUSHD_SILENT
+alias d="dirs -v"
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
 
 # Completion
