@@ -11,8 +11,9 @@ zvm_after_lazy_keybindings() {
     bindkey -v '\ep' history-search-backward
     bindkey -v '\en' history-search-forward
 }
-bindkey -v ^F forward-char
+bindkey -v '^F' forward-char
 bindkey -v '^@' fzf-tab-complete # ^@ is <C-Space>.
+bindkey -v '^R' fzf-history-widget
 
 export KEYTIMEOUT=1
 
