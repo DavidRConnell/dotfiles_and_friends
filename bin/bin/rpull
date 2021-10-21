@@ -8,7 +8,9 @@ function missingfile {
 function run {
 	[ -f '.rclonepath' ] || missingfile
 	remote=$(cat '.rclonepath')
-	rclone sync $remote $PWD
+	rclone sync \
+	    --filter-from=$XDG_CONFIG_HOME/rclone/filter-file.txt \
+	    "$remote" "$PWD"
 }
 
 function rpulldir {
