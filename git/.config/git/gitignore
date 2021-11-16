@@ -1,9 +1,13 @@
-README.pdf
 .DS_STORE
 .tags
+TAGS
 *.mat
 ._*
 *.bak
 .rclonepath
 .direnv
 .envrc
+.ccls
+.ccls*/
+mvn2nix-lock.json
+dependency-reduced-pom.xml
