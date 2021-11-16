@@ -1,0 +1,5 @@
+toggle_keep_vp v
+next_img j
+prev_img k
+save_image
+zoom_fit s
