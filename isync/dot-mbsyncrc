@@ -1,13 +1,12 @@
-Create Slave
+Create Near
 SyncState *
 
 IMAPAccount gmail
-CertificateFile /etc/ssl/certs/ca-certificates.crt
 SSLType IMAPS
 Host imap.gmail.com
-User davidconnell12@gmail.com
-PassCmd "pass show email/gmail.com | head -n1"
-PipelineDepth 50
+AuthMechs LOGIN
+UserCmd "pass show email/gmail.com | sed -n '2p;3q'"
+PassCmd "pass show email/gmail.com | sed -n '3p;4q'"
 
 MaildirStore gmail-local
 Subfolders Verbatim
@@ -18,17 +17,16 @@ IMAPStore gmail-remote
 Account gmail
 
 Channel gmail
-Master :gmail-remote:
-Slave :gmail-local:
-Patterns "[Gmail]/Sent Mail" "[Gmail]/All Mail" "INBOX"
+Far :gmail-remote:
+Near :gmail-local:
+Patterns "[Gmail]/Sent Mail" "INBOX" "Trash"
 
 IMAPAccount rush
-Host localhost
-Port 1143
-User david_r_connell@rush.edu
+Host outlook.office365.com
+Port 993
+SSLType IMAPS
+UserCmd "pass show email/rush.edu | sed -n '2p;3q'"
 PassCmd "pass show email/rush.edu | head -n1"
-SSLType NONE
-AUTHMechs LOGIN
 
 MaildirStore rush-local
 Subfolders Verbatim
@@ -39,6 +37,6 @@ IMAPStore rush-remote
 Account rush
 
 Channel rush
-Master :rush-remote:
-Slave :rush-local:
-Patterns *
+Far :rush-remote:
+Near :rush-local:
+Patterns "INBOX" "Drafts" "Grad" "Outbox" "Sent Items" "Archive" "Deleted Items"
