@@ -1,0 +1,9 @@
+set download-path=/tmp/vimb
+set input-autohide=true
+set spell-checking=true
+set spell-checking-languages=en
+set incsearch=true
+set editor-command=emacsclient -ca "" %s
+set hint-keys=aoeusnth
+
+nnoremap <C-d> :q<CR>
