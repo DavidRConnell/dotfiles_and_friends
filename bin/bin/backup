@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+#
+# Personal backup script for use with restic.
+
+usage() {
+    echo ""
+    echo "Usage: $(basename $0) backup device"
+    echo "Backups to drive with label \"backup\"."
+    echo "example: $(basename $0)"
+}
+
+if [[ "$#" -eq 1 ]] && [[ "$1" = "-h" ]]; then
+    usage
+    exit 0
+fi
+
+partition=/dev/disk/by-label/backup
+if ! [ -L $partition ]; then
+    echo "Error: partition \"$partition\" not found"
+    exit 1
+fi
+
+home_dir=/home/voidee
+partition=$(readlink $partition)
+partition=/dev/${partition/*\/}
+partnumber=${partition//[^0-9]/}
+dev=${partition//[0-9]/}
+mount_point=/run/media
+excludes_file=$home_dir/.config/restic/excludes.txt
+
+([[ -d $mount_point ]] || sudo mkdir $mount_point) && \
+    sudo mount $partition $mount_point
+sudo restic -r $mount_point/TheVoidII backup $home_dir
+sudo umount $mount_point
+udisksctl power-off -b $dev

@@ -23,6 +23,7 @@ useronly=(
     nixpkgs
     pass-git-helper
     qutebrowser
+    restic
     stumpwm
     xdg-mime
     zathura
