@@ -13,6 +13,17 @@ map + zoom in
 map - zoom out
 map ZZ quit
 map <C-d> quit
+map p toggle_fullscreen
+map <Space> toggle_index
+
+map [fullscreen] <C-j> navigate next
+map [fullscreen] <C-k> navigate previous
+map [fullscreen] <C-[> toggle_fullscreen
+map [fullscreen] <Space> toggle_index
+
+map [index] <C-n> navigate next
+map [index] <C-p> navigate previous
+map [index] <C-Space> navigate_index expand
 
 set highlight-active-color "#0030a6"
 set highlight-transparency 0.3
