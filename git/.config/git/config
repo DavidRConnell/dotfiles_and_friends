@@ -19,8 +19,6 @@
 	process = git-lfs filter-process
 [pull]
 	rebase = true
-[commit]
-	template = /home/voidee/.config/git/gitmessage
 [diff "lisp"]
   xfuncname = "^(((;;;+ )|\\(|([ \t]+\\(((cl-|el-patch-)?def(un|var|macro|method|custom)|gb/))).*)$"
 [diff "org"]
