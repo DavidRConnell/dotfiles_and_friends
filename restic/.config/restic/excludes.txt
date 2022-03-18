@@ -1,2 +1,10 @@
-~/.cache
-~/data/syneregy
+.cache
+data/synergy
+data/pubmed
+.cargo
+.compose-cache
+.gradle
+.java
+.keras
+.nix-profile
+.npm
