@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env bash
 
 if [[ $1 =~ '-s' ]]; then
 	delim=${1#-s}
@@ -7,7 +7,7 @@ else
 	delim=','
 fi
 
-column -s"$delim" -t $1 | vi -R \
+column -s"$delim" -t $1 | nvim -R \
 	'+setlocal nowrap'\
 	'+setlocal colorcolumn=0'\
 	'+nnoremap <buffer> <tab> W'\

@@ -1,4 +1,5 @@
-#! /bin/bash
+#!/usr/bin/env nix-shell
+#! nix-shell -i sh -p libreoffice texlive.combined.scheme-medium
 
 if ! [ -f "$1" ]; then
     echo "$1 does not exist."
@@ -18,4 +19,4 @@ if [ "$ext" != "docx" ]; then
     exit 3
 fi
 
-pandoc --pdf-engine="xelatex" -i "$1" -o "$name".pdf
+pandoc --pdf-engine="lualatex" -i "$1" -o "$name".pdf
