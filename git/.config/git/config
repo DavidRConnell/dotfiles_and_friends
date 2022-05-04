@@ -25,3 +25,7 @@
   xfuncname = "^(\\*+ +.*)$"
 [init]
 	defaultBranch = master
+[credential]
+	helper = cache
+[safe]
+	directory = /home/voidee/.dotfiles/nix/.config/nixpkgs
