@@ -22,13 +22,16 @@ fi
 
 home_dir=/home/voidee
 partition=$(readlink $partition)
-partition=/dev/${partition/*\/}
+partition=/dev/${partition/*\//}
 dev=${partition//[0-9]/}
-mount_point=/run/media
+mount_point=/run/media/backup
 excludes_file=$home_dir/.config/restic/excludes.txt
+host=thevoidII # Since want to keep machines in sync always have same host
 
-([[ -d $mount_point ]] || sudo mkdir $mount_point) && \
-    sudo mount $partition $mount_point
-sudo restic -r $mount_point/TheVoidII backup $home_dir --exclude-file=$excludes_file
+[[ -d $mount_point ]] || sudo mkdir -p $mount_point
+mountpoint -q $mount_point || sudo mount $partition $mount_point
+sudo restic -r $mount_point/TheVoidII backup $home_dir \
+    --exclude-file=$excludes_file \
+    --host=$host
 sudo umount $mount_point
 udisksctl power-off -b $dev
