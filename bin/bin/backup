@@ -37,5 +37,5 @@ mountpoint -q $mount_point || sudo mount $partition $mount_point
 sudo -E restic -r $mount_point/TheVoidII backup "$HOME" \
     --exclude-file=$excludes_file \
     --host=$host
-sudo umount $mount_point
-udisksctl power-off -b $dev
+
+udiskie-umount $mount_point --detach
