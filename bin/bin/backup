@@ -38,4 +38,11 @@ sudo -E restic -r $mount_point/TheVoidII backup "$HOME" \
     --exclude-file=$excludes_file \
     --host=$host
 
+if [ mountpoint -q /data ]; then
+    # Data is an external drive so host should be independent of the
+    # system it's currently mounted to.
+    sudo -E restic -r $mount_point/data backup /data \
+        --host=data
+fi
+
 udiskie-umount $mount_point --detach
