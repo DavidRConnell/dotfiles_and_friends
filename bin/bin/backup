@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 #
 # Personal backup script for use with restic.
+# Assumes backup drive is labeled "backup".
+
+user=$(whoami)
+export RESTIC_PASSWORD_COMMAND="sudo -Eu ${user} bash -c \"$RESTIC_PASSWORD_COMMAND\""
 
 usage() {
     echo ""
