@@ -47,6 +47,9 @@ config.bind("<Ctrl-N>", "fake-key <Down>", mode="insert")
 config.bind("<Ctrl-I>", "edit-text", mode="insert")
 
 config.bind("<Ctrl-Space>c", "config-edit", mode="normal")
+config.bind("<Ctrl-Space>e", "spawn --userscript open-in-emacs.sh", mode="normal")
+config.bind("<Ctrl-Space>.", "config-source", mode="normal")
+
 config.bind("O", "set-cmd-text -s :open -w", mode="normal")
 config.bind("Pp", "open -w -- {clipboard}", mode="normal")
 config.bind("PP", "open -w -- {primary}", mode="normal")
