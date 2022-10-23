@@ -6,8 +6,8 @@ export XDG_CACHE_HOME="$HOME/.cache"
 # ZSH files
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
-export HISTSIZE=10000
-export SAVEHIST=10000
+export HISTSIZE=50000
+export SAVEHIST=50000
 
 # Editors
 export EDITOR="emacsclient -ca ''"
