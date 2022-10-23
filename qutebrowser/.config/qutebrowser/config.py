@@ -100,4 +100,4 @@ config.bind(
     "hint links userscript preview-pdf.sh",
 )
 
-c.content.headers.user_agent = "Mozilla/5.0 ({os_info}; rv:84.0) Gecko/20100101 Firefox/84.0"
+c.content.headers.user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0"
