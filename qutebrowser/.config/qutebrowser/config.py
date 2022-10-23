@@ -6,6 +6,8 @@ theme.draw(c, {"spacing": {"vertical": 6, "horizontal": 8}})
 
 c.tabs.tabs_are_windows = True
 c.tabs.title.format = "{audio} {current_title}"
+
+c.downloads.remove_finished = 5000
 c.hints.mode = "letter"
 c.hints.chars = "aoeuhtns"
 c.input.partial_timeout = 60000
