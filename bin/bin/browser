@@ -2,11 +2,12 @@
 
 usage() {
     cat <<-_EOF_
-USAGE: $(basename $0) [-aldbh] [CONTAINER] [EXTRA_COMMANDS]
+USAGE: $(basename $0) [-acldbh] [CONTAINER] [EXTRA_COMMANDS]
 
- -b,--basedir	  Print the location continers are stored.
+ -b,--basedir	  Print the location containers are stored.
  -l,--ls,--list	  List all containers.
  -a,--add	  Add a new container.
+ -c,--color	  Color to use for in tab bar (to differentiate containers)
  -d,--delete	  Delete a container.
  -h,--help	  Print this help message.
 
@@ -26,9 +27,15 @@ the data is stored and will remain until the the temporary directory is cleared.
 When adding a container, an optional color argument can be passed that specifies
 the color of the tab bar to use in order to differentiate between windows from
 different containers:
-	  $(basename $0) --add foo green
+	  $(basename $0) --color green --add foo
+
+If color is passed when opening a container, that color will override the
+default container color.
 _EOF_
 }
+
+CONFIG="$XDG_CONFIG_HOME"/qutebrowser/config.py
+USERSCRIPTS="$XDG_DATA_HOME"/qutebrowser/userscripts
 
 error() {
     local exit_code="$1"
@@ -51,19 +58,34 @@ list() {
     echo ${containers[@]}
 }
 
+create_container() {
+    local path=$1
+    local color=$2
+
+    mkdir "$path"
+    [ -z "$color" ] || echo "$color" >"$container"/color.txt
+
+    mkdir -p "$path"/data
+    ln -s "$USERSCRIPTS" "$container"/data
+}
+
 add() {
     ([ "$1" == "default" ] || [ "$1" == "temp" ]) && error 1 \
         "Can't name container reserved name \"$1\"."
-    [ -d $(containerdir)/"$1" ] && error 1 \
-        "Container \"$1\" already exists. Nothing to do."
 
-    mkdir $(containerdir)/"$1"
-    [[ "$#" == 2 ]] && (echo "$2" >$(containerdir)/"$1"/color.txt)
+    local container=$(containerdir)/"$1"
+    [ -d "$container" ] &&
+        echo "Container \"$1\" already exists. Nothing to do." >&2 &&
+        exit 1
+
+    create_container "$container" "$2"
 }
 
 delete() {
-    [ -d $(containerdir)/"$1" ] || error 1 \
-        "Container \"$1\" does not exist. Nothing to do."
+    [ -d $(containerdir)/"$1" ] || {
+        echo "Container \"$1\" does not exist. Nothing to do." >&2
+        exit 1
+    }
 
     rm -rf $(containerdir)/"$1"
 }
@@ -73,6 +95,7 @@ for arg in "$@"; do
     case "$arg" in
     '--basedir') set -- "$@" '-b' ;;
     '--ls' | '--list') set -- "$@" '-l' ;;
+    '--color') set -- "$@" '-c' ;;
     '--add') set -- "$@" '-a' ;;
     '--delete') set -- "$@" '-d' ;;
     '--help') set -- "$@" '-h' ;;
@@ -80,9 +103,9 @@ for arg in "$@"; do
     esac
 done
 
-config="$XDG_CONFIG_HOME"/qutebrowser/config.py
+color=""
 [ -d $(containerdir) ] || mkdir -p $(containerdir)
-while getopts 'bla:d:h' arg; do
+while getopts 'blc:a:d:h' arg; do
     case "$arg" in
     b)
         containerdir
@@ -92,9 +115,11 @@ while getopts 'bla:d:h' arg; do
         list
         exit 0
         ;;
+    c)
+        color="$OPTARG"
+        ;;
     a)
-        shift
-        add "$@"
+        add "$OPTARG" "$color"
         exit 0
         ;;
     d)
@@ -111,6 +136,7 @@ while getopts 'bla:d:h' arg; do
         ;;
     esac
 done
+shift $(($OPTIND - 1))
 
 [ "$#" -gt 0 ] || error 1 "Must provide a container name."
 
@@ -118,25 +144,30 @@ if [ -d $(containerdir)/"$1" ]; then
     container=$(containerdir)/"$1"
 elif [ "$1" == "temp" ]; then
     container=$(mktemp --directory)
-    echo "darkgray" >${container}/color.txt
-else
-    [ "$1" == default ] || error 1 "Container \"$1\" does not exist." \
-        "Add with:\n\t $(basename $0) --add $1"
+    create_container "$container" "darkgray"
+elif [ "$1" == "default" ]; then
     container="$1"
+else
+    error 1 "Container \"$1\" does not exist." \
+        "Add with:\n\t $(basename $0) --add $1"
 fi
 shift
 
 if [ $container == "default" ]; then
     qutebrowser "$@"
 else
+    if [ -z "$color" ] && [ -f "$container"/color.txt ]; then
+        color=$(cat "${container}"/color.txt)
+    fi
+
     set_color=""
-    if [ -f "$container"/color.txt ]; then
-        set_color="--set colors.tabs.selected.odd.bg $(cat ${container}/color.txt)"
+    if [ ! -z "$color" ]; then
+        set_color="--set colors.tabs.selected.odd.bg $color"
     fi
 
     qutebrowser \
         -B "$container" \
-        -C "$config" \
+        -C "$CONFIG" \
         --set tabs.title.format "{audio} $(basename $container): {current_title}" \
         $set_color \
         "$@"
