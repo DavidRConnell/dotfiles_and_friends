@@ -4,6 +4,8 @@ from colorschemes import modus as theme
 
 theme.draw(c, {"spacing": {"vertical": 6, "horizontal": 8}})
 
+c.tabs.tabs_are_windows = True
+c.tabs.title.format = "{audio} {current_title}"
 c.hints.mode = "letter"
 c.hints.chars = "aoeuhtns"
 c.input.partial_timeout = 60000
