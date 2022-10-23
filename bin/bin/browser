@@ -1,0 +1,143 @@
+#!/usr/bin/env bash
+
+usage() {
+    cat <<-_EOF_
+USAGE: $(basename $0) [-aldbh] [CONTAINER] [EXTRA_COMMANDS]
+
+ -b,--basedir	  Print the location continers are stored.
+ -l,--ls,--list	  List all containers.
+ -a,--add	  Add a new container.
+ -d,--delete	  Delete a container.
+ -h,--help	  Print this help message.
+
+Open a qutebrowser session using the provided container passing extra commands
+directly to qutebrowser.
+
+In addition to containers stored in BASEDIR there is also the default
+"container" and temporary containers.
+
+The default container opens qutebrowser normally (using the data in
+qutebrowser's default state directory), this is used if CONTAINER is "default".
+
+Temporary containers are created using \`mktemp\` if CONTAINER is temp. Each time
+this is called a new container is made. NOTE: unlike a private browser session,
+the data is stored and will remain until the the temporary directory is cleared.
+
+When adding a container, an optional color argument can be passed that specifies
+the color of the tab bar to use in order to differentiate between windows from
+different containers:
+	  $(basename $0) --add foo green
+_EOF_
+}
+
+error() {
+    local exit_code="$1"
+    shift
+    echo -e "$@\n" >&2
+    usage >&2
+    exit "$exit_code"
+}
+
+containerdir() {
+    if [ -z "$XDG_DATA_HOME" ]; then
+        echo ".qutebrowser/containers"
+    else
+        echo "$XDG_DATA_HOME"/qb_containers
+    fi
+}
+
+list() {
+    containers=("default" "temp" $(ls $(containerdir)))
+    echo ${containers[@]}
+}
+
+add() {
+    ([ "$1" == "default" ] || [ "$1" == "temp" ]) && error 1 \
+        "Can't name container reserved name \"$1\"."
+    [ -d $(containerdir)/"$1" ] && error 1 \
+        "Container \"$1\" already exists. Nothing to do."
+
+    mkdir $(containerdir)/"$1"
+    [[ "$#" == 2 ]] && (echo "$2" >$(containerdir)/"$1"/color.txt)
+}
+
+delete() {
+    [ -d $(containerdir)/"$1" ] || error 1 \
+        "Container \"$1\" does not exist. Nothing to do."
+
+    rm -rf $(containerdir)/"$1"
+}
+
+for arg in "$@"; do
+    shift
+    case "$arg" in
+    '--basedir') set -- "$@" '-b' ;;
+    '--ls' | '--list') set -- "$@" '-l' ;;
+    '--add') set -- "$@" '-a' ;;
+    '--delete') set -- "$@" '-d' ;;
+    '--help') set -- "$@" '-h' ;;
+    *) set -- "$@" "$arg" ;;
+    esac
+done
+
+config="$XDG_CONFIG_HOME"/qutebrowser/config.py
+[ -d $(containerdir) ] || mkdir -p $(containerdir)
+while getopts 'bla:d:h' arg; do
+    case "$arg" in
+    b)
+        containerdir
+        exit 0
+        ;;
+    l)
+        list
+        exit 0
+        ;;
+    a)
+        shift
+        add "$@"
+        exit 0
+        ;;
+    d)
+        delete "$OPTARG"
+        exit 0
+        ;;
+    h)
+        usage
+        exit 0
+        ;;
+    ?)
+        usage >&2
+        exit 1
+        ;;
+    esac
+done
+
+[ "$#" -gt 0 ] || error 1 "Must provide a container name."
+
+if [ -d $(containerdir)/"$1" ]; then
+    container=$(containerdir)/"$1"
+elif [ "$1" == "temp" ]; then
+    container=$(mktemp --directory)
+    echo "darkgray" >${container}/color.txt
+else
+    [ "$1" == default ] || error 1 "Container \"$1\" does not exist." \
+        "Add with:\n\t $(basename $0) --add $1"
+    container="$1"
+fi
+shift
+
+if [ $container == "default" ]; then
+    qutebrowser "$@"
+else
+    set_color=""
+    if [ -f "$container"/color.txt ]; then
+        set_color="--set colors.tabs.selected.odd.bg $(cat ${container}/color.txt)"
+    fi
+
+    qutebrowser \
+        -B "$container" \
+        -C "$config" \
+        --set tabs.title.format "{audio} $(basename $container): {current_title}" \
+        $set_color \
+        "$@"
+fi
