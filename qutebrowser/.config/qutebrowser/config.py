@@ -9,8 +9,6 @@ c.tabs.title.format = "{audio} {current_title}"
 c.hints.mode = "letter"
 c.hints.chars = "aoeuhtns"
 c.input.partial_timeout = 60000
-c.url.start_pages = ["https://en.wikipedia.org/wiki/Special:Random"]
-c.url.default_page = "https://en.wikipedia.org/wiki/Special:Random"
 c.editor.command = ["emacsclient", "-ca ''", "{file}"]
 c.bindings.key_mappings = {
     "<Ctrl-[>": "<Escape>",
