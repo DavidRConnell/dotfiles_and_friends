@@ -51,6 +51,8 @@ config.bind("<Ctrl-I>", "edit-text", mode="insert")
 config.bind("<Ctrl-Space>c", "config-edit", mode="normal")
 config.bind("<Ctrl-Space>e", "spawn --userscript open-in-emacs.sh", mode="normal")
 config.bind("<Ctrl-Space>.", "config-source", mode="normal")
+config.bind("<Ctrl-Space>y", "spawn --userscript yt-dlp-to-downloads.sh", mode="normal")
+config.bind("<Ctrl-Space>m", "spawn mpv {url}", mode="normal")
 
 config.bind("O", "set-cmd-text -s :open -w", mode="normal")
 config.bind("Pp", "open -w -- {clipboard}", mode="normal")
@@ -105,6 +107,11 @@ config.bind(
 config.bind(
     ";n",
     "hint links userscript nix-prefetch-to-clip.sh",
+)
+
+config.bind(
+    ";m",
+    "hint links spawn mpv {hint-url}",
 )
 
 c.content.headers.user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0"
