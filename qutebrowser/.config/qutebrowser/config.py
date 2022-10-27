@@ -91,7 +91,12 @@ config.bind("H", "move-to-start-of-line", mode="caret")
 # Org-roam
 config.bind(
     "<Ctrl-r>",
-    "open javascript:location.href='org-protocol://roam-ref?template=d&ref='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title)",
+    (
+       "open javascript:location.href='org-protocol://roam-ref?template=b'+" + 
+       "'&ref='+encodeURIComponent(location.href)+" +
+       "'&title='+encodeURIComponent(document.title)+" +
+       "'&body='+encodeURIComponent(window.getSelection())"
+    ),
 )
 
 config.bind(
