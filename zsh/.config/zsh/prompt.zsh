@@ -76,8 +76,14 @@ prompt_purification_setup() {
     git_prompt='$(prompt_git)'
     caret_prompt='$(prompt_user)'
 
+    if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH2_CLIENT" ]]; then
+	host_prompt="$(hostname):"
+    else
+	host_prompt=""
+    fi
+
     PROMPT=" $git_prompt$caret_prompt "
-    RPS1="%~"
+    RPS1="$host_prompt%~"
 }
 
 prompt_purification_setup
