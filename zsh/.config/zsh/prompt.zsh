@@ -77,7 +77,7 @@ prompt_purification_setup() {
     caret_prompt='$(prompt_user)'
 
     if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH2_CLIENT" ]]; then
-	host_prompt="$(hostname):"
+	host_prompt="%B%F{blue}$(hostname):%f%b"
     else
 	host_prompt=""
     fi
