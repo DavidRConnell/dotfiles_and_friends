@@ -12,5 +12,6 @@ export SAVEHIST=50000
 # Editors
 export EDITOR="emacsclient -ca ''"
 export VISUAL="emacsclient -ca ''"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export STOW_DIR="$HOME/.dotfiles"
