@@ -48,11 +48,14 @@ config.bind("<Ctrl-P>", "fake-key <Up>", mode="insert")
 config.bind("<Ctrl-N>", "fake-key <Down>", mode="insert")
 config.bind("<Ctrl-I>", "edit-text", mode="insert")
 
+# local-leader-esque bindings
 config.bind("<Ctrl-Space>c", "config-edit", mode="normal")
 config.bind("<Ctrl-Space>e", "spawn --userscript open-in-emacs.sh", mode="normal")
 config.bind("<Ctrl-Space>.", "config-source", mode="normal")
 config.bind("<Ctrl-Space>y", "spawn --userscript yt-dlp-to-downloads.sh", mode="normal")
 config.bind("<Ctrl-Space>m", "spawn mpv {url}", mode="normal")
+config.bind("<Ctrl-Space>g", "spawn --userscript git-clone-repo-and-open.sh", mode="normal")
+config.bind("<Ctrl-Space>G", "spawn --userscript git-clone-repo-no-open.sh", mode="normal")
 
 config.bind("O", "set-cmd-text -s :open -w", mode="normal")
 config.bind("Pp", "open -w -- {clipboard}", mode="normal")
