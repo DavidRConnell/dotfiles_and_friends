@@ -41,15 +41,7 @@ compctl -g '*.md' md2pdf
 compctl -g '*.ppt*' pptx2pdf
 compctl -g '*.docx' docx2pdf
 
-# Change cursor based on vi-mode
-zvm_after_select_vi_mode () {
-    if [ $ZVM_MODE = $ZVM_MODE_INSERT ]; then
-	echo -ne "\e[5 q"
-    else
-	echo -ne "\e[2 q"
-    fi
-}
-ZVM_CURSOR_STYLE_ENABLED=false
+ZVM_CURSOR_STYLE_ENABLED=true
 
 # Directories
 WORDCHARS=${WORDCHARS//[\/=]} # Remove "/" and "=" so they are not part of words
