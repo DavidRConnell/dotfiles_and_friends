@@ -71,7 +71,10 @@ config.bind( # Org-roam
     mode="normal"
 )
 
-config.bind("O", "set-cmd-text -s :open -w", mode="normal")
+config.bind("<Ctrl-R>", "spawn --userscript readability", mode="normal")
+config.bind("<Ctrl-E>", "edit-url", mode="normal")
+config.bind("O", "cmd-set-text -s :open -w", mode="normal")
+config.bind("u", ":undo --window", mode="normal")
 config.bind("Pp", "open -w -- {clipboard}", mode="normal")
 config.bind("PP", "open -w -- {primary}", mode="normal")
 config.bind("<Ctrl-P>", "hint links fill :open -p {hint-url}", mode="normal")
@@ -79,7 +82,6 @@ config.bind("<Ctrl-SHIFT-P>", "open -p", mode="normal")
 config.bind("F", "hint all tab-bg", mode="normal")
 config.bind("<Ctrl-/>", "hint all", mode="normal")
 config.bind("<Alt-/>", "hint links yank", mode="normal")
-
 
 config.unbind("<Ctrl-W>")
 config.bind("<Ctrl-D>", "quit --save", mode="normal")
@@ -100,40 +102,28 @@ config.bind("DR", "download-remove", mode="normal")
 config.bind("Dr", "download-retry", mode="normal")
 config.bind("Dv", "spawn mpv {url}", mode="normal")
 
-config.bind(";v", "hint links spawn mpv {hint-url}", mode="normal")
-
 config.bind("L", "move-to-end-of-line", mode="caret")
 config.bind("H", "move-to-start-of-line", mode="caret")
 
-# Org-roam
-config.bind(
-    "<Ctrl-r>",
-    (
-       "open javascript:location.href='org-protocol://roam-ref?template=b'+" + 
-       "'&ref='+encodeURIComponent(location.href)+" +
-       "'&title='+encodeURIComponent(document.title)+" +
-       "'&body='+encodeURIComponent(window.getSelection())"
-    ),
-)
+# Hinting shortcuts
+config.bind(";v", "hint links spawn mpv {hint-url}", mode="normal")
 
 config.bind(
     ";r",
     "hint links userscript add-entry-from-doi.sh",
+    mode="normal"
 )
 
 config.bind(
     ";p",
     "hint links userscript preview-pdf.sh",
+    mode="normal"
 )
 
 config.bind(
     ";n",
     "hint links userscript nix-prefetch-to-clip.sh",
-)
-
-config.bind(
-    ";m",
-    "hint links spawn mpv {hint-url}",
+    mode="normal"
 )
 
 c.content.headers.user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0"
