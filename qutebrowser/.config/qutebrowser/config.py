@@ -7,6 +7,10 @@ theme.draw(c, {"spacing": {"vertical": 6, "horizontal": 8}})
 c.tabs.tabs_are_windows = True
 c.tabs.title.format = "{audio} {current_title}"
 
+c.url.start_pages = "start.home"
+c.url.default_page = "start.home"
+c.url.searchengines = {"DEFAULT": "http://searx.home/?q={}"}
+
 c.downloads.remove_finished = 5000
 c.hints.mode = "letter"
 c.hints.chars = "aoeuhtns"
