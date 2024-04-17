@@ -60,6 +60,16 @@ config.bind("<Ctrl-Space>y", "spawn --userscript yt-dlp-to-downloads.sh", mode="
 config.bind("<Ctrl-Space>m", "spawn mpv {url}", mode="normal")
 config.bind("<Ctrl-Space>g", "spawn --userscript git-clone-repo-and-open.sh", mode="normal")
 config.bind("<Ctrl-Space>G", "spawn --userscript git-clone-repo-no-open.sh", mode="normal")
+config.bind( # Org-roam
+    "<Ctrl-Space>r",
+    (
+       "open javascript:location.href='org-protocol://roam-ref?template=b'+" + 
+       "'&ref='+encodeURIComponent(location.href)+" +
+       "'&title='+encodeURIComponent(document.title)+" +
+       "'&body='+encodeURIComponent(window.getSelection())"
+    ),
+    mode="normal"
+)
 
 config.bind("O", "set-cmd-text -s :open -w", mode="normal")
 config.bind("Pp", "open -w -- {clipboard}", mode="normal")
