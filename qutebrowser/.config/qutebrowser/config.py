@@ -30,6 +30,10 @@ c.bindings.key_mappings = {
 }
 c.content.autoplay = False
 
+clipboard_domains = {'app.addy.io', 'github.com', 'gitlab.com'}
+for domain in clipboard_domains:
+    config.set('content.javascript.clipboard', 'access', domain)
+
 config.load_autoconfig()
 c.zoom.default = 90
 
