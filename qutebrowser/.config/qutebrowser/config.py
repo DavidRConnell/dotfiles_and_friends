@@ -28,6 +28,7 @@ c.bindings.key_mappings = {
     "<Ctrl-Enter>": "<Ctrl-Return>",
     "<Ctrl-Space>": "<Tab>",
 }
+c.content.autoplay = False
 
 config.load_autoconfig()
 c.zoom.default = 90
