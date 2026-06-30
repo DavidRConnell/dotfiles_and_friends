@@ -1,4 +1,4 @@
-live_config_reload = true
+general.live_config_reload = true
 working_directory = "None"
 
 [bell]
@@ -44,7 +44,7 @@ print_events = false
 render_timer = false
 
 [font]
-size = 12.0
+size = 10.0
 
 [font.bold]
 family = "Hack"
@@ -597,7 +597,7 @@ multiplier = 3
 save_to_clipboard = true
 semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
-[shell]
+[terminal.shell]
 args = ["--login", "-c", "tmux"]
 program = "zsh"
 
