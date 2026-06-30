@@ -1,3 +1,8 @@
 *.lisp  diff=lisp
 *.el    diff=lisp
 *.org   diff=org
+*.py	diff=python
+*.m	diff=matlab
+*.c	diff=cpp
+*.sh	diff=bash
+*.bib	diff=bibtex
