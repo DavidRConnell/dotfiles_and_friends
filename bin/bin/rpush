@@ -7,10 +7,14 @@ function missingfile {
 
 function run {
     [ -f '.rclonepath' ] || missingfile
-    remote=$(cat '.rclonepath')
-    rclone sync \
-        --filter-from="$XDG_CONFIG_HOME"/rclone/filter-file.txt \
-        "$PWD" "$remote"
+
+    while IFS= read -r remote || [ -n "$remote" ]; do
+        [[ -z "$remote" || "$remote" =~ "^$" ]] && continue
+
+        rclone sync \
+            --filter-from="$XDG_CONFIG_HOME"/rclone/filter-file.txt \
+            "$PWD" "$remote"
+    done <'.rclonepath'
 }
 
 function rpushdir {

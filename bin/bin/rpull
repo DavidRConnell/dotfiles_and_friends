@@ -7,7 +7,8 @@ function missingfile {
 
 function run {
     [ -f '.rclonepath' ] || missingfile
-    remote=$(cat '.rclonepath')
+
+    IFS= read -r remote <'.rclonepath'
     rclone sync \
         --filter-from="$XDG_CONFIG_HOME"/rclone/filter-file.txt \
         "$remote" "$PWD"
