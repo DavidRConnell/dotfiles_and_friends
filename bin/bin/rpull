@@ -1,37 +1,37 @@
 #!/usr/bin/env bash
 
 function missingfile {
-	echo "No .rclonepath file in current directory"
-	exit 1
+    echo "No .rclonepath file in current directory"
+    exit 1
 }
 
 function run {
-	[ -f '.rclonepath' ] || missingfile
-	remote=$(cat '.rclonepath')
-	rclone sync \
-	    --filter-from=$XDG_CONFIG_HOME/rclone/filter-file.txt \
-	    "$remote" "$PWD"
+    [ -f '.rclonepath' ] || missingfile
+    remote=$(cat '.rclonepath')
+    rclone sync \
+        --filter-from="$XDG_CONFIG_HOME"/rclone/filter-file.txt \
+        "$remote" "$PWD"
 }
 
 function rpulldir {
-	cd "$1" || exit 3
-	rpull
-	echo "${PWD}" "Pulled"
-	cd - > /dev/null || exit 3
+    cd "$1" || exit 3
+    rpull
+    echo "${PWD}" "Pulled"
+    cd - >/dev/null || exit 3
 }
 
 if [ $# == 0 ]; then
-	run
+    run
 elif [[ $1 == "--all" ]] || [[ $1 == "-a" ]]; then
-	shopt -s globstar
-	shopt -s dotglob
-	cd ~
-	for p in $(rg --files ~/**/.rclonepath); do
-		d=$(dirname "$p")
-		rpulldir "$d" &
-	done
-	wait
+    shopt -s globstar
+    shopt -s dotglob
+    cd ~ || exit 3
+    for p in $(rg --files ~/**/.rclonepath); do
+        d=$(dirname "$p")
+        rpulldir "$d" &
+    done
+    wait
 else
-	echo "rpull takes no arguments or -a/--all."
-	exit 2
+    echo "rpull takes no arguments or -a/--all."
+    exit 2
 fi
