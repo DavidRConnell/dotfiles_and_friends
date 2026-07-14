@@ -23,14 +23,11 @@ function rpulldir {
 if [ $# == 0 ]; then
     run
 elif [[ $1 == "--all" ]] || [[ $1 == "-a" ]]; then
-    shopt -s globstar
-    shopt -s dotglob
-    cd ~ || exit 3
-    for p in $(rg --files ~/**/.rclonepath); do
-        d=$(dirname "$p")
-        rpulldir "$d" &
-    done
-    wait
+    export -f missingfile
+    export -f run
+    export -f rpulldir
+
+    fd -H \.rclonepath ~ -j8 --exec bash -c 'rpulldir "$1"' _ "{//}"
 else
     echo "rpull takes no arguments or -a/--all."
     exit 2
